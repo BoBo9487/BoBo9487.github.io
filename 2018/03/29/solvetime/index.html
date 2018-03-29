@@ -93,8 +93,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/03/29/solvetime/warmup.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/29/solvetime/badcompare.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/29/solvetime/compare2.jpg">
-<meta property="og:updated_time" content="2018-03-29T12:26:34.302Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/29/solvetime/badcompare2.jpg">
+<meta property="og:updated_time" content="2018-03-29T12:29:27.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&lt;font color=&quot;#dd0000&quot;&gt;&lt;font size=&quot;7&quot;&gt;solvetime解析&lt;&#x2F;font&gt;&lt;br &#x2F;&gt;&lt;&#x2F;font&gt;&lt;br &#x2F;&gt;">
 <meta name="twitter:description" content="网址:http://solveme.peng.kr/ 1、warmup首先看到题目给了个base64的代码php小白一点点查出来各个函数base64_encode这个是解base64hex2bin这个是把16进制的值转化为ASCIIbin2hex是把ASCII转化为十六进制strrev（）这个函数是把所有字符反向输出根据题目可以写出脚本反解1234&amp;lt;?php $flag = &amp;quot;1w">
@@ -310,7 +310,7 @@
       
         <p><font size="6">网址:<a href="http://solveme.peng.kr/" target="_blank" rel="noopener">http://solveme.peng.kr/</a></font><br></p>
 <p><font size="5">1、warmup</font><br><br><img src="/2018/03/29/solvetime/warmup.jpg" alt=" "><br>首先看到题目给了个base64的代码<br>php小白一点点查出来各个函数<br><code>base64_encode</code>这个是解base64<br><code>hex2bin</code>这个是把16进制的值转化为ASCII<br><code>bin2hex</code>是把ASCII转化为十六进制<br><code>strrev（）</code>这个函数是把所有字符反向输出<br>根据题目可以写出脚本反解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$flag = &quot;1wMDEyY2U2YTY0M2NgMTEyZDQyMjAzNWczYjZgMWI4NTt3YWxmY=&quot;;</span><br><span class="line">echo hex2bin(strrev(bin2hex(base64_decode($flag))));</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure><br>得到<code>flag{582a0f2c7e302244b110cc461f5cb100}</code></p>
-<p><font size="5">2、badcompare</font><br><br><img src="/2018/03/29/solvetime/badcompare.jpg" alt=" "><br>继续看函数~<br><code>isset</code>是判断一个变量是否定义过,即使它没有值,返回值也是true.<br>这个题的大概意思就是要让<code>answer=роВхУъесЧМ</code>如果直接复制就会报错所以需要转码一下，但这些都不是常见的ASCII码所以用python跑一下<br>但是殷大佬突然告诉我用burp抓一下包（如下图）然后写个脚本或者手动加百分号就行，原理就是url编码的本身就是%对应字符的十六进制。<br><img src="/2018/03/29/solvetime/compare2.jpg" alt=" "><br>最终结果<code>%f0%ee%c2%f5%d3%fa%e5%f1%d7%cc</code><br>payload:<code>http://badcompare.solveme.peng.kr/?answer=%f0%ee%c2%f5%d3%fa%e5%f1%d7%cc</code><br><code>flag{446c7b68ad824cd9c1df87158717aa2b}</code></p>
+<p><font size="5">2、badcompare</font><br><br><img src="/2018/03/29/solvetime/badcompare.jpg" alt=" "><br>继续看函数~<br><code>isset</code>是判断一个变量是否定义过,即使它没有值,返回值也是true.<br>这个题的大概意思就是要让<code>answer=роВхУъесЧМ</code>如果直接复制就会报错所以需要转码一下，但这些都不是常见的ASCII码所以用python跑一下<br>但是殷大佬突然告诉我用burp抓一下包（如下图）然后写个脚本或者手动加百分号就行，原理就是url编码的本身就是%对应字符的十六进制。<br><img src="/2018/03/29/solvetime/badcompare2.jpg" alt=" "><br>最终结果<code>%f0%ee%c2%f5%d3%fa%e5%f1%d7%cc</code><br>payload:<code>http://badcompare.solveme.peng.kr/?answer=%f0%ee%c2%f5%d3%fa%e5%f1%d7%cc</code><br><code>flag{446c7b68ad824cd9c1df87158717aa2b}</code></p>
 <p><font size="5">3、wintersleep</font><br></p>
 
       
