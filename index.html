@@ -231,6 +231,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/DDCTF2108-misc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/DDCTF2108-misc/" itemprop="url">DDCTF2108 misc</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T10:49:12+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>DDCTF本来一个web手活生生成了misc、、、唉~<br>不说了，来波解析<br>1.签到<br><img src="/2018/04/21/DDCTF2108-misc/签到.jpg" alt=" "><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DDCTF&#123;echo&quot;W3Lc0me_2_DiD1$&#123;PAAMAYIM_NEKUDOTAYIM&#125;C7f!&quot;&#125;</span><br></pre></td></tr></table></figure><br>这的一个坑是flag居然就是这个、、、心机出题人~一直以为要打印出来别的东西<br>2.扔板凳<br>一直没搞懂这题和板凳有啥关系哈哈哈、<br><img src="/2018/04/21/DDCTF2108-misc/板凳.jpg." alt=" "><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d4e8e1f4a0f7e1f3a0e6e1f3f4a1a0d4e8e5a0e6ece1e7a0e9f3baa0c4c4c3d4c6fbb9b2b2e1e2b9b9b7b4e1b4b7e3e4b3b2b2e3e6b4b3e2b5b0b6b1b0e6e1e5e1b5fd</span><br></pre></td></tr></table></figure><br>16进制转换成字符是不可见字符,可见范围是0~127，直接贴脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=&quot;d4e8e1f4a0f7e1f3a0e6e1f3f4a1a0d4e8e5a0e6ece1e7a0e9f3baa0c4c4c3d4c6fbb9b2b2e1e2b9b9b7b4e1b4b7e3e4b3b2b2e3e6b4b3e2b5b0b6b1b0e6e1e5e1b5fd&quot;</span><br><span class="line">b=&apos;&apos;</span><br><span class="line">for i in range(0,len(a),2):</span><br><span class="line">    b+=str(chr(int(a[i:i+2],16)-128))</span><br><span class="line">    print(b)</span><br><span class="line"> </span><br></pre></td></tr></table></figure><br>运行结果<br><code>That was fast! The flag is: DDCTF{922ab9974a47cd322cf43b50610faea5}</code><br>3.第四拓展FS<br>讲道理FS又骗了我一次、、、一直以为是文件流、、、<br>首先下载下来是一个jpg、、12M的jpg哈哈哈，想到了隐写，拖入stegesolve没发现啥，于是binwalk-e看看<br>有东西，是个压缩包，可是这里binwalk提取的东西在windows上是显示损坏的。两种办法，一个就是用好压打开，另一个就是get的新姿势~<br><code>foremost 要分离的文件名 -o 输出文件夹的名字（自己定义的）</code><br>输出来会有一个文件夹，里面有提取的zip，拖到windows就能打开了~不过这里的rar是加密的，密码在图片属性里<br><img src="/2018/04/21/DDCTF2108-misc/图片属性.jpg" alt=" "><br>输入就可以打开啦<br>打开以后是个杂乱无章的文档<br><img src="/2018/04/21/DDCTF2108-misc/file.jpg" alt=" "><br>这时候看题目说提示都在题目里了：日常违规审计中频次有时候非常重要<br>想到了词频统计，这文档的词频不能用在线的词频统计，只能自己写一下脚本<br>贴代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;file.txt&apos;)</span><br><span class="line">str = f.read()</span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">for i in str:</span><br><span class="line">#print i</span><br><span class="line">if dict.has_key(i):</span><br><span class="line">dict[i] += 1</span><br><span class="line">else:</span><br><span class="line">dict[i] = 1</span><br><span class="line"></span><br><span class="line">for i in dict:</span><br><span class="line">print i,&quot; : &quot;,dict[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print sorted(dict.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)\</span><br><span class="line"> </span><br></pre></td></tr></table></figure><br> 出来以后是这样<br> <img src="/2018/04/21/DDCTF2108-misc/运行结果.jpg" alt=" "><br> 这时候自己数一下每个词就行，就能拼出flag<br> 我的flag是<code>DDCTF{x1n9shaNgbIci}</code><br> 这次DDCTF讲道理还是可以的~每个人拿到题目不一样，flag也不一样，反作弊666<br> 继续加油吧~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/密码杂项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1869,7 +1989,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
