@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-21T03:01:41.834Z</updated>
+  <updated>2018-04-26T13:23:30.950Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>怎么在优酷下载视频不用VIP，不用客户端</title>
+    <link href="http://yoursite.com/2018/04/26/youku/"/>
+    <id>http://yoursite.com/2018/04/26/youku/</id>
+    <published>2018-04-26T08:55:53.000Z</published>
+    <updated>2018-04-26T13:23:30.950Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天需要一个优酷的视频，可是看了一下没有下载链接，很gg<br>于是百度了一堆下载方法，有些已经不能再用了，所以自己想了想办法<br>我们知道优酷防止用户通过别的方法下载会把视频分段，这也难不倒我们哦<br>首先我们点开想要的视频，如图：<br><img src="/2018/04/26/youku/客户端.jpg" alt=" "><br>这里点击下载就会让我们下载他的客户端，有时候就需要一下视频所以下载安装超级麻烦哦（还不知道会不会要VIP~）<br>等广告加载完以后，我们用搜狗高速浏览器打开这个网页，会出现如下图片（有一个小窗口播放）<br><img src="/2018/04/26/youku/小窗口.jpg" alt=" "><br>点开，就会以小窗口播放，然后我们点鼠标右键会惊喜的发现有个视频另存为？？岂不是美滋滋？（手动滑稽）<br><img src="/2018/04/26/youku/另存.jpg" alt=" "><br>然后保存到桌面就好。<br>上文提到优酷会让视频分段播放，我们可以看一下下载下来的视频大概到多少分钟，然后重复上面步骤：以<code>小窗播放--&gt;视频另存为（这里需要把进度条往后拖一拖才能下载到后面那个片段）</code><br>现在我们有两个mp4文件了，分开看岂不是很不舒服，于是用<code>格式工厂</code>里面有<code>视频合并</code>功能，可以合为一个，不会有重复片段<br>然后就可以美滋滋看视频咯<br>小小技巧送给大佬们</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天需要一个优酷的视频，可是看了一下没有下载链接，很gg&lt;br&gt;于是百度了一堆下载方法，有些已经不能再用了，所以自己想了想办法&lt;br&gt;我们知道优酷防止用户通过别的方法下载会把视频分段，这也难不倒我们哦&lt;br&gt;首先我们点开想要的视频，如图：&lt;br&gt;&lt;img src=&quot;/201
+      
+    
+    </summary>
+    
+    
+      <category term="小技巧" scheme="http://yoursite.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>DDCTF2108 misc</title>
