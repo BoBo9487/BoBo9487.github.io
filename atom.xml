@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-29T07:19:51.822Z</updated>
+  <updated>2018-09-30T10:47:11.518Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>近期比赛（按比赛时间及报名截止顺序）</title>
+    <link href="http://yoursite.com/2018/09/30/%E6%AF%94%E8%B5%9B/"/>
+    <id>http://yoursite.com/2018/09/30/比赛/</id>
+    <published>2018-09-30T05:32:57.000Z</published>
+    <updated>2018-09-30T10:47:11.518Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、领航杯（4人）<br><a href="http://jyxxhd.jse.edu.cn/Competition/Newsnetwork/about/channelid/a5dada0d74c547d28f6a8f999afcd249" target="_blank" rel="noopener">http://jyxxhd.jse.edu.cn/Competition/Newsnetwork/about/channelid/a5dada0d74c547d28f6a8f999afcd249</a><br><code>2018.10.8~2018.10.9</code>（不过貌似延迟了）</p><p>二、“护网杯”首届工业互联网安全大赛（5人）<br><a href="http://www.huwangbei.cn/" target="_blank" rel="noopener">http://www.huwangbei.cn/</a><br>“护网杯”2018年网络安全防护赛暨首届工业互联网安全大赛，报名火热进行中。<br>目前已有来自于中央企业、基础电信企业、互联网企业、工业互联网企业、高校等千余支队伍报名参赛，报名时间将于10月10日截止。<br>报名时间：8月18日一10月10日<br>线上预选赛：<code>10.13</code><br>所有参赛人员须拥有唯一中国国籍(不合港澳台地区)，每支赛队成员不超过5人。<br>现场决赛：线上预选赛排名前60的战队可申请参加决赛，赛队人员应由同一企业、高校、事业单位人员组成，于10月19日前向赛事组委会提交加盖单位公章的报名表和个人身份证明。经组委会审核通过后，按照预赛排名取40支战队参赛。</p><p>三、上海大学生网络安全大赛（3人）</p><p>#报名截止时间：2018 年 10 月 28 日。 </p><p>##1、网络攻防赛预赛<br>时间为<code>11月3日08:00至11月4日8:00。</code>预赛为CTF在线解<br>题比赛，采取网络答题方式进行，各高校参赛队登录大赛官网<br>（<a href="http://www.ichunqiu.com/shwas，具体开放日期另行通知" target="_blank" rel="noopener">http://www.ichunqiu.com/shwas，具体开放日期另行通知</a>)<br>点击预赛链接，使用网络报名时注册的帐号密码登录预赛网址进行网络预<br>赛。网络攻防赛根据预赛成绩由高至低产生28支决赛队伍，其中上<br>海高校13支队伍，外省市15支队伍（注：外省市高校每校最多只允<br>许一支出线队伍参加决赛），详细名单将于11月11日前在公众号、<br>官方QQ群等公布</p><p>四、2018湖湘杯（3人）<br><a href="http://hxb.hunan.gov.cn/mobile/message" target="_blank" rel="noopener">http://hxb.hunan.gov.cn/mobile/message</a><br>   （一）海选队线上报名<br>　　定于2018年10月1日12时至11月8日24时<br>开放网络安全技能大赛比赛报名通道，符合参赛资格者凭大赛平台发出的短信或电子邮件通知参赛；</p><p>　　（二）海选队初赛<br>    <code>11月10日09:00至11日09:00</code><br>　　公布参加复赛资格名单：初赛结束后一周内在大赛官网公布，并以短信或电子邮件通知符合资格者参加复赛。</p><p>　　（二）海选队复赛<br>　　复赛时间：2018年11月18日10时至18日22时。<br>　　公布参加决赛资格名单：网络安全技能大赛复赛结束后一周在大赛官网公布网络安全技能大赛决赛名单。并以短信、电子邮件或者电话通知符合资格者赴长沙参加现场比赛。</p><p>　　（三）海选队和邀请队共同决赛<br>　　决赛分两场进行：<br>　　2018年11月26日举行第一场，上半场：08:00-12:30、下半场：14:00-19:00。期间12时30分至14时统一组织安排午餐，暂停比赛。<br>　　2018年11月27日举行第二场：08:00-13:00。</p><p>加油！<br><img src="/2018/09/30/比赛/hacker.jpg" alt=" "></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一、领航杯（4人）&lt;br&gt;&lt;a href=&quot;http://jyxxhd.jse.edu.cn/Competition/Newsnetwork/about/channelid/a5dada0d74c547d28f6a8f999afcd249&quot; target=&quot;_blank&quot; 
+      
+    
+    </summary>
+    
+    
+      <category term="比赛信息" scheme="http://yoursite.com/tags/%E6%AF%94%E8%B5%9B%E4%BF%A1%E6%81%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>中国矿业大学BXS实训平台WEB部分解析</title>
@@ -125,29 +148,6 @@
         &lt;p&gt;Base64: ZXZhbCgkX1BPU1RbcDRuOV96MV96aDNuOV9qMXVfU2gxX0oxM10p&lt;/p&gt;
 &lt;p&gt;NTU2NJC3ODHHYWJIZ3P4ZWY=&lt;/p&gt;
 &lt;p&gt;Base64编码要求把3个8位字节（3&lt;em&gt;8=24）转化为4个6位的字
-      
-    
-    </summary>
-    
-    
-      <category term="日益成长的小白" scheme="http://yoursite.com/tags/%E6%97%A5%E7%9B%8A%E6%88%90%E9%95%BF%E7%9A%84%E5%B0%8F%E7%99%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>近期比赛</title>
-    <link href="http://yoursite.com/2018/04/10/%E6%AF%94%E8%B5%9B/"/>
-    <id>http://yoursite.com/2018/04/10/比赛/</id>
-    <published>2018-04-10T15:32:57.000Z</published>
-    <updated>2018-04-24T09:29:28.152Z</updated>
-    
-    <content type="html"><![CDATA[<p>红帽杯（4月30日08:00 - 5月1日08:00）<br><a href="http://www.cinsa.org.cn/2018redhat/" target="_blank" rel="noopener">http://www.cinsa.org.cn/2018redhat/</a><br>QQ群 218891597</p><p>第十一届全国大学生信息安全大赛（4.28~4.29）<br>队员人数：10名<br>QQ群 460811132<br>报名网址 <a href="http://www.ciscn.cn/myteam" target="_blank" rel="noopener">http://www.ciscn.cn/myteam</a></p><p>2018年第四届全国网络空间安全技术大赛<br>主办单位:中国兵工协会<br>承办单位:西安工业大学<br>比赛时间;2018年5月12日-5月13日(线上赛)。<br>报名截止时间：2018年5月8日24:00<br>大赛QQ群:457343652<br>比赛官网:<a href="http://cstc.xatu.edu.cn/" target="_blank" rel="noopener">http://cstc.xatu.edu.cn/</a></p><p>第15届(2018)全国大学生信息安全与对抗技术竞赛(ISCC2018)通知<br>（5.1）<br><a href="http://www.isclab.org.cn/archives/2018/04/5240.html" target="_blank" rel="noopener">http://www.isclab.org.cn/archives/2018/04/5240.html</a></p><p>最近比赛一波又一波，加油加油加油~</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;红帽杯（4月30日08:00 - 5月1日08:00）&lt;br&gt;&lt;a href=&quot;http://www.cinsa.org.cn/2018redhat/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.cinsa.org.cn/2018r
       
     
     </summary>
