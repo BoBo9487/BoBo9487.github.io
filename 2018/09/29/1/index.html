@@ -73,6 +73,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="BoBo's Blog" type="application/atom+xml" />
 
@@ -113,7 +115,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/29/1/hash1.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/09/29/1/hash3.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/09/29/1/hash4.jpg">
-<meta property="og:updated_time" content="2018-09-30T13:35:51.585Z">
+<meta property="og:updated_time" content="2018-10-01T07:06:34.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中国矿业大学BXS实训平台WEB部分解析">
 <meta name="twitter:description" content="这个平台首先需要做出基础选择题才能做挑战的CTF题，好久没有写博客了，此处手动感谢Overwatch大佬帮我修好了博客首先我们看题一、源代码题目提示源代码，我们打开题目链接看到BXS的Logo，由于题目提示源代码，所以我们点击鼠标右键查看源代码、如图：flag就在最下面flag{youfindme23333333333} 二、colorSnake打开以后发现是个游戏，但是如果你真的想玩到50分，那">
@@ -336,7 +338,7 @@
 <p>六、phpmywind<br>本来应该比较难的一道题目，但是配置有点问题，直接报出flag<br><img src="/2018/09/29/1/php1.jpg" alt=" "><br><code>flag{327A6C4304AD5938EAF0EFB6CC3E53DC}</code></p>
 <p>七、is hash safe??<br><img src="/2018/09/29/1/hash.jpg" alt=" "><br>打开提示只有admin可以登录，抓包修改guest为admin无果,看到后面还有一串hsh=<br>看到题目说有东西没有删干净，于是找一下<code>admin.php.swp</code>(常见的备份文件)<br><img src="/2018/09/29/1/hash1.jpg" alt=" "><br>可以下载下来一个，<code>admin.php.swp</code>文件<br>不知道swp文件是什么的可以<a href="https://blog.csdn.net/weixin_38133867/article/details/78671626" target="_blank" rel="noopener">点击这里</a><br>使用<code>Vim</code>恢复<code>vim -r index.php.swp</code><br><img src="/2018/09/29/1/hash3.jpg" alt=" "><br>看到代码立有<code>cumtctf{you_know_this_is_not_the_flag}</code>假的flag<br>因为前面说到有hsh=……<br>所以来试试哈希长度扩展攻击</p>
 <p>##哈希长度扩展攻击(hash length extension attacks)是指针对某些允许包含额外信息的加密散列函数的攻击手段。该攻击适用于在消息与密钥的长度已知的情形下，所有采取了 H(密钥 ∥ 消息) 此类构造的散列函数。MD5和SHA-1等基于Merkle–Damgård构造的算法均对此类攻击显示出脆弱性。</p>
-<p>###如果一个应用程序是这样操作的：准备了一个密文和一些数据构造成一个字符串里，并且使用了MD5之类的哈希函数生成了一个哈希值（也就是所谓的signature/签名）让攻击者可以提交数据以及哈希值，虽然攻击者不知道密文服务器把提交的数据跟密文构造成字符串，并经过哈希后判断是否等同于提交上来的哈希值这个时候，该应用程序就易受长度扩展攻击，攻击者可以构造出{secret || data || attacker_controlled_data}的哈希值。<br>这里需要hashpump工具<a href="https://github.com/bwall/HashPump" target="_blank" rel="noopener">点击此处</a><br>在linux下安装就好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><br>安装好后运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input Signature: c70ab9d039f166c5b5f506a5698ebaa1</span><br><span class="line">Input Data: guest</span><br><span class="line">Input Key Length: 13</span><br><span class="line">Input Data to Add: admin</span><br><span class="line">37d0fe2c401a689be9608e9f850ef3de</span><br><span class="line">guest\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x90\x00\x00\x00\x00\x00\x00\x00admin</span><br></pre></td></tr></table></figure><br>最后把cooike改成<code>role=guest%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%90%00%00%00%00%00%00%00admin;hsh=37d0fe2c401a689be9608e9f850ef3de</code>即可<br><img src="/2018/09/29/1/hash4.jpg" alt=" "><br>flag<code>cumtctf{Md5_1s_n0t_safe}</code></p>
+<p>###如果一个应用程序是这样操作的：准备了一个密文和一些数据构造成一个字符串里，并且使用了MD5之类的哈希函数生成了一个哈希值（也就是所谓的signature/签名）让攻击者可以提交数据以及哈希值，虽然攻击者不知道密文服务器把提交的数据跟密文构造成字符串，并经过哈希后判断是否等同于提交上来的哈希值这个时候，该应用程序就易受长度扩展攻击，攻击者可以构造出{secret || data || attacker_controlled_data}的哈希值。<br>这里需要hashpump工具<a href="https://github.com/bwall/HashPump" target="_blank" rel="noopener">点击此处</a><br>在linux下安装就好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><br>安装好后运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input Signature: c70ab9d039f166c5b5f506a5698ebaa1</span><br><span class="line">Input Data: guest</span><br><span class="line">Input Key Length: 13</span><br><span class="line">Input Data to Add: admin</span><br><span class="line">37d0fe2c401a689be9608e9f850ef3de</span><br><span class="line">guest%80%00%00%x00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%90%00%00%00%00%00%00%00admin</span><br></pre></td></tr></table></figure><br>最后把cooike改成<code>role=guest%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%90%00%00%00%00%00%00%00admin;hsh=37d0fe2c401a689be9608e9f850ef3de</code>即可<br><img src="/2018/09/29/1/hash4.jpg" alt=" "><br>flag<code>cumtctf{Md5_1s_n0t_safe}</code></p>
 
       
     </div>
@@ -447,7 +449,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +462,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
