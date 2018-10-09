@@ -231,6 +231,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/2018中科大CTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/09/2018中科大CTF/" itemprop="url">2018中科大CTF</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T18:51:37+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h1><h2 id="题目如下"><a href="#题目如下" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/签到1.jpg" alt=" "><br>key输入框有最长输入限制，从前端改一下就好，如图<br><img src="/2018/10/09/2018中科大CTF/签到2.jpg" alt=" "><br><code>flag{Hackergame2018_Have_Fun!}</code></p>
+<h1 id="游园会的集章卡片"><a href="#游园会的集章卡片" class="headerlink" title="游园会的集章卡片"></a>游园会的集章卡片</h1><h2 id="题目如下-1"><a href="#题目如下-1" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/游园1.jpg" alt=" "><br>这个题真的想吐槽一波。。。一直以为有什么规律，结果就是拼图，而且还不是很好拼(可能我太菜了)<br>最后终于得出了flag<br><code>flag{H4PPY_1M4GE_PR0CE551NG}</code></p>
+<h1 id="Word-文档"><a href="#Word-文档" class="headerlink" title="Word 文档"></a>Word 文档</h1><h2 id="题目如下-2"><a href="#题目如下-2" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/word1.jpg" alt=" "><br>下载下来是个word文档，但是有损坏，winhex查看发现有flag.txt<br><img src="/2018/10/09/2018中科大CTF/word2.jpg" alt=" "><br>然后在linux用binwalk提取出来，发现了flag.txt得到flag。<br><code>flag{xlsx,pptx,docx_are_just_zip_files}</code><br>后来根据flag提示，发现刚开始那个附件，改一下后缀，改为zip，解压就可以得到flag.txt</p>
+<h1 id="黑曜石浏览器"><a href="#黑曜石浏览器" class="headerlink" title="黑曜石浏览器"></a>黑曜石浏览器</h1><h2 id="题目如下-3"><a href="#题目如下-3" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/石头1.jpg" alt=" "><br>打开链接看到<br><img src="/2018/10/09/2018中科大CTF/石头2.jpg" alt=" "><br>于是我们就找一下黑曜石浏览器，百度貌似找不到这个东西，用必应浏览器可以找到<br><a href="https://heicore.com/" target="_blank" rel="noopener">黑曜石</a><br>我们在这个页面查看源码，不过右键查看被禁了<br>我们直接输入<code>view-source:https://heicore.com/index.html</code>可以看到源码<br><img src="/2018/10/09/2018中科大CTF/石头3.jpg" alt=" "><br>看到这里，想到替换user-agent为<code>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) HEICORE/49.1.2623.213 Safari/537.36</code><br>重新访问刚才页面，得到flag。<br><code>flag{H3ic0re_49.1.2623.213_sai_kou}</code></p>
+<h1 id="我是谁"><a href="#我是谁" class="headerlink" title="我是谁"></a>我是谁</h1><h2 id="第一个题目如下"><a href="#第一个题目如下" class="headerlink" title="第一个题目如下"></a>第一个题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/我是谁1.jpg" alt=" "><br>打开看到<br><img src="/2018/10/09/2018中科大CTF/我是谁2.jpg" alt=" "><br>一头雾水，然后试试注入等等，都没用。。。<br>后来想看一下请求头，发现是418请求头，很奇怪的请求头，于是百度发现：</p>
+<ul>
+<li>HTCPCP 1.0 RFC2324<blockquote>
+<p>超文本咖啡壶控制协议（英文：Hyper Text Coffee Pot ControlProtocol，HTCPCP）是一种用于控制、监测和诊断咖啡壶的协议。<br>这个协议在文档RFC 2324[1]（发布于1998年4月1日）中被定义。尽管互联网国际标准机构经常在4月1日发布一些恶搞之作，他们还是让这个协议看上去像是一个真的、非虚构的协议（比如HTTP）。文本编辑器Emacs甚至完全兼容于这个协议，Mozilla也发布了数个补丁来扩展旗下产品的功能。<br>HTCPCP是HTTP协议的扩展HTCPCP请求通过URI架构coffee:来引用，并且还包含了若干种HTTP请求:</p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>BREW或POST：令HTCPCP服务器（咖啡壶）煮咖啡。</li>
+<li>GET：从服务器获取咖啡。</li>
+<li>PROPFIND：获取咖啡的元数据。</li>
+<li>WHEN：让服务器停止向咖啡中加入牛奶（如适用）。<br>这个协议还定义了两种错误答复：</li>
+<li>406 Not Acceptable（不能接受的）：HTCPCP服务器由于某种原因而暂时不能煮咖啡。服务器在回复中应当包含一组可接受的咖啡类型列表。</li>
+<li>I’m a teapot（我是茶壶）：HTCPCP服务器是一个茶壶。给出答复的实体可能是又矮又胖的。<br>所以输入<code>I&#39;m a teapot</code>得到flag<br><code>flag{i_canN0t_BReW_c0ffEE!}</code></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/ctf-web/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1465,504 +1603,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/ganhuo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BoBo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BoBo's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/28/ganhuo/" itemprop="url">一大批干货</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T09:27:18+08:00">
-                2018-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>积累了不少干货，贴出来造福人类~<br>有的网址需要扶墙，有的自测可用<br>个人技术博客：<br>国内：<br><a href="http://blog.csdn.net/qq_27446553/" target="_blank" rel="noopener">http://blog.csdn.net/qq_27446553/</a> （qq_27446553博客）</p>
-<p><a href="http://0x007.blog.51cto.com/6330498/1628943" target="_blank" rel="noopener">http://0x007.blog.51cto.com/6330498/1628943</a> （0x007博客）</p>
-<p><a href="http://www.kavsec.com/" target="_blank" rel="noopener">http://www.kavsec.com/</a> (kavsec博客）</p>
-<p><a href="http://www.lorexxar.cn/（lorexxar博客" target="_blank" rel="noopener">http://www.lorexxar.cn/（lorexxar博客</a>)</p>
-<p><a href="http://www.test404.com/（test404博客）" target="_blank" rel="noopener">http://www.test404.com/（test404博客）</a></p>
-<p><a href="https://evi1cg.me/（evilcg博客）" target="_blank" rel="noopener">https://evi1cg.me/（evilcg博客）</a></p>
-<p><a href="http://ver007.com/（ver007博客）" target="_blank" rel="noopener">http://ver007.com/（ver007博客）</a></p>
-<p><a href="http://cciezsm.lofter.com/（颖奇博客）" target="_blank" rel="noopener">http://cciezsm.lofter.com/（颖奇博客）</a></p>
-<p><a href="http://www.secsky.cn/（安全天空博客）" target="_blank" rel="noopener">http://www.secsky.cn/（安全天空博客）</a></p>
-<p><a href="https://www.hackfun.org/（4ido1on博客）" target="_blank" rel="noopener">https://www.hackfun.org/（4ido1on博客）</a></p>
-<p><a href="http://helloeveryone.blog.51cto.com/（牛磊博客" target="_blank" rel="noopener">http://helloeveryone.blog.51cto.com/（牛磊博客</a>)</p>
-<p><a href="http://www.7kb.org/(7kb论坛" target="_blank" rel="noopener">http://www.7kb.org/(7kb论坛</a>)</p>
-<p><a href="http://lu4n.com/（lun博客）" target="_blank" rel="noopener">http://lu4n.com/（lun博客）</a></p>
-<p><a href="http://www.cnbraid.com/（cnbiraid博客）" target="_blank" rel="noopener">http://www.cnbraid.com/（cnbiraid博客）</a></p>
-<p><a href="http://blog.neargle.com（neargle博客" target="_blank" rel="noopener">http://blog.neargle.com（neargle博客</a>)</p>
-<p><a href="https://lightrains.org（lightrains博客" target="_blank" rel="noopener">https://lightrains.org（lightrains博客</a>)</p>
-<p><a href="https://imlonghao.com/（imlonghao博客）" target="_blank" rel="noopener">https://imlonghao.com/（imlonghao博客）</a></p>
-<p><a href="http://www.zerokeeper.com/（zerokeeper博客）" target="_blank" rel="noopener">http://www.zerokeeper.com/（zerokeeper博客）</a></p>
-<p><a href="http://www.thinkings.org/（thinkings博客）" target="_blank" rel="noopener">http://www.thinkings.org/（thinkings博客）</a></p>
-<p><a href="https://www.ohlinge.cn/" target="_blank" rel="noopener">https://www.ohlinge.cn/</a> （ohlinge博客）</p>
-<p><a href="https://www.virzz.com" target="_blank" rel="noopener">https://www.virzz.com</a> （virzz博客)</p>
-<p><a href="https://www.jisec.com/" target="_blank" rel="noopener">https://www.jisec.com/</a> (jisec博客)</p>
-<p><a href="http://www.hfhuge.com/（hfhuge博客）" target="_blank" rel="noopener">http://www.hfhuge.com/（hfhuge博客）</a></p>
-<p><a href="http://www.91ri.org/（91ri博客" target="_blank" rel="noopener">http://www.91ri.org/（91ri博客</a>)</p>
-<p><a href="http://www.codersec.net" target="_blank" rel="noopener">http://www.codersec.net</a> (codersec博客)</p>
-<p><a href="http://www.venenof.com/（venenof博客）" target="_blank" rel="noopener">http://www.venenof.com/（venenof博客）</a></p>
-<p><a href="http://blog.leanote.com/thorns（leanote博客）" target="_blank" rel="noopener">http://blog.leanote.com/thorns（leanote博客）</a></p>
-<p><a href="http://www.droidsec.cn/（安卓中文博客" target="_blank" rel="noopener">http://www.droidsec.cn/（安卓中文博客</a> ）</p>
-<p><a href="http://linux.im/（im博客）" target="_blank" rel="noopener">http://linux.im/（im博客）</a></p>
-<p><a href="https://www.iswin.org/（飓风博客）" target="_blank" rel="noopener">https://www.iswin.org/（飓风博客）</a></p>
-<p><a href="http://www.shentou.org/" target="_blank" rel="noopener">http://www.shentou.org/</a> （安全渗透军火库博客）</p>
-<p><a href="http://joychou.org" target="_blank" rel="noopener">http://joychou.org</a> (joychou博客)</p>
-<p><a href="http://0cx.cc/" target="_blank" rel="noopener">http://0cx.cc/</a> (0cx博客)</p>
-<p><a href="http://hacktech.cn/（hacketech博客）" target="_blank" rel="noopener">http://hacktech.cn/（hacketech博客）</a></p>
-<p><a href="http://www.lucien116.com（lucien博客）" target="_blank" rel="noopener">http://www.lucien116.com（lucien博客）</a></p>
-<p><a href="http://www.hack1990.com（hack1990博客）" target="_blank" rel="noopener">http://www.hack1990.com（hack1990博客）</a></p>
-<p><a href="http://www.xmanblog.net/（xmanblog博客）" target="_blank" rel="noopener">http://www.xmanblog.net/（xmanblog博客）</a></p>
-<p><a href="http://xia0yu.win/（xia0yu博客）" target="_blank" rel="noopener">http://xia0yu.win/（xia0yu博客）</a></p>
-<p><a href="http://littlehann.cnblogs.com/" target="_blank" rel="noopener">http://littlehann.cnblogs.com/</a> （littlehann博客）</p>
-<p><a href="http://lonelyrain.me/（lonelyrain博客）" target="_blank" rel="noopener">http://lonelyrain.me/（lonelyrain博客）</a></p>
-<p><a href="http://www.hack-gov.com（hack-gov博客）" target="_blank" rel="noopener">http://www.hack-gov.com（hack-gov博客）</a></p>
-<p><a href="http://xdxd.love/（xdxd博客）" target="_blank" rel="noopener">http://xdxd.love/（xdxd博客）</a></p>
-<p><a href="https://www.lynahex.com/（lynahex博客）" target="_blank" rel="noopener">https://www.lynahex.com/（lynahex博客）</a></p>
-<p><a href="http://www.cnblogs.com/S4b0r/（S4b0r博客）" target="_blank" rel="noopener">http://www.cnblogs.com/S4b0r/（S4b0r博客）</a></p>
-<p><a href="http://www.leesec.com/（leesce博客）" target="_blank" rel="noopener">http://www.leesec.com/（leesce博客）</a></p>
-<p><a href="https://bl4ck.in/（b14ck博客）" target="_blank" rel="noopener">https://bl4ck.in/（b14ck博客）</a></p>
-<p><a href="http://www.hksafe.cn.com" target="_blank" rel="noopener">http://www.hksafe.cn.com</a> (hksafe博客)</p>
-<p><a href="http://www.n0tr00t.com/（n0tr00t博客）" target="_blank" rel="noopener">http://www.n0tr00t.com/（n0tr00t博客）</a></p>
-<p><a href="https://www.92aq.com/（92工具博客）" target="_blank" rel="noopener">https://www.92aq.com/（92工具博客）</a></p>
-<p><a href="https://3gstudent.github.io/(三好学生博客）" target="_blank" rel="noopener">https://3gstudent.github.io/(三好学生博客）</a></p>
-<p><a href="http://www.nxadmin.com/（" target="_blank" rel="noopener">http://www.nxadmin.com/（</a> nxadmin博客 ）</p>
-<p><a href="https://www.leavesongs.com/（" target="_blank" rel="noopener">https://www.leavesongs.com/（</a> p牛代码审计博客 ）</p>
-<p><a href="http://www.code521.com/（code521博客）" target="_blank" rel="noopener">http://www.code521.com/（code521博客）</a></p>
-<p><a href="http://p2j.cn/(" target="_blank" rel="noopener">http://p2j.cn/(</a> 园长博客)</p>
-<p><a href="http://le4f.net/（le4f博客）" target="_blank" rel="noopener">http://le4f.net/（le4f博客）</a></p>
-<p><a href="http://www.polaris-lab.com/" target="_blank" rel="noopener">http://www.polaris-lab.com/</a> (polaris-lab实验室)</p>
-<p><a href="http://www.programlife.net/（程序人生博客）" target="_blank" rel="noopener">http://www.programlife.net/（程序人生博客）</a></p>
-<p><a href="http://evilcos.me/(余玄博客" target="_blank" rel="noopener">http://evilcos.me/(余玄博客</a>)</p>
-<p><a href="https://www.blackh4t.org/" target="_blank" rel="noopener">https://www.blackh4t.org/</a> （blackh4t博客）</p>
-<p><a href="http://www.bugsec.org/tools" target="_blank" rel="noopener">http://www.bugsec.org/tools</a> (bugsec博客)</p>
-<p><a href="http://ecma.io/（ecma博客）" target="_blank" rel="noopener">http://ecma.io/（ecma博客）</a></p>
-<p><a href="http://www.meijj.org/" target="_blank" rel="noopener">http://www.meijj.org/</a> (meijj博客)</p>
-<p><a href="https://ricterz.me/（ricterz博客）" target="_blank" rel="noopener">https://ricterz.me/（ricterz博客）</a></p>
-<p><a href="http://yaseng.org（yaseng博客）" target="_blank" rel="noopener">http://yaseng.org（yaseng博客）</a></p>
-<p><a href="http://avfisher.win/（安全小飞侠博客）" target="_blank" rel="noopener">http://avfisher.win/（安全小飞侠博客）</a></p>
-<p><a href="http://www.0xmh.com/（0xmh博客）" target="_blank" rel="noopener">http://www.0xmh.com/（0xmh博客）</a></p>
-<p><a href="http://www.lijiejie.com/（lijiejie博客）" target="_blank" rel="noopener">http://www.lijiejie.com/（lijiejie博客）</a></p>
-<p><a href="http://secoff.net/（secoff博客）" target="_blank" rel="noopener">http://secoff.net/（secoff博客）</a></p>
-<p><a href="http://twi1ight.com/（twi1ight博客）" target="_blank" rel="noopener">http://twi1ight.com/（twi1ight博客）</a></p>
-<p><a href="https://rinige.com" target="_blank" rel="noopener">https://rinige.com</a> (ringige博客)</p>
-<p><a href="http://www.bystudent.com/(bystudent博客" target="_blank" rel="noopener">http://www.bystudent.com/(bystudent博客</a>)</p>
-<p><a href="http://o0xmuhe.me/page/2/" target="_blank" rel="noopener">http://o0xmuhe.me/page/2/</a> (o0xmuhe博客)</p>
-<p><a href="http://www.blue-lotus.net/" target="_blank" rel="noopener">http://www.blue-lotus.net/</a> （蓝莲花战队博客）</p>
-<p><a href="https://www.webshell.cc/(" target="_blank" rel="noopener">https://www.webshell.cc/(</a> webshell博客)</p>
-<p><a href="http://appleu0.sinaapp.com/(" target="_blank" rel="noopener">http://appleu0.sinaapp.com/(</a> appleu0博客)</p>
-<p><a href="http://www.lshack.cn/" target="_blank" rel="noopener">http://www.lshack.cn/</a> (lshack博客)</p>
-<p><a href="https://phpinfo.me/" target="_blank" rel="noopener">https://phpinfo.me/</a> ( phpinfo博客)</p>
-<p><a href="http://f4le.com/" target="_blank" rel="noopener">http://f4le.com/</a> ( f4le博客)</p>
-<p><a href="http://www.03sec.com/" target="_blank" rel="noopener">http://www.03sec.com/</a> (03sec博客)</p>
-<p><a href="http://www.cnbraid.com/（cnbradid博客）" target="_blank" rel="noopener">http://www.cnbraid.com/（cnbradid博客）</a></p>
-<p><a href="http://www.cnblogs.com/killbit/（killbit博客）" target="_blank" rel="noopener">http://www.cnblogs.com/killbit/（killbit博客）</a></p>
-<p><a href="http://blog.nuptzj.cn/" target="_blank" rel="noopener">http://blog.nuptzj.cn/</a> (nuptzj博客)</p>
-<p><a href="http://www.cnblogs.com/Ox9A82/（Ox9A82博客" target="_blank" rel="noopener">http://www.cnblogs.com/Ox9A82/（Ox9A82博客</a> ）</p>
-<p><a href="https://www.lshack.cn/" target="_blank" rel="noopener">https://www.lshack.cn/</a>    (lshack博客)</p>
-<p><a href="http://www.cnblogs.com/sevck/" target="_blank" rel="noopener">http://www.cnblogs.com/sevck/</a> （sevck博客）</p>
-<p><a href="https://tom0li.github.io（tom0li博客）" target="_blank" rel="noopener">https://tom0li.github.io（tom0li博客）</a></p>
-<p><a href="http://www.waitalone.cn/（独自等待博客）" target="_blank" rel="noopener">http://www.waitalone.cn/（独自等待博客）</a></p>
-<p><a href="https://wujunze.com/（wujunze博客）" target="_blank" rel="noopener">https://wujunze.com/（wujunze博客）</a></p>
-<p><a href="https://ht-sec.org（昊天博客）" target="_blank" rel="noopener">https://ht-sec.org（昊天博客）</a></p>
-<p><a href="http://docs.hackinglab.cn/（hackinglab博客）" target="_blank" rel="noopener">http://docs.hackinglab.cn/（hackinglab博客）</a></p>
-<p><a href="http://www.hackqing.com/（情博客）" target="_blank" rel="noopener">http://www.hackqing.com/（情博客）</a></p>
-<p><a href="http://www.milw0rm.cn（milw0rm博客）" target="_blank" rel="noopener">http://www.milw0rm.cn（milw0rm博客）</a></p>
-<p><a href="https://www.sitedirsec.com/（非安全中国博客" target="_blank" rel="noopener">https://www.sitedirsec.com/（非安全中国博客</a>    ）</p>
-<p><a href="http://www.arvinhk.com/（arivn博客）" target="_blank" rel="noopener">http://www.arvinhk.com/（arivn博客）</a></p>
-<p><a href="http://hk-xg.lofter.com/（hk-xg博客" target="_blank" rel="noopener">http://hk-xg.lofter.com/（hk-xg博客</a> ）</p>
-<p><a href="http://www.hackblog.cn/（" target="_blank" rel="noopener">http://www.hackblog.cn/（</a> hackblog博客）</p>
-<p><a href="http://piaoyu.org/（piaoyu博客）" target="_blank" rel="noopener">http://piaoyu.org/（piaoyu博客）</a></p>
-<p><a href="http://defcon.cn/script（defcon博客）" target="_blank" rel="noopener">http://defcon.cn/script（defcon博客）</a></p>
-<p><a href="http://www.jeehsu.com/（几许博客）" target="_blank" rel="noopener">http://www.jeehsu.com/（几许博客）</a></p>
-<p><a href="http://www.52bug.cn/（吾爱漏洞博客）" target="_blank" rel="noopener">http://www.52bug.cn/（吾爱漏洞博客）</a></p>
-<p><a href="http://www.moonsec.com/（暗月博客）" target="_blank" rel="noopener">http://www.moonsec.com/（暗月博客）</a></p>
-<p><a href="http://www.cnseay.com/（法师博客）" target="_blank" rel="noopener">http://www.cnseay.com/（法师博客）</a></p>
-<p><a href="http://www.exehack.net/（小残博客）" target="_blank" rel="noopener">http://www.exehack.net/（小残博客）</a></p>
-<p><a href="http://blog.knownsec.com/（知道创宇博客）" target="_blank" rel="noopener">http://blog.knownsec.com/（知道创宇博客）</a></p>
-<p><a href="http://www.keen8.com/（kee8博客" target="_blank" rel="noopener">http://www.keen8.com/（kee8博客</a>    ）</p>
-<p><a href="http://0ke.org/（" target="_blank" rel="noopener">http://0ke.org/（</a> 0ke博客 ）</p>
-<p><a href="http://www.storysec.com/（影风&#39;s" target="_blank" rel="noopener">http://www.storysec.com/（影风&#39;s</a> Blog）</p>
-<p><a href="http://www.weixianmanbu.com/（黑客技术博客）" target="_blank" rel="noopener">http://www.weixianmanbu.com/（黑客技术博客）</a></p>
-<p><a href="http://www.x14hack.com/" target="_blank" rel="noopener">http://www.x14hack.com/</a> （14xhack博客）</p>
-<p><a href="http://rcoil.me/（rcoil博客）" target="_blank" rel="noopener">http://rcoil.me/（rcoil博客）</a></p>
-<p><a href="https://perseus.codes/（perseus博客）" target="_blank" rel="noopener">https://perseus.codes/（perseus博客）</a></p>
-<p><a href="http://www.legendsec.org/" target="_blank" rel="noopener">http://www.legendsec.org/</a> (legendsec博客)</p>
-<p><a href="http://xiao106347.blog.163.com/（小刘kali博客）" target="_blank" rel="noopener">http://xiao106347.blog.163.com/（小刘kali博客）</a></p>
-<p><a href="http://blog.sycsec.com/(三叶草博客）" target="_blank" rel="noopener">http://blog.sycsec.com/(三叶草博客）</a></p>
-<p><a href="http://www.cnnetsec.com/（cnnetsec博客）" target="_blank" rel="noopener">http://www.cnnetsec.com/（cnnetsec博客）</a></p>
-<p><a href="http://iscc.gxu.edu.cn/index.php/Index/start" target="_blank" rel="noopener">http://iscc.gxu.edu.cn/index.php/Index/start</a> （iscc博客）</p>
-<p><a href="http://www.joychou.org/（joychou博客）" target="_blank" rel="noopener">http://www.joychou.org/（joychou博客）</a></p>
-<p><a href="http://rootkiter.com/EarthWorm/（rootkiter博客）" target="_blank" rel="noopener">http://rootkiter.com/EarthWorm/（rootkiter博客）</a></p>
-<p><a href="https://www.lmva.cc/" target="_blank" rel="noopener">https://www.lmva.cc/</a> (lmva博客)</p>
-<p><a href="http://www.evil0x.com/" target="_blank" rel="noopener">http://www.evil0x.com/</a> （十六进制）</p>
-<p><a href="https://ha.cker.in/（cker博客）" target="_blank" rel="noopener">https://ha.cker.in/（cker博客）</a></p>
-<p><a href="http://3xp10it.cc/(3xp10it博客）" target="_blank" rel="noopener">http://3xp10it.cc/(3xp10it博客）</a></p>
-<p><a href="http://wolvez.club/（lostwolf博客）" target="_blank" rel="noopener">http://wolvez.club/（lostwolf博客）</a></p>
-<p><a href="http://thief.one(thief博客）" target="_blank" rel="noopener">http://thief.one(thief博客）</a></p>
-<p><a href="http://simeon.blog.51cto.com/（simeon博客）" target="_blank" rel="noopener">http://simeon.blog.51cto.com/（simeon博客）</a></p>
-<p><a href="http://javaweb.org/（javaweb博客）" target="_blank" rel="noopener">http://javaweb.org/（javaweb博客）</a></p>
-<p><a href="http://qqhack8.blog.163.com/（k8博客）" target="_blank" rel="noopener">http://qqhack8.blog.163.com/（k8博客）</a></p>
-<p><a href="http://das.scusec.org/(scusec博客）" target="_blank" rel="noopener">http://das.scusec.org/(scusec博客）</a></p>
-<p><a href="http://www.zcgonvh.com/（草泥马之家博客）" target="_blank" rel="noopener">http://www.zcgonvh.com/（草泥马之家博客）</a></p>
-<p><a href="http://www.webbaozi.com/（包子博客）" target="_blank" rel="noopener">http://www.webbaozi.com/（包子博客）</a></p>
-<p><a href="http://blog.safebuff.com/（x17dev博客）" target="_blank" rel="noopener">http://blog.safebuff.com/（x17dev博客）</a></p>
-<p><a href="http://k1p4ss.sinaapp.com/（k1p4ss博客）" target="_blank" rel="noopener">http://k1p4ss.sinaapp.com/（k1p4ss博客）</a></p>
-<p><a href="http://www.daokers.com/（金刀客博客）" target="_blank" rel="noopener">http://www.daokers.com/（金刀客博客）</a></p>
-<p><a href="https://www.i0day.com/（小马博客）" target="_blank" rel="noopener">https://www.i0day.com/（小马博客）</a></p>
-<p><a href="http://www.cnblogs.com/SEC-fsq/（范世强博客）" target="_blank" rel="noopener">http://www.cnblogs.com/SEC-fsq/（范世强博客）</a></p>
-<p>国外：</p>
-<p><a href="http://www.lanmaster53.com/（lanmaster53博客）" target="_blank" rel="noopener">http://www.lanmaster53.com/（lanmaster53博客）</a></p>
-<p><a href="http://pen-testing.sans.org/blog/pen-testing（sans渗透测试博客）" target="_blank" rel="noopener">http://pen-testing.sans.org/blog/pen-testing（sans渗透测试博客）</a></p>
-<p><a href="https://digi.ninja/（digi渗透测试博客）" target="_blank" rel="noopener">https://digi.ninja/（digi渗透测试博客）</a></p>
-<p><a href="http://www.harmj0y.net/blog/（harmj0y渗透测试博客）" target="_blank" rel="noopener">http://www.harmj0y.net/blog/（harmj0y渗透测试博客）</a></p>
-<p><a href="http://nullsecurity.net/tools.html(nullsecurity渗透工具博客" target="_blank" rel="noopener">http://nullsecurity.net/tools.html(nullsecurity渗透工具博客</a>)</p>
-<p><a href="http://www.ehacking.net/（ehacking渗透测试博客）" target="_blank" rel="noopener">http://www.ehacking.net/（ehacking渗透测试博客）</a></p>
-<p><a href="http://www.kitploit.com/（kitploit.渗透测试博客）" target="_blank" rel="noopener">http://www.kitploit.com/（kitploit.渗透测试博客）</a></p>
-<p><a href="http://www.commonexploits.com/（commonexploits渗透测试博客）" target="_blank" rel="noopener">http://www.commonexploits.com/（commonexploits渗透测试博客）</a></p>
-<p><a href="https://adsecurity.org/(AD域渗透测试博客）" target="_blank" rel="noopener">https://adsecurity.org/(AD域渗透测试博客）</a></p>
-<p><a href="http://www.securitytube.net/（securitytube渗透视频教程博客）" target="_blank" rel="noopener">http://www.securitytube.net/（securitytube渗透视频教程博客）</a></p>
-<p><a href="https://www.dsinternals.com/en/（AD域渗透测试博客）" target="_blank" rel="noopener">https://www.dsinternals.com/en/（AD域渗透测试博客）</a></p>
-<p><a href="https://adsecurity.org/(AD域渗透博客）" target="_blank" rel="noopener">https://adsecurity.org/(AD域渗透博客）</a></p>
-<p><a href="http://blog.gentilkiwi.com/（mimikazhi博客）" target="_blank" rel="noopener">http://blog.gentilkiwi.com/（mimikazhi博客）</a></p>
-<p><a href="https://blog.0x80.org/（汽车安全博客）" target="_blank" rel="noopener">https://blog.0x80.org/（汽车安全博客）</a></p>
-<p><a href="http://sectools.org/tag/web-scanners/（安全工具下载博客）" target="_blank" rel="noopener">http://sectools.org/tag/web-scanners/（安全工具下载博客）</a></p>
-<p><a href="https://blog.netspi.com/（SQL注入技能博客）" target="_blank" rel="noopener">https://blog.netspi.com/（SQL注入技能博客）</a></p>
-<p><a href="http://www.sqlinjectionwiki.com/Categories/4/postgresql-sql-injection-cheat-sheet/（注入技能表博客）" target="_blank" rel="noopener">http://www.sqlinjectionwiki.com/Categories/4/postgresql-sql-injection-cheat-sheet/（注入技能表博客）</a></p>
-<p><a href="http://websec.ca/kb/sql_injection" target="_blank" rel="noopener">http://websec.ca/kb/sql_injection</a> (sql注入大全)</p>
-<p><a href="https://wn.com/httpheaderinjectionds（http头注入博客" target="_blank" rel="noopener">https://wn.com/httpheaderinjectionds（http头注入博客</a>)</p>
-<p><a href="http://www.devttys0.com/blog/（路由安全博客）" target="_blank" rel="noopener">http://www.devttys0.com/blog/（路由安全博客）</a></p>
-<p><a href="https://fail0verflow.com/（硬件大牛博客）" target="_blank" rel="noopener">https://fail0verflow.com/（硬件大牛博客）</a></p>
-<p><a href="http://www.blackhat.com/（黑帽大赛官方博客）" target="_blank" rel="noopener">http://www.blackhat.com/（黑帽大赛官方博客）</a></p>
-<p><a href="http://www.social-engineer.org/(社会工程学博客）" target="_blank" rel="noopener">http://www.social-engineer.org/(社会工程学博客）</a></p>
-<p><a href="http://www.windowsecurity.com/（window安全博客）" target="_blank" rel="noopener">http://www.windowsecurity.com/（window安全博客）</a></p>
-<p><a href="https://www.blackmoreops.com/（linux安全博客）" target="_blank" rel="noopener">https://www.blackmoreops.com/（linux安全博客）</a></p>
-<p><a href="http://http-tunnel.sourceforge.net/" target="_blank" rel="noopener">http://http-tunnel.sourceforge.net/</a> (http-tunnel反向代理博客）</p>
-<p><a href="https://zmap.io/（zmap博客）" target="_blank" rel="noopener">https://zmap.io/（zmap博客）</a></p>
-<p><a href="https://www.thc.org/（thc博客）" target="_blank" rel="noopener">https://www.thc.org/（thc博客）</a></p>
-<p><a href="http://mydowndown.com/y2down" target="_blank" rel="noopener">http://mydowndown.com/y2down</a> (youtuble视频下载）</p>
-<p><a href="http://securityxploded.com/download.php（国外密码工具大全）" target="_blank" rel="noopener">http://securityxploded.com/download.php（国外密码工具大全）</a></p>
-<p><a href="https://pentest.blog/（渗透测试博客）" target="_blank" rel="noopener">https://pentest.blog/（渗透测试博客）</a></p>
-<p><a href="http://www.rekings.com/blog/（rekings博客" target="_blank" rel="noopener">http://www.rekings.com/blog/（rekings博客</a>)</p>
-<p><a href="http://www.hackingarticles.in（黑客文章知识库）" target="_blank" rel="noopener">http://www.hackingarticles.in（黑客文章知识库）</a></p>
-<p><a href="http://fuzzysecurity.com/tutorials/16.html（fuzzysecurity博客）" target="_blank" rel="noopener">http://fuzzysecurity.com/tutorials/16.html（fuzzysecurity博客）</a></p>
-<p><a href="https://artkond.com/2017/03/23/pivoting-guide/（artkond博客）" target="_blank" rel="noopener">https://artkond.com/2017/03/23/pivoting-guide/（artkond博客）</a></p>
-<p><a href="http://www.hacking-tutorial.com（haking博客）" target="_blank" rel="noopener">http://www.hacking-tutorial.com（haking博客）</a></p>
-<p><a href="https://legalhackers.com/（legalhackers博客）" target="_blank" rel="noopener">https://legalhackers.com/（legalhackers博客）</a></p>
-<p><a href="https://blog.quarkslab.com/（quarkslab博客）" target="_blank" rel="noopener">https://blog.quarkslab.com/（quarkslab博客）</a></p>
-<p><a href="https://foxglovesecurity.com/" target="_blank" rel="noopener">https://foxglovesecurity.com/</a> （foxglovesecurity博客）</p>
-<p><a href="http://carnal0wnage.attackresearch.com/（attackresearch博客）" target="_blank" rel="noopener">http://carnal0wnage.attackresearch.com/（attackresearch博客）</a></p>
-<p><a href="https://www.darknet.org.uk/" target="_blank" rel="noopener">https://www.darknet.org.uk/</a></p>
-<p><a href="https://room362.com/（room362博客）" target="_blank" rel="noopener">https://room362.com/（room362博客）</a></p>
-<p><a href="http://blog.portswigger.net/（burpsuit博客）" target="_blank" rel="noopener">http://blog.portswigger.net/（burpsuit博客）</a></p>
-<p><a href="https://blog.skullsecurity.org/（关于CTF）" target="_blank" rel="noopener">https://blog.skullsecurity.org/（关于CTF）</a></p>
-<p><a href="https://community.rapid7.com/community/metasploit/blog(MSF官方博客）" target="_blank" rel="noopener">https://community.rapid7.com/community/metasploit/blog(MSF官方博客）</a></p>
-<p><a href="http://www.tssci-security.com/（tssci博客）" target="_blank" rel="noopener">http://www.tssci-security.com/（tssci博客）</a></p>
-<p><a href="http://blog.gdssecurity.com/（gdssecurity博客）" target="_blank" rel="noopener">http://blog.gdssecurity.com/（gdssecurity博客）</a></p>
-<p><a href="https://websec.wordpress.com（websec博客）" target="_blank" rel="noopener">https://websec.wordpress.com（websec博客）</a></p>
-<p><a href="http://bernardodamele.blogspot.com/（blogspot博客）" target="_blank" rel="noopener">http://bernardodamele.blogspot.com/（blogspot博客）</a></p>
-<p><a href="http://laramies.blogspot.com/（blogspot博客）" target="_blank" rel="noopener">http://laramies.blogspot.com/（blogspot博客）</a></p>
-<p><a href="https://clymb3r.wordpress.com/" target="_blank" rel="noopener">https://clymb3r.wordpress.com/</a> (clymb3r博客)</p>
-<p><a href="https://www.cyberciti.biz（博客）" target="_blank" rel="noopener">https://www.cyberciti.biz（博客）</a></p>
-<p><a href="http://www.spylogic.net/（spylogic博客）" target="_blank" rel="noopener">http://www.spylogic.net/（spylogic博客）</a></p>
-<p><a href="http://pentestmonkey.net/blog（pentestmonkey博客）" target="_blank" rel="noopener">http://pentestmonkey.net/blog（pentestmonkey博客）</a></p>
-<p><a href="https://www.commonexploits.com/（commonexploits博客）" target="_blank" rel="noopener">https://www.commonexploits.com/（commonexploits博客）</a></p>
-<p><a href="https://sensepost.com/blog/（sensepost博客）" target="_blank" rel="noopener">https://sensepost.com/blog/（sensepost博客）</a></p>
-<p><a href="http://exploit.co.il/blog/（exploit博客）" target="_blank" rel="noopener">http://exploit.co.il/blog/（exploit博客）</a></p>
-<p><a href="http://sirdarckcat.blogspot.com/（sirdarckcat博客）" target="_blank" rel="noopener">http://sirdarckcat.blogspot.com/（sirdarckcat博客）</a></p>
-<p><a href="http://reusablesec.blogspot.com/（reusablesec博客）" target="_blank" rel="noopener">http://reusablesec.blogspot.com/（reusablesec博客）</a></p>
-<p><a href="https://www.trustwave.com/（trustwave博客）" target="_blank" rel="noopener">https://www.trustwave.com/（trustwave博客）</a></p>
-<p><a href="https://www.corelan.be/（corelan博客）" target="_blank" rel="noopener">https://www.corelan.be/（corelan博客）</a></p>
-<p><a href="https://www.notsosecure.com/blog/（notsosecure博客）" target="_blank" rel="noopener">https://www.notsosecure.com/blog/（notsosecure博客）</a></p>
-<p><a href="https://securityreliks.wordpress.com/（securityreliks博客）" target="_blank" rel="noopener">https://securityreliks.wordpress.com/（securityreliks博客）</a></p>
-<p><a href="http://ihazomgsecurityskillz.blogspot.com/（linux内核）" target="_blank" rel="noopener">http://ihazomgsecurityskillz.blogspot.com/（linux内核）</a></p>
-<p><a href="https://memset.wordpress.com/（memset博客）" target="_blank" rel="noopener">https://memset.wordpress.com/（memset博客）</a></p>
-<p><a href="http://gynvael.coldwind.pl/?blog=1&amp;lang=en（gynvael博客）" target="_blank" rel="noopener">http://gynvael.coldwind.pl/?blog=1&amp;lang=en（gynvael博客）</a></p>
-<p><a href="https://blog.g0tmi1k.com/（g0tmi1k博客）" target="_blank" rel="noopener">https://blog.g0tmi1k.com/（g0tmi1k博客）</a></p>
-<p><a href="https://digi.ninja/（digi博客）" target="_blank" rel="noopener">https://digi.ninja/（digi博客）</a></p>
-<p><a href="http://pentestit.com/（pentestit博客）" target="_blank" rel="noopener">http://pentestit.com/（pentestit博客）</a></p>
-<p><a href="https://www.shellntel.com/（shellntel博客）" target="_blank" rel="noopener">https://www.shellntel.com/（shellntel博客）</a></p>
-<p><a href="http://www.irongeek.com/（irongeek博客）" target="_blank" rel="noopener">http://www.irongeek.com/（irongeek博客）</a></p>
-<p><a href="https://bitvijays.github.io/（bitvijays博客）" target="_blank" rel="noopener">https://bitvijays.github.io/（bitvijays博客）</a></p>
-<p><a href="https://pentestlab.blog（渗透检测实验室博客）" target="_blank" rel="noopener">https://pentestlab.blog（渗透检测实验室博客）</a></p>
-<p><a href="https://www.hackthissite.org/forums/index.php（国外黑客论坛）" target="_blank" rel="noopener">https://www.hackthissite.org/forums/index.php（国外黑客论坛）</a></p>
-<p>在线知识：<br><a href="http://wiki.ioin.in/（安全文库）" target="_blank" rel="noopener">http://wiki.ioin.in/（安全文库）</a></p>
-<p><a href="http://bobao.360.cn/learning/index（安全客知识库）" target="_blank" rel="noopener">http://bobao.360.cn/learning/index（安全客知识库）</a></p>
-<p><a href="https://www.hackfun.org/kali-tools/kali-tools-zh.html(" target="_blank" rel="noopener">https://www.hackfun.org/kali-tools/kali-tools-zh.html(</a> KALI工具使用说明)</p>
-<p><a href="https://www.gitbook.com/book/t0data/burpsuite/details" target="_blank" rel="noopener">https://www.gitbook.com/book/t0data/burpsuite/details</a> （burpsuit中文指南）</p>
-<p><a href="http://www.w3school.com.cn/（" target="_blank" rel="noopener">http://www.w3school.com.cn/（</a> w3school在线学习 ）</p>
-<p><a href="http://www.runoob.com/" target="_blank" rel="noopener">http://www.runoob.com/</a> (it脚本学习）</p>
-<p><a href="http://www.ziqiangxuetang.com/django" target="_blank" rel="noopener">http://www.ziqiangxuetang.com/django</a> （djiango之python学习）</p>
-<p><a href="http://www.sec-wiki.com/（安全技能库）" target="_blank" rel="noopener">http://www.sec-wiki.com/（安全技能库）</a></p>
-<p><a href="http://www.oschina.net/（源代码）" target="_blank" rel="noopener">http://www.oschina.net/（源代码）</a></p>
-<p><a href="http://paper.seebug.org/" target="_blank" rel="noopener">http://paper.seebug.org/</a> (seebug安全知识库)</p>
-<p><a href="https://bowen.navisec.it/（安全文库）" target="_blank" rel="noopener">https://bowen.navisec.it/（安全文库）</a></p>
-<p><a href="http://expku.com/（国内exp搜索大全）" target="_blank" rel="noopener">http://expku.com/（国内exp搜索大全）</a></p>
-<p><a href="http://www.exploitsearch.net（exp搜索）" target="_blank" rel="noopener">http://www.exploitsearch.net（exp搜索）</a></p>
-<p>论坛与导航：<br><a href="http://www.hegouvip.com/（合购资源网）" target="_blank" rel="noopener">http://www.hegouvip.com/（合购资源网）</a></p>
-<p><a href="http://www.anquanquan.info/（安全圈导航）" target="_blank" rel="noopener">http://www.anquanquan.info/（安全圈导航）</a></p>
-<p><a href="http://navisec.it/" target="_blank" rel="noopener">http://navisec.it/</a> （navisec导航）</p>
-<p><a href="http://cmcc.ml/（cmcc网址安全导航）" target="_blank" rel="noopener">http://cmcc.ml/（cmcc网址安全导航）</a></p>
-<p><a href="http://www.pediy.com/（看雪论坛" target="_blank" rel="noopener">http://www.pediy.com/（看雪论坛</a> ）</p>
-<p><a href="http://www.52pojie.cn/（吾爱破解" target="_blank" rel="noopener">http://www.52pojie.cn/（吾爱破解</a> ）</p>
-<p><a href="http://www.metasploit.cn/（metasploit论坛）" target="_blank" rel="noopener">http://www.metasploit.cn/（metasploit论坛）</a></p>
-<p><a href="https://xianzhi.aliyun.com/forum/read/723.html" target="_blank" rel="noopener">https://xianzhi.aliyun.com/forum/read/723.html</a> （先知社区）</p>
-<p><a href="http://www.pd521.com/（安卓逆向论坛）" target="_blank" rel="noopener">http://www.pd521.com/（安卓逆向论坛）</a></p>
-<p><a href="http://bbs.ichunqiu.com/(爱春秋论坛" target="_blank" rel="noopener">http://bbs.ichunqiu.com/(爱春秋论坛</a>)</p>
-<p><a href="http://hackinglab.cn/（hack实验室）" target="_blank" rel="noopener">http://hackinglab.cn/（hack实验室）</a></p>
-<p><a href="https://www.t00ls.net/(t00ls论坛" target="_blank" rel="noopener">https://www.t00ls.net/(t00ls论坛</a> )</p>
-<p><a href="https://forum.90sec.org/（90sec论坛" target="_blank" rel="noopener">https://forum.90sec.org/（90sec论坛</a>)</p>
-<p><a href="https://www.70sec.com/(70sec论坛" target="_blank" rel="noopener">https://www.70sec.com/(70sec论坛</a>)</p>
-<p><a href="https://forum.exploit.in/(exploit论坛" target="_blank" rel="noopener">https://forum.exploit.in/(exploit论坛</a>)</p>
-<p><a href="http://forum.exetools.com/index.php（explotools论坛）" target="_blank" rel="noopener">http://forum.exetools.com/index.php（explotools论坛）</a></p>
-<p><a href="https://www.v2ex.com/（v2ex程序员社区）" target="_blank" rel="noopener">https://www.v2ex.com/（v2ex程序员社区）</a></p>
-<p>安全资讯：<br><a href="http://www.freebuf.com/（freebuf安全媒体）" target="_blank" rel="noopener">http://www.freebuf.com/（freebuf安全媒体）</a></p>
-<p><a href="http://www.0daybank.org/(" target="_blank" rel="noopener">http://www.0daybank.org/(</a> 漏洞银行安全资讯)</p>
-<p><a href="https://www.secpulse.com/（安全脉搏安全资讯）" target="_blank" rel="noopener">https://www.secpulse.com/（安全脉搏安全资讯）</a></p>
-<p><a href="http://www.secbox.cn/（安全盒子资讯）" target="_blank" rel="noopener">http://www.secbox.cn/（安全盒子资讯）</a></p>
-<p><a href="http://www.secist.com/(即刻安全资讯）" target="_blank" rel="noopener">http://www.secist.com/(即刻安全资讯）</a></p>
-<p><a href="https://www.sec-wiki.com/（wiki安全资讯）" target="_blank" rel="noopener">https://www.sec-wiki.com/（wiki安全资讯）</a></p>
-<p><a href="http://www.mottoin.com/（猫眼安全媒体" target="_blank" rel="noopener">http://www.mottoin.com/（猫眼安全媒体</a>)</p>
-<p><a href="http://www.4hou.com/（嘶吼安全媒体）" target="_blank" rel="noopener">http://www.4hou.com/（嘶吼安全媒体）</a></p>
-<p>漏洞预警和exp查询：<br><a href="http://wy.hx99.net/（乌云搜索）" target="_blank" rel="noopener">http://wy.hx99.net/（乌云搜索）</a></p>
-<p><a href="https://loudong.sjtu.edu.cn/（教育行业安全漏洞）" target="_blank" rel="noopener">https://loudong.sjtu.edu.cn/（教育行业安全漏洞）</a></p>
-<p><a href="http://webscan.360.cn/vul（网站常见漏洞）" target="_blank" rel="noopener">http://webscan.360.cn/vul（网站常见漏洞）</a></p>
-<p><a href="https://cxsecurity.com/wlb/（国外漏洞）" target="_blank" rel="noopener">https://cxsecurity.com/wlb/（国外漏洞）</a></p>
-<p><a href="http://blogs.360.cn/（360漏洞技术博客）" target="_blank" rel="noopener">http://blogs.360.cn/（360漏洞技术博客）</a></p>
-<p><a href="http://xteam.baidu.com/（百度实验室" target="_blank" rel="noopener">http://xteam.baidu.com/（百度实验室</a>    ）</p>
-<p><a href="http://blog.nsfocus.net/（绿盟漏洞预警博客）" target="_blank" rel="noopener">http://blog.nsfocus.net/（绿盟漏洞预警博客）</a></p>
-<p><a href="https://www.seebug.org/（seebug漏洞预警）" target="_blank" rel="noopener">https://www.seebug.org/（seebug漏洞预警）</a></p>
-<p><a href="http://www.cnvd.org.cn/（cnvd漏洞平台）" target="_blank" rel="noopener">http://www.cnvd.org.cn/（cnvd漏洞平台）</a></p>
-<p><a href="https://www.vulnhub.com/（漏洞测试平台）" target="_blank" rel="noopener">https://www.vulnhub.com/（漏洞测试平台）</a></p>
-<p><a href="https://www.exploit-db.com/papers/（exploit-db漏洞库）" target="_blank" rel="noopener">https://www.exploit-db.com/papers/（exploit-db漏洞库）</a></p>
-<p><a href="https://technet.microsoft.com/en-us/library/security/mt637763.aspx（微软exp版本号列表）" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/security/mt637763.aspx（微软exp版本号列表）</a></p>
-<p><a href="https://bugs.chromium.org/p/project-zero/issues/list（微软漏洞下载搜索）" target="_blank" rel="noopener">https://bugs.chromium.org/p/project-zero/issues/list（微软漏洞下载搜索）</a></p>
-<p><a href="https://www.kernel-exploits.com/(linxu内核exp查询）" target="_blank" rel="noopener">https://www.kernel-exploits.com/(linxu内核exp查询）</a></p>
-<p><a href="http://exploit.linuxnote.org/（国内linux内核EXP查询）" target="_blank" rel="noopener">http://exploit.linuxnote.org/（国内linux内核EXP查询）</a></p>
-<p><a href="https://packetstormsecurity.com/（packetstormsecurity" target="_blank" rel="noopener">https://packetstormsecurity.com/（packetstormsecurity</a> 的exp查询）</p>
-<p><a href="http://cve.mitre.org/（漏洞编号查询）" target="_blank" rel="noopener">http://cve.mitre.org/（漏洞编号查询）</a></p>
-<p><a href="http://www.securiteam.com/（安全团队）" target="_blank" rel="noopener">http://www.securiteam.com/（安全团队）</a></p>
-<p><a href="http://www.securityfocus.com/（安全焦点）" target="_blank" rel="noopener">http://www.securityfocus.com/（安全焦点）</a></p>
-<p><a href="http://www.securitytracker.com（securitytracker）" target="_blank" rel="noopener">http://www.securitytracker.com（securitytracker）</a></p>
-<p><a href="http://www.guninski.com/（guninski的exp查询）" target="_blank" rel="noopener">http://www.guninski.com/（guninski的exp查询）</a></p>
-<p><a href="http://cxsecurity.com/（漏洞库）" target="_blank" rel="noopener">http://cxsecurity.com/（漏洞库）</a></p>
-<p><a href="http://www.routerpwn.com/（路由漏洞查询）" target="_blank" rel="noopener">http://www.routerpwn.com/（路由漏洞查询）</a></p>
-<p><a href="http://www.sebug.net/vuldb/vulnerabilities（WEB漏洞库查询）" target="_blank" rel="noopener">http://www.sebug.net/vuldb/vulnerabilities（WEB漏洞库查询）</a></p>
-<p><a href="http://0day5.com/（WEB漏洞时代）" target="_blank" rel="noopener">http://0day5.com/（WEB漏洞时代）</a></p>
-<p><a href="http://www.ussrback.com/（ussrback的exp查询）" target="_blank" rel="noopener">http://www.ussrback.com/（ussrback的exp查询）</a></p>
-<p><a href="http://cn.0day.today/（oday" target="_blank" rel="noopener">http://cn.0day.today/（oday</a>)</p>
-<p><a href="http://xssor.io/" target="_blank" rel="noopener">http://xssor.io/</a> (xss poc大全)</p>
-<p>在线web扫描器：<br><a href="http://webscan.360.cn/" target="_blank" rel="noopener">http://webscan.360.cn/</a></p>
-<p><a href="http://site.safedog.cn/index.html" target="_blank" rel="noopener">http://site.safedog.cn/index.html</a></p>
-<p><a href="http://www.wmirror.org/" target="_blank" rel="noopener">http://www.wmirror.org/</a></p>
-<p>CTF训练：<br><a href="http://www.shiyanbar.com/ctf/practice（CTF训练营）" target="_blank" rel="noopener">http://www.shiyanbar.com/ctf/practice（CTF训练营）</a></p>
-<p><a href="https://xss.haozi.me/#/(xss闯关）" target="_blank" rel="noopener">https://xss.haozi.me/#/(xss闯关）</a></p>
-<p><a href="http://oj.xctf.org.cn/web/login/?next=/（xctf）" target="_blank" rel="noopener">http://oj.xctf.org.cn/web/login/?next=/（xctf）</a></p>
-<p><a href="http://bobao.360.cn/ctf/index（360CTF训练营" target="_blank" rel="noopener">http://bobao.360.cn/ctf/index（360CTF训练营</a> ）</p>
-<p><a href="http://hackinglab.cn/（网络安全对抗平台" target="_blank" rel="noopener">http://hackinglab.cn/（网络安全对抗平台</a> ）</p>
-<p><a href="https://pwnhub.cn/(CTF比赛" target="_blank" rel="noopener">https://pwnhub.cn/(CTF比赛</a>)</p>
-<p><a href="https://www.xctf.org.cn/（xctf社区）" target="_blank" rel="noopener">https://www.xctf.org.cn/（xctf社区）</a></p>
-<p><a href="http://bobao.360.cn/ctf/（360CTF社区）" target="_blank" rel="noopener">http://bobao.360.cn/ctf/（360CTF社区）</a></p>
-<p><a href="https://ctftime.org/（ctftime社区）" target="_blank" rel="noopener">https://ctftime.org/（ctftime社区）</a></p>
-<p>github项目：<br><a href="https://github.com/ctfs/（CTFwrite" target="_blank" rel="noopener">https://github.com/ctfs/（CTFwrite</a> ）</p>
-<p><a href="https://github.com/powershellempire/empire（powershllempire项目）" target="_blank" rel="noopener">https://github.com/powershellempire/empire（powershllempire项目）</a></p>
-<p><a href="https://github.com/adaptivethreat/EmPyre（EmPyre项目）" target="_blank" rel="noopener">https://github.com/adaptivethreat/EmPyre（EmPyre项目）</a></p>
-<p><a href="https://github.com/HarmJ0y/Malleable-C2-Profiles(Malleable-C2-Profiles项目）" target="_blank" rel="noopener">https://github.com/HarmJ0y/Malleable-C2-Profiles(Malleable-C2-Profiles项目）</a></p>
-<p><a href="https://github.com/Veil-Framework/Veil-Evasion（Veil-Evasion免杀项目）" target="_blank" rel="noopener">https://github.com/Veil-Framework/Veil-Evasion（Veil-Evasion免杀项目）</a></p>
-<p><a href="https://github.com/offensive-security（offensive-security项目）" target="_blank" rel="noopener">https://github.com/offensive-security（offensive-security项目）</a></p>
-<p><a href="https://github.com/secretsquirrel/the-backdoor-factory/（the-backdoor-factory项目）" target="_blank" rel="noopener">https://github.com/secretsquirrel/the-backdoor-factory/（the-backdoor-factory项目）</a></p>
-<p><a href="https://github.com/Veil-Framework/Veil-Evasion/（Veil-Evasion免杀项目）" target="_blank" rel="noopener">https://github.com/Veil-Framework/Veil-Evasion/（Veil-Evasion免杀项目）</a></p>
-<p><a href="https://github.com/x3omdax/PenBox（安全测试框架）" target="_blank" rel="noopener">https://github.com/x3omdax/PenBox（安全测试框架）</a></p>
-<p><a href="https://github.com/SecWiki（安全文库）" target="_blank" rel="noopener">https://github.com/SecWiki（安全文库）</a></p>
-<p>在线常用工具：<br><a href="http://ip.fbisb.com/(真实IP地址查询地址" target="_blank" rel="noopener">http://ip.fbisb.com/(真实IP地址查询地址</a>)</p>
-<p><a href="https://phpinfo.me/domain/（子域名在线爆破）" target="_blank" rel="noopener">https://phpinfo.me/domain/（子域名在线爆破）</a></p>
-<p><a href="http://www.bugbank.cn/dscan/index.html（在线子域名爆破）" target="_blank" rel="noopener">http://www.bugbank.cn/dscan/index.html（在线子域名爆破）</a></p>
-<p><a href="https://phpinfo.me/bing.php（在线c段查询）" target="_blank" rel="noopener">https://phpinfo.me/bing.php（在线c段查询）</a></p>
-<p><a href="https://dnsdb.io/zh-cn/(在线C段查询2）" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/(在线C段查询2）</a></p>
-<p><a href="http://www.yopmail.com/zh/（一次性使用邮箱）" target="_blank" rel="noopener">http://www.yopmail.com/zh/（一次性使用邮箱）</a></p>
-<p><a href="http://objectif-securite.ch/(LM破解）" target="_blank" rel="noopener">http://objectif-securite.ch/(LM破解）</a></p>
-<p><a href="https://www.mailinator.com/（一次性使用邮箱）" target="_blank" rel="noopener">https://www.mailinator.com/（一次性使用邮箱）</a></p>
-<p><a href="http://tools88.com/safe/vnc.php（在线VNC破解）" target="_blank" rel="noopener">http://tools88.com/safe/vnc.php（在线VNC破解）</a></p>
-<p><a href="https://www.hashkiller.co.uk/（在线hash破解）" target="_blank" rel="noopener">https://www.hashkiller.co.uk/（在线hash破解）</a></p>
-<p><a href="http://tool.chacuo.net/cryptdes（在线解密加密）" target="_blank" rel="noopener">http://tool.chacuo.net/cryptdes（在线解密加密）</a></p>
-<p><a href="http://www.xssed.com/（xssed平台）" target="_blank" rel="noopener">http://www.xssed.com/（xssed平台）</a></p>
-<p><a href="http://xss.cnit.pro/（cnitxss平台" target="_blank" rel="noopener">http://xss.cnit.pro/（cnitxss平台</a>)</p>
-<p><a href="http://www.objectif-securite.ch/（在线LMHASH破解）" target="_blank" rel="noopener">http://www.objectif-securite.ch/（在线LMHASH破解）</a></p>
-<p><a href="http://toolbar.netcraft.com（很好的域名搜索引擎）" target="_blank" rel="noopener">http://toolbar.netcraft.com（很好的域名搜索引擎）</a></p>
-<p><a href="http://who.is" target="_blank" rel="noopener">http://who.is</a> （ 域名解析记录很好使）</p>
-<p><a href="https://cirt.net/passwords(常用设备密码字典" target="_blank" rel="noopener">https://cirt.net/passwords(常用设备密码字典</a>)</p>
-<p><a href="http://www.webscantest.com/datastore/(web在线测试练习" target="_blank" rel="noopener">http://www.webscantest.com/datastore/(web在线测试练习</a>)</p>
-<p><a href="http://www.pinchins.cn/Tools.aspx?ch=Tools(勒索病毒解密工具" target="_blank" rel="noopener">http://www.pinchins.cn/Tools.aspx?ch=Tools(勒索病毒解密工具</a>)</p>
-<p>国内社工裤：<br><a href="http://cha.hx99.net/（华西社工库）" target="_blank" rel="noopener">http://cha.hx99.net/（华西社工库）</a></p>
-<p><a href="http://s.70sec.com/（70sec社工库）" target="_blank" rel="noopener">http://s.70sec.com/（70sec社工库）</a></p>
-<p><a href="http://so.moonsec.com/index.php（暗月社工库）" target="_blank" rel="noopener">http://so.moonsec.com/index.php（暗月社工库）</a></p>
-<p><a href="http://qq.findmima.com/(qq密码" target="_blank" rel="noopener">http://qq.findmima.com/(qq密码</a>)</p>
-<p><a href="http://www.ckaifang.com/（查开房数据库）" target="_blank" rel="noopener">http://www.ckaifang.com/（查开房数据库）</a></p>
-<p><a href="https://boy.findmima.com/" target="_blank" rel="noopener">https://boy.findmima.com/</a> （查找密码社工库）</p>
-<p><a href="http://163.donothackme.club/(163邮箱社工库" target="_blank" rel="noopener">http://163.donothackme.club/(163邮箱社工库</a>)</p>
-<p>国外社工裤：<br><a href="https://www.instantcheckmate.com/" target="_blank" rel="noopener">https://www.instantcheckmate.com/</a></p>
-<p><a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">https://haveibeenpwned.com/</a></p>
-<p>联合账号查询：<br><a href="http://reg007.com" target="_blank" rel="noopener">http://reg007.com</a> （查询邮箱已注册过的网址）</p>
-<p><a href="http://www.zhaohuini.com/（找回密码）" target="_blank" rel="noopener">http://www.zhaohuini.com/（找回密码）</a></p>
-<p><a href="http://qun.findmima.com/（群关系）" target="_blank" rel="noopener">http://qun.findmima.com/（群关系）</a></p>
-<p><a href="http://toolsapp.duapp.com/randpw.html（反社工随机密码）" target="_blank" rel="noopener">http://toolsapp.duapp.com/randpw.html（反社工随机密码）</a></p>
-<p><a href="https://www.trustasia.com/tools/ccs-checker/" target="_blank" rel="noopener">https://www.trustasia.com/tools/ccs-checker/</a> （css漏洞检查）</p>
-<p><a href="http://www.bejson.com/" target="_blank" rel="noopener">http://www.bejson.com/</a> （json在线验证）</p>
-<p>大数据以及端口服务查询：<br><a href="https://www.zoomeye.org/（钟道之眼）" target="_blank" rel="noopener">https://www.zoomeye.org/（钟道之眼）</a></p>
-<p><a href="https://www.shodan.io/（shodan查询）" target="_blank" rel="noopener">https://www.shodan.io/（shodan查询）</a></p>
-<p><a href="https://www.oshadan.com/（osshadan查询）" target="_blank" rel="noopener">https://www.oshadan.com/（osshadan查询）</a></p>
-<p><a href="https://www.censys.io/（censys查询）" target="_blank" rel="noopener">https://www.censys.io/（censys查询）</a></p>
-<p><a href="http://cn.bing.com/" target="_blank" rel="noopener">http://cn.bing.com/</a> (必应查询)</p>
-<p><a href="https://searchcode.com/（代码泄露）" target="_blank" rel="noopener">https://searchcode.com/（代码泄露）</a></p>
-<p>CDN查找真实的多ping:<br><a href="https://asm.ca.com/en/ping.php" target="_blank" rel="noopener">https://asm.ca.com/en/ping.php</a></p>
-<p><a href="http://www.cdnplanet.com/tools/cdnfinder/" target="_blank" rel="noopener">http://www.cdnplanet.com/tools/cdnfinder/</a></p>
-<p><a href="http://toolbar.netcraft.com/site_report" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report</a></p>
-<p><a href="http://viewdns.info/iphistory/?domain=" target="_blank" rel="noopener">http://viewdns.info/iphistory/?domain=</a></p>
-<p><a href="http://www.hosterstats.com/historicaldns.php" target="_blank" rel="noopener">http://www.hosterstats.com/historicaldns.php</a></p>
-<p><a href="http://whoisrequest.com/history/" target="_blank" rel="noopener">http://whoisrequest.com/history/</a></p>
-<p><a href="http://map.norsecorp.com/#/" target="_blank" rel="noopener">http://map.norsecorp.com/#/</a></p>
-<p><a href="http://crimeflare.com（查cloudflare真实ip百试不爽）" target="_blank" rel="noopener">http://crimeflare.com（查cloudflare真实ip百试不爽）</a></p>
-<p>常用web在线工具：<br><a href="http://tool.chinaz.com/(站长工具）" target="_blank" rel="noopener">http://tool.chinaz.com/(站长工具）</a></p>
-<p><a href="http://whatweb.net/（网站指纹查询）" target="_blank" rel="noopener">http://whatweb.net/（网站指纹查询）</a></p>
-<p><a href="https://www.t00ls.net/domain.html（t00ls工具）" target="_blank" rel="noopener">https://www.t00ls.net/domain.html（t00ls工具）</a></p>
-<p>MD5在线检查：<br><a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com/</a></p>
-<p><a href="https://www.somd5.com/" target="_blank" rel="noopener">https://www.somd5.com/</a></p>
-<p><a href="http://www.xmd5.com/" target="_blank" rel="noopener">http://www.xmd5.com/</a></p>
-<p><a href="http://pmd5.com/" target="_blank" rel="noopener">http://pmd5.com/</a></p>
-<p><a href="https://www.hashkill.com/" target="_blank" rel="noopener">https://www.hashkill.com/</a></p>
-<p><a href="https://md5db.net/decrypt" target="_blank" rel="noopener">https://md5db.net/decrypt</a></p>
-<p><a href="http://www.dmd5.com/" target="_blank" rel="noopener">http://www.dmd5.com/</a></p>
-<p><a href="http://www.xmd5.org/" target="_blank" rel="noopener">http://www.xmd5.org/</a></p>
-<p><a href="http://md5decryption.com/" target="_blank" rel="noopener">http://md5decryption.com/</a></p>
-<p><a href="http://www.chamd5.org/" target="_blank" rel="noopener">http://www.chamd5.org/</a></p>
-<p><a href="http://hash-killer.com/" target="_blank" rel="noopener">http://hash-killer.com/</a></p>
-<p><a href="https://crackstation.net/" target="_blank" rel="noopener">https://crackstation.net/</a></p>
-<p><a href="http://hashchecker.de/find.html" target="_blank" rel="noopener">http://hashchecker.de/find.html</a></p>
-<p><a href="http://www.objectif-securite.ch/ophcrack.php" target="_blank" rel="noopener">http://www.objectif-securite.ch/ophcrack.php</a></p>
-<p><a href="http://www.md5decrypter.com/" target="_blank" rel="noopener">http://www.md5decrypter.com/</a></p>
-<p><a href="http://www.md5this.com/latest.html" target="_blank" rel="noopener">http://www.md5this.com/latest.html</a></p>
-<p><a href="http://cracker.offensive-security.com/index.php" target="_blank" rel="noopener">http://cracker.offensive-security.com/index.php</a></p>
-<p><a href="http://freerainbowtables.mirror.garr.it/mirrors/freerainbowtables/md5/(彩虹表" target="_blank" rel="noopener">http://freerainbowtables.mirror.garr.it/mirrors/freerainbowtables/md5/(彩虹表</a>)</p>
-<p><a href="http://md5.gromweb.com/" target="_blank" rel="noopener">http://md5.gromweb.com/</a></p>
-<p><a href="http://md5online.org/" target="_blank" rel="noopener">http://md5online.org/</a></p>
-<p><a href="http://tw.freemd5.com/" target="_blank" rel="noopener">http://tw.freemd5.com/</a></p>
-<p><a href="http://www.md5.cc/" target="_blank" rel="noopener">http://www.md5.cc/</a></p>
-<p><a href="http://hashtoolkit.com/" target="_blank" rel="noopener">http://hashtoolkit.com/</a></p>
-<p><a href="https://hashkiller.co.uk/md5-decrypter.aspx" target="_blank" rel="noopener">https://hashkiller.co.uk/md5-decrypter.aspx</a></p>
-<p><a href="http://neeao.com/tools/decode/index_eval.php（gzinflate解密）" target="_blank" rel="noopener">http://neeao.com/tools/decode/index_eval.php（gzinflate解密）</a></p>
-<p>在线病毒检测：<br><a href="http://appscan.360.cn/" target="_blank" rel="noopener">http://appscan.360.cn/</a> （安卓检测）</p>
-<p><a href="https://b-chao.com/" target="_blank" rel="noopener">https://b-chao.com/</a> （安卓检测）</p>
-<p><a href="https://malwr.com/submission/" target="_blank" rel="noopener">https://malwr.com/submission/</a> （病毒分析）</p>
-<p><a href="https://www.virustotal.com/" target="_blank" rel="noopener">https://www.virustotal.com/</a> （病毒分析2）</p>
-<p><a href="http://virusview.net/search/inde（病毒查询" target="_blank" rel="noopener">http://virusview.net/search/inde（病毒查询</a> ）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2013,7 +1653,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2026,7 +1666,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
