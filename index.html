@@ -309,7 +309,7 @@
 <h1 id="我是谁"><a href="#我是谁" class="headerlink" title="我是谁"></a>我是谁</h1><h2 id="第一个题目如下"><a href="#第一个题目如下" class="headerlink" title="第一个题目如下"></a>第一个题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/我是谁1.jpg" alt=" "><br>打开看到<br><img src="/2018/10/09/2018中科大CTF/我是谁2.jpg" alt=" "><br>一头雾水，然后试试注入等等，都没用。。。<br>后来想看一下请求头，发现是418请求头，很奇怪的请求头，于是百度发现：</p>
 <ul>
 <li>HTCPCP 1.0 RFC2324<blockquote>
-<p>超文本咖啡壶控制协议（英文：Hyper Text Coffee Pot ControlProtocol，HTCPCP）是一种用于控制、监测和诊断咖啡壶的协议。<br>这个协议在文档RFC 2324[1]（发布于1998年4月1日）中被定义。尽管互联网国际标准机构经常在4月1日发布一些恶搞之作，他们还是让这个协议看上去像是一个真的、非虚构的协议（比如HTTP）。文本编辑器Emacs甚至完全兼容于这个协议，Mozilla也发布了数个补丁来扩展旗下产品的功能。<br>HTCPCP是HTTP协议的扩展HTCPCP请求通过URI架构coffee:来引用，并且还包含了若干种HTTP请求:</p>
+<p>超文本咖啡壶控制协议（英文：Hyper Text Coffee Pot ControlProtocol，HTCPCP）是一种用于控制、监测和诊断咖啡壶的协议。<br>这个协议在文档RFC 2324[1]（发布于1998年4月1日）中被定义。尽管互联网国际标准机构经常在4月1日发布一些恶搞之作，他们还是让这个协议看上去像是一个真的、非虚构的协议（比如HTTP）。文本编辑器Emacs甚至完全兼容于这个协议，Mozilla也发布了数个补丁来扩展旗下产品的功能。<br>HTCPCP是HTTP协议的扩展HTCPCP请求通过URI架构coffee:来引用，并且还包含了若干种HTTP请求</p>
 </blockquote>
 </li>
 </ul>
@@ -321,6 +321,8 @@
 <li>406 Not Acceptable（不能接受的）：HTCPCP服务器由于某种原因而暂时不能煮咖啡。服务器在回复中应当包含一组可接受的咖啡类型列表。</li>
 <li>I’m a teapot（我是茶壶）：HTCPCP服务器是一个茶壶。给出答复的实体可能是又矮又胖的。<br>所以输入<code>I&#39;m a teapot</code>得到flag<br><code>flag{i_canN0t_BReW_c0ffEE!}</code></li>
 </ol>
+<h1 id="猫咪银行"><a href="#猫咪银行" class="headerlink" title="猫咪银行"></a>猫咪银行</h1><h2 id="题目如下-4"><a href="#题目如下-4" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/bank1.jpg" alt=" "><br>打开链接：<br><img src="/2018/10/09/2018中科大CTF/bank2.jpg" alt=" "><br>先开始以为是web……后来做好怀疑人生又以为是数学题，后来抓包发现如果时间参数过大可以溢出<br>于是我们先兑换理财产品需要的货币：TDSU<br>然后我们存入，但是时间参数需要修改为一个很大的数<br>payload：<code>http://202.38.95.46:12003/?action=buy_A1&amp;period=5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555&amp;val=39636</code><br>后面的val是存入的钱数，填写自己兑换好的货币总量就ok。<br>于是我们看到<br><img src="/2018/10/09/2018中科大CTF/bank3.jpg" alt=" "><br>我们点击取出，然后发现自己成了土豪，再慢慢兑换买flag需要的货币就ok<br><code>flag{Evil_Integer._Evil_Overflow.}</code></p>
+<h1 id="猫咪问答"><a href="#猫咪问答" class="headerlink" title="猫咪问答"></a>猫咪问答</h1><h2 id="题目如下-5"><a href="#题目如下-5" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/问答1.jpg" alt=" "><br><img src="/2018/10/09/2018中科大CTF/问答2.jpg" alt=" "><br>讲真的这个还是有点难哈哈哈,也默默佩服中科大~<br>贴上答案：<br>1958<br>9111B026<br>9<br>TP311.1/94<br>3A202<br><code>flag{G00G1E-is-always-YOUR-FRIEND}</code></p>
 
           
         
