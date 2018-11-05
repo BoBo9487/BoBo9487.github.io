@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-03T15:30:22.265Z</updated>
+  <updated>2018-11-05T10:22:52.869Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>怎样不用任何插件下载网易云收费音乐</title>
+    <link href="http://yoursite.com/2018/11/05/music/"/>
+    <id>http://yoursite.com/2018/11/05/music/</id>
+    <published>2018-11-05T09:54:47.000Z</published>
+    <updated>2018-11-05T10:22:52.869Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天突然有人问我IT男会不会免费下载网易云收费音乐，我说试试吧<br>于是在来回琢磨种发现了这个小技巧，不需要任何插件就可以，很简单<br>首先我们打开网易云音乐官网，选一首下载需要收费的歌曲，如图<br>我们下载一个最近很火的《沙漠骆驼》，在客户端上可以看到是收费的。<br><img src="/2018/11/05/music/1.jpg" alt=" "><br>我们打开网易云官网搜索《沙漠骆驼》<br><img src="/2018/11/05/music/2.jpg" alt=" "><br>记住后面的歌曲ID<br>这时我们需用到歌曲解析接口<a href="http://music.163.com/song/media/outer/url?id=().mp3" target="_blank" rel="noopener">http://music.163.com/song/media/outer/url?id=().mp3</a><br>括号里面写你想下载的歌曲的ID<br><img src="/2018/11/05/music/3.jpg" alt=" "><br>来到了这个页面，这说明我们的链接解析成功<br>直接鼠标右键下载即可<br><img src="/2018/11/05/music/4.jpg" alt=" "><br>下载到桌面，但是名字是乱码，自己重命名一下即可<br><img src="/2018/11/05/music/5.jpg" alt=" "><br>下载成功，收费歌曲已经被我们不用安装任何插件下载下来了，美滋滋</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天突然有人问我IT男会不会免费下载网易云收费音乐，我说试试吧&lt;br&gt;于是在来回琢磨种发现了这个小技巧，不需要任何插件就可以，很简单&lt;br&gt;首先我们打开网易云音乐官网，选一首下载需要收费的歌曲，如图&lt;br&gt;我们下载一个最近很火的《沙漠骆驼》，在客户端上可以看到是收费的。&lt;b
+      
+    
+    </summary>
+    
+    
+      <category term="实用技巧" scheme="http://yoursite.com/tags/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>sqlmap命令</title>
@@ -116,7 +139,7 @@
     <published>2018-10-17T03:32:34.000Z</published>
     <updated>2018-10-17T03:34:29.722Z</updated>
     
-    <content type="html"><![CDATA[<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><div id="hbe-security">  <div class="hbe-input-container">  <input type="password" class="hbe-form-control" id="pass" placeholder="Welcome to my blog, enter password to read.">    <label for="pass">Welcome to my blog, enter password to read.</label>    <div class="bottom-line"></div>  </div></div><div id="decryptionError" style="display: none;">Incorrect Password!</div><div id="noContentError" style="display: none;">No content to display!</div><div id="encrypt-blog" style="display:none">U2FsdGVkX1+1LZX2u0pFZxmyPVvpsAvUXy3pJfe5y2wAYbFqc90LFcxpByrZZPngIEzZSR+jRdnsA9SxanDqQW1ec584Q4XfPzehC8UQLI2Tm1tUA4jZ9x+91BDTSiydMkBta/RY9bIGM5BB8Ma+BVnU1mszXjJITgfeUPd3UIOJYB8OgfWNHY0tQ3N4iRI7Nvpsw/mVzTvztURsGKqVWlDCnDlR2XRnZHZuad523WndA4pPEbwfiEEkEYPoTiajFCUCCtcB6nXHNL8Ol2OQn9npMZCddYcIpjEesLYPRGON7o+4I+DNanVG0ci5dT+/+JdiLKUiJxz7KO2ilKAG8yY2o2JJLiEwdl3UMQ1Mbnzu77hjVXWf+hjLRuVag8x+1QW1BRNeq11tQk58ICTK1UGSFl8KceNHZZ6Ni1Xuyll78dOiRAFresnF9qHVpyAEDUZJvmv/JuTLu/kPkIuXqupG5dSo8tOCG3Gp6vKfxOO2B7eRSmRThCt+HU/CLxVuiaPYGozkG9vBtWTqmrdXgFOsTOPON0phGT0E8VglEss6eH66J6e5exp0eSFlOXy1tSxf3kFHdC6FjueBp/7rA4q28uS5mh/pnIIT9iZ1BbJ8Y0vYyhgfkPdGvxxVWxjN5kAg7SPW9y9SHvOByo60aZqjkD2E5yFPRf++a2Kem1YK/xVg98S8XTIFB+P7lOho5kPZwCQzOEtu+VM/sPoTKRPFQyQmZX/AwI4wwf7aD+5BYepfRiWEomHwRRPEa1fYDW3XpeNqPdRRV2voQey+TsuRPVsCrvdURt7sbGSq5jPDDeHRcUFXK9mFIxf4s3HwTPhG19oN0BIqsT3I7iNLniPOoFkiGwL1QtJhL+Sfp6BeF1XAgVbYlYZQHLRjFIdnYgp8tjEWaHNgQFFS/7YhZa3OieBw6NSUO7zZwUYcMFQZGRiUA5Jil5Ly6/qr7hdYN6iMr28wE/w1NZiS2cKyewPP/neviF544JNGvoxK9v3sdvU2yUj5YGMdex+7spZDDz2f6iQd9tcpXqTx9gTjlfxE1nOv1GDyNAaIW/69vRMoU8Gk8gh7pX4LNS5sXYUQGNBdtYKACZRLT+ryaYrqxsjl7jE0bGDU7yA5YxZsUIs+756JcVMEHbGuGGj7+2d3B/V9fE8OcrKOEQQbOPl76sVxaqiCKu6z/flUreEv/0OaPS5GP1++Uz4VJaPoxddGcf8Rv4zP112YL7LpPOF386tCmgUAVJCR9rZvO7YoFEgsZjRtXWvH6ffBZ7E7Z93ZxbhCKGe4XgfwWOWQJTzam7oFcjRY3/AYPYyEVM2x8UxreSqAMrSpM+QIDpinuLTgnJZiUbww1UNA90NtDf4NUYEtfzus0oQ5HxGDMtgoLsI6OoIFkni44WcqSYec8/pREoJcA2+H/Fm669XErVHgPSiG/F76R6MvCbUKI18WngqIbqK0Zi98XdP0iHMl8Dqa708zV6ELUtROM0dfA2AwFqPWgp5f8POka2tG5GYjWL16JeJu0B2ikBensqMb7UaPuEDV8z1Kxts84pVBe4CLfvf8L7n5WSj7yDYlGaozyB3Chmp7e25fNNfYJUyEeusdJhle/NbakjiU0pGBxdkj5kdE/FKUgHcmDGCOsqB4ABQBjHDW3djzaGuZsP/5oDtY</div><script src="/lib/crypto-js.js"></script><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+    <content type="html"><![CDATA[<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><div id="hbe-security">  <div class="hbe-input-container">  <input type="password" class="hbe-form-control" id="pass" placeholder="Welcome to my blog, enter password to read.">    <label for="pass">Welcome to my blog, enter password to read.</label>    <div class="bottom-line"></div>  </div></div><div id="decryptionError" style="display: none;">Incorrect Password!</div><div id="noContentError" style="display: none;">No content to display!</div><div id="encrypt-blog" style="display:none">U2FsdGVkX1+XjD/Avsliqm0M0WYF1MSvz9yff+HhgBAZt3/pruuuNneKdduLH2foSzsVcjyR0NbK9ZLl7FXwbdiy9sfOpcH9jlK2ps3bPCX9iaWRtf7scIhjL8rTs74RjXkcZCR8gALklDASbgrYwn9jnjsEV1N6clTtwcgQH2u/emKA4lE7CB+1kZuQWfIRtIJcpcylscmx2wScgeizba5+Xk8Gh75q4UzbCK8nGJK/FFql4SVTwzNlk/akjAWEA5jqyRxoQzTbQBFVVQaQqmiXSlkgGrB6y9d0dLw8T/Fm5gowJdH+5tuMqN8bgx4QVT+jqBFOm3OYrscbk3hE82WmnfXRvrGwung31PsiAmx5rJaIxMdC1e58KGvgeHyH1cQKYfGxoLIw4hiG79mgapkxuIkIfqD5rEU5kSl0SP0W2UWPThT3GB82TWTUslCmyYlDn6Hp4GSLpL3pAeCnd97CtZ3r0RNG6HYK2kFGATfBYwY9vZZNpGhz2d4IWb7gQTF9i3+r/6q8x2+8Jw/BmogNVanvuwKRT78iLtHlwbvjFJm4gusvCEEAnn2ZuwqlD1EqgLhI0aiMu0h12AypU353181hNsJiIMPDJCEFOxkPY5bpFG3q8NjLLNQSaX1t14pqOQ1ztOOwn0VQOG3bzOAcZJNa0BTCV6xmv6zhENqDV+AhGX5U4xOQLA/nyXfDw8GwNo10OS5q6sU96jyIkLOmgCddxA7c9n7Xp9Eipo0f84ucHKYVCV0VFb4nhUufaZSRhipGNqfJZ8xhj3dRHZHH8BIr/fSb2ksc2hDCUES/i9RRso0u8sCxAd/SeP0YMb3GAPJjVplBeaqnZg9Lbsovi7sqtgi3Vg8iQUpiwcZ0O99ElrUUc07gHtnmtjjx7GbNX+mpsq97Ar5gbDEuH8agyUy82ZpH5r4dOAOgJUZ8mcumXSKWc3EiLi3fX06FA7vqKpOEYMhHwHBKoHuLmwi/nY9EL5grHrVKmRZTzuTLe7w2XiCnKb/Zlr/0G92rwbOSSGiytEw2nhIRxJ4NYQpRwXYyd8T7z9CbXjIAq1wNPniK4v0pqKNwJip6RcLdSop57AcPNT5f1oJ3h24iGP8li0R4j5Ky6uOUbiynBHkBhVodel/T7c+nDMCpJyM8vf34fbxqi/Grf+oO0oBwtSf+odMQl87k4vq3FjBarqsHX0DQifBe2d0XSAvE4AO/pp5HhLBoLKGPSOeZPI793SAudDOkkbaGrxrZeE/1EA1daNzGuKPcjl5kQJlpU7OEn764OrxWaF3iyStrcr3vhoRUYmdyAJEmJJjGsLCZa670bQfQf2p5UXsUlpeV5uPhBE1TP4ZddHMPHKbrHMfbT2d/oHnwLX/GNDgM0PVGl+WO/BJSBdWgJtYrseChO10rFcAp7T8kooFqBMUtEjv1ktUZnXXPLlpu7w7gO7gC2y8SrTLmbrj9PvV2shnMnEHdFVibpvV9/VtfSeComajqnFP7cJX48DIL1VjvGHuqOLXjcvbm3yH/O6JSDbd4lCM/Mzh7HGigpexp6wCySnYCVnPCex3ecvy27p3PfGo5+LLDMLml1X21uc0pTORlYlttfMQ36TfoTN7OclVFMtx+4CWoHmlWs4qDVaLSEhS8pFmp0SzeY8JnaPCQ5LTnKvGP</div><script src="/lib/crypto-js.js"></script><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
     
     <summary type="html">
     
@@ -449,29 +472,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>hexo里面怎么插入图片，代码，音乐等</title>
-    <link href="http://yoursite.com/2018/02/10/second/"/>
-    <id>http://yoursite.com/2018/02/10/second/</id>
-    <published>2018-02-10T03:59:25.000Z</published>
-    <updated>2018-02-25T14:05:30.734Z</updated>
-    
-    <content type="html"><![CDATA[<p>首先第一篇博客测试了一下，历经千辛万苦终于成功了2333~<br>现在简单的来说一下自己是如何插入的<br>1.图片<br>如果你想插入外部图片（就是从网上找的）首先应该这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![“图片描述”](“图片地址”)</span><br></pre></td></tr></table></figure><br>要是插入本地图片，应该：<br>1、 把主页配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br></pre></td></tr></table></figure> 里的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder:</span><br></pre></td></tr></table></figure>这个选项设置为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure><br>然后要安装一个插件，目的是为了在你创建博客的时候本地会自动生成一个文件夹，供你存放图片什么的（反正小白我是这样理解的）<br>插件安装的代码是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure><br>等这个插件安装好以后，就会在你本地生成同名文件夹，把要插入的本地图片放进去就行。<br>就像这样<br><img src="/2018/02/10/second/blog2.jpg" alt="举例图片"><br>最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中就行，图片命名就是上面说的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![“图片描述”](“图片名.jpg”)</span><br></pre></td></tr></table></figure><br>最后检查一下，生成后的html标签内的语句是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;2017/02/26/xxxx/图片名.jpg&quot;&gt;</span><br></pre></td></tr></table></figure>，而不是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;xxxx/图片名.jpg&gt;</span><br></pre></td></tr></table></figure><br>这样图片就好啦<br>2.接下来说一下代码如何插入<br>因为用的是sublime Text，没用md的编辑器，所以插入代码会有点繁琐<br>在要插入的代码前加上<code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`结束的时候插入`</span><br></pre></td></tr></table></figure></code><br>就大功告成~~~<br>3.如何插入音乐<br>比如网易云音乐，找到喜欢的歌曲，点击分享按钮，把里面的代码复制下来，直接粘贴到博文中即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86   </span><br><span class="line">    src=&quot;http://music.163.com/outchain/player?type=2&amp;id=25706282&amp;auto=0&amp;height=66&quot;&gt;  </span><br><span class="line">&lt;/iframe&gt;  </span><br></pre></td></tr></table></figure><br>音乐也就好啦，我的举例是夜空中最闪亮的星<br>从别人微博看来的方法<br>地址是<br><a href="http://blog.csdn.net/qq_26891045/article/details/51693571" target="_blank" rel="noopener">http://blog.csdn.net/qq_26891045/article/details/51693571</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;首先第一篇博客测试了一下，历经千辛万苦终于成功了2333~&lt;br&gt;现在简单的来说一下自己是如何插入的&lt;br&gt;1.图片&lt;br&gt;如果你想插入外部图片（就是从网上找的）首先应该这样&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
-      
-    
-    </summary>
-    
-    
-      <category term="日益成长的小白" scheme="http://yoursite.com/tags/%E6%97%A5%E7%9B%8A%E6%88%90%E9%95%BF%E7%9A%84%E5%B0%8F%E7%99%BD/"/>
     
   </entry>
   
