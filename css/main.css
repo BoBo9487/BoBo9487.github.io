@@ -1090,8 +1090,7 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: url("E:\Blog\hexo\themes
-ext\source\imagesbackground.jpg");
+  background: transparent;
 }
 .header-inner {
   position: relative;
@@ -1874,7 +1873,7 @@ ext\source\imagesbackground.jpg");
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7dffee;
+  background: #ffffd7;
 }
 .links-of-blogroll {
   font-size: 13px;
