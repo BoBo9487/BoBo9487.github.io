@@ -245,37 +245,207 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/yushang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">豫商杯web的WP</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h2><h3 id="1-variable-–提示：something-about-php"><a href="#1-variable-–提示：something-about-php" class="headerlink" title="1.variable –提示：something about php"></a>1.variable –提示：something about php</h3><p><a href="http://ctf3.shiyanbar.com/web/variable/" target="_blank" rel="noopener">http://ctf3.shiyanbar.com/web/variable/</a><br>打开题目发现<br><img src="/2018/10/24/yushang/1.jpg" alt=" "><br>源码可以下载下来，于是我们下载源码打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&quot;secret.php&quot;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;The Ducks&lt;/title&gt;</span><br><span class="line">        &lt;link href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; integrity=&quot;sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7&quot; crossorigin=&quot;anonymous&quot;&gt;</span><br><span class="line">        &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot; integrity=&quot;sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;jumbotron&quot;&gt;</span><br><span class="line">                &lt;center&gt;</span><br><span class="line">                    &lt;h1&gt;The Ducks&lt;/h1&gt;</span><br><span class="line">                    &lt;?php if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;POST&quot;) &#123; ?&gt;</span><br><span class="line">                        &lt;?php</span><br><span class="line">                        extract($_POST);</span><br><span class="line">                        if ($pass == $thepassword_123) &#123; ?&gt;</span><br><span class="line">                            &lt;div class=&quot;alert alert-success&quot;&gt;</span><br><span class="line">                                &lt;code&gt;&lt;?php echo $theflag; ?&gt;&lt;/code&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                        &lt;?php &#125; ?&gt;</span><br><span class="line">                    &lt;?php &#125; ?&gt;</span><br><span class="line">                    &lt;form action=&quot;.&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">                        &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">                            &lt;div class=&quot;col-md-6 col-md-offset-3&quot;&gt;</span><br><span class="line">                                &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">                                    &lt;div class=&quot;col-md-9&quot;&gt;</span><br><span class="line">                                        &lt;input type=&quot;password&quot; class=&quot;form-control&quot; name=&quot;pass&quot; placeholder=&quot;Password&quot; /&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                    &lt;div class=&quot;col-md-3&quot;&gt;</span><br><span class="line">                                        &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary&quot; value=&quot;Submit&quot; /&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                &lt;/div&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    &lt;/form&gt;</span><br><span class="line">                &lt;/center&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;p&gt;</span><br><span class="line">                &lt;center&gt;</span><br><span class="line">                    source at &lt;a href=&quot;source.phps&quot; target=&quot;_blank&quot;&gt;/source.php&lt;/a&gt;</span><br><span class="line">                &lt;/center&gt;</span><br><span class="line">            &lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure><br>定位到关键函数：extract()<br>这个函数通过百度我们可以知道：extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。该函数返回成功导入到符号表中的变量数目。</p>
+          <h1 class="post-title" itemprop="name headline">豫商杯web的WP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T10:29:41+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h2><h3 id="1-variable-–提示：something-about-php"><a href="#1-variable-–提示：something-about-php" class="headerlink" title="1.variable –提示：something about php"></a>1.variable –提示：something about php</h3><p><a href="http://ctf3.shiyanbar.com/web/variable/" target="_blank" rel="noopener">http://ctf3.shiyanbar.com/web/variable/</a><br>打开题目发现<br><img src="/2018/10/24/yushang/1.jpg" alt=" "><br>源码可以下载下来，于是我们下载源码打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&quot;secret.php&quot;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;The Ducks&lt;/title&gt;</span><br><span class="line">        &lt;link href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; integrity=&quot;sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7&quot; crossorigin=&quot;anonymous&quot;&gt;</span><br><span class="line">        &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot; integrity=&quot;sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;jumbotron&quot;&gt;</span><br><span class="line">                &lt;center&gt;</span><br><span class="line">                    &lt;h1&gt;The Ducks&lt;/h1&gt;</span><br><span class="line">                    &lt;?php if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;POST&quot;) &#123; ?&gt;</span><br><span class="line">                        &lt;?php</span><br><span class="line">                        extract($_POST);</span><br><span class="line">                        if ($pass == $thepassword_123) &#123; ?&gt;</span><br><span class="line">                            &lt;div class=&quot;alert alert-success&quot;&gt;</span><br><span class="line">                                &lt;code&gt;&lt;?php echo $theflag; ?&gt;&lt;/code&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                        &lt;?php &#125; ?&gt;</span><br><span class="line">                    &lt;?php &#125; ?&gt;</span><br><span class="line">                    &lt;form action=&quot;.&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">                        &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">                            &lt;div class=&quot;col-md-6 col-md-offset-3&quot;&gt;</span><br><span class="line">                                &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">                                    &lt;div class=&quot;col-md-9&quot;&gt;</span><br><span class="line">                                        &lt;input type=&quot;password&quot; class=&quot;form-control&quot; name=&quot;pass&quot; placeholder=&quot;Password&quot; /&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                    &lt;div class=&quot;col-md-3&quot;&gt;</span><br><span class="line">                                        &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary&quot; value=&quot;Submit&quot; /&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                &lt;/div&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    &lt;/form&gt;</span><br><span class="line">                &lt;/center&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;p&gt;</span><br><span class="line">                &lt;center&gt;</span><br><span class="line">                    source at &lt;a href=&quot;source.phps&quot; target=&quot;_blank&quot;&gt;/source.php&lt;/a&gt;</span><br><span class="line">                &lt;/center&gt;</span><br><span class="line">            &lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure><br>定位到关键函数：extract()<br>这个函数通过百度我们可以知道：extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。该函数返回成功导入到符号表中的变量数目。</p>
 <p>于是看到关键代码<code>if ($pass == $thepassword_123)</code>这里可以用变量覆盖，重新post两个相同名字不同值的变量上去就可以覆盖<br>payload：<code>http://ctf3.shiyanbar.com/web/variable/</code><br>需要post的数据：<code>pass=123&amp;thepassword_123=123</code><br><code>flag{f1c6edcdc3f1c291eea3f266600439aa}</code></p>
 <h2 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h2><h3 id="2-md5-–提示：md5算法的漏洞？"><a href="#2-md5-–提示：md5算法的漏洞？" class="headerlink" title="2.md5 –提示：md5算法的漏洞？"></a>2.md5 –提示：md5算法的漏洞？</h3><p><a href="http://ctf3.shiyanbar.com/web/md5/" target="_blank" rel="noopener">http://ctf3.shiyanbar.com/web/md5/</a><br>打开看到源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">please input a</span><br><span class="line">source code:</span><br><span class="line">&lt;?php</span><br><span class="line">$md51 = md5(&quot;QNKCDZO&quot;);</span><br><span class="line">$a = @$_GET[&quot;a&quot;];</span><br><span class="line">$md52 = @md5($a);</span><br><span class="line">if(isset($a))&#123;</span><br><span class="line">if ($a != &quot;QNKCDZO&quot; &amp;&amp; $md51 == $md52) &#123;</span><br><span class="line">    echo &quot;flag&#123;*****************&#125;&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    echo &quot;false!!!&quot;;</span><br><span class="line">&#125;&#125;</span><br><span class="line">else&#123;echo &quot;please input a&quot;;&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><br>直接想到php黑魔法：和<code>QNKCDZO</code>MD5相等的数是<code>240610708</code><br>payload：<a href="http://ctf3.shiyanbar.com/web/md5/?a=240610708" target="_blank" rel="noopener">http://ctf3.shiyanbar.com/web/md5/?a=240610708</a><br><code>flag{56f008ff31c89382e15915a8ad78f209}</code></p>
 <h2 id="题目三"><a href="#题目三" class="headerlink" title="题目三"></a>题目三</h2><h3 id="3-无论你输入什么都是错的"><a href="#3-无论你输入什么都是错的" class="headerlink" title="3.无论你输入什么都是错的"></a>3.无论你输入什么都是错的</h3><p><a href="http://ctf3.shiyanbar.com/web/wrong/" target="_blank" rel="noopener">http://ctf3.shiyanbar.com/web/wrong/</a><br>打开输入任何东西都错误于是查看源代码，发现右键被禁用<br>用最古老的姿势：<code>view-source:http://ctf3.shiyanbar.com/web/wrong/</code><br>看到有个not.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function stop()&#123;</span><br><span class="line">alert(&apos;其实破解我很简单，加油哦！&apos;);</span><br><span class="line">return false;</span><br><span class="line">&#125;</span><br><span class="line">document.oncontextmenu=stop;</span><br><span class="line"></span><br><span class="line">function SymError()</span><br><span class="line">&#123;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br><span class="line">window.onerror = SymError;</span><br></pre></td></tr></table></figure><br>看出来这是禁用右键，于是我们修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function stop()&#123;</span><br><span class="line">return true;</span><br><span class="line">&#125;</span><br><span class="line">document.oncontextmenu=stop;</span><br><span class="line"></span><br><span class="line">function SymError()</span><br><span class="line">&#123;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br><span class="line">window.onerror = SymError;</span><br></pre></td></tr></table></figure><br>发现可以右键审查元素，发现一个da.html直接访问，F12审查元素得到flag<br><code>flag{a37b3a66-172f-434d-9105-aada3aed5bdc}</code></p>
 
-        
-      </div>
-      
-      
       
     </div>
     
     
     
+
+    
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatreward.jpg" alt="BoBo 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipayreward.jpg" alt="BoBo 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/各类WP/" rel="tag"># 各类WP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/Book/" rel="next" title="Book">
+                <i class="fa fa-chevron-left"></i> Book
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/28/bandit/" rel="prev" title="linux学习记录">
+                linux学习记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
   </div>
 
 

