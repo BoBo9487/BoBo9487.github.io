@@ -258,86 +258,24 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Book/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BoBo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BoBo's Blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Book</h1>
-        
+	<h1 class="post-title" itemprop="name headline">Book</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T18:22:05+08:00">
-                2018-10-23
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>老师说每一届要走了没有给学弟学妹留下东西<br>这些积累的东西便于大家入门</p>
+      <div class="post-body">
+        
+        
+          <p>老师说每一届要走了没有给学弟学妹留下东西<br>这些积累的东西便于大家入门</p>
 <h1 id="Web（初级入门）"><a href="#Web（初级入门）" class="headerlink" title="Web（初级入门）"></a>Web（初级入门）</h1><h2 id="题目链接1：http-120-24-86-145-8002-web2"><a href="#题目链接1：http-120-24-86-145-8002-web2" class="headerlink" title="题目链接1：http://120.24.86.145:8002/web2/"></a>题目链接1：<a href="http://120.24.86.145:8002/web2/" target="_blank" rel="noopener">http://120.24.86.145:8002/web2/</a></h2><p>打开发现一脸滑稽，于是最简单的就是F12审查元素<br><img src="/2018/10/23/Book/book1.jpg" alt=" "><br>于是可以看到flag<br><code>flag KEY{Web-2-bugKssNNikls9100}</code></p>
 <h2 id="题目链接2：http-120-24-86-145-8002-yanzhengma"><a href="#题目链接2：http-120-24-86-145-8002-yanzhengma" class="headerlink" title="题目链接2：http://120.24.86.145:8002/yanzhengma/"></a>题目链接2：<a href="http://120.24.86.145:8002/yanzhengma/" target="_blank" rel="noopener">http://120.24.86.145:8002/yanzhengma/</a></h2><p>打开题目发现要输入验证码，可是最多让输入一个字符<br>于是F12审查元素，看到有最长字符限制<code>maxlength=&quot;1&quot;</code><br><img src="/2018/10/23/Book/book2.jpg" alt=" "><br>我们想到这是前端验证，于是修改最长输入字符限制，改为<code>maxlength=&quot;10&quot;</code><br>(这里只要是大于能输入验证的字符长度就行)，得到flag<br><code>flag{CTF-bugku-0032}</code></p>
 <h2 id="题目链接3：http-120-24-86-145-8002-web3"><a href="#题目链接3：http-120-24-86-145-8002-web3" class="headerlink" title="题目链接3：http://120.24.86.145:8002/web3/"></a>题目链接3：<a href="http://120.24.86.145:8002/web3/" target="_blank" rel="noopener">http://120.24.86.145:8002/web3/</a></h2><p>打开题目发现一直弹窗<br><img src="/2018/10/23/Book/book3.jpg" alt=" "><br>老规矩查看源代码<br><img src="/2018/10/23/Book/book4.jpg" alt=" "><br>到最下面发现一行<code>&amp;#75;&amp;#69;&amp;#89;&amp;#123;&amp;#74;&amp;#50;&amp;#115;&amp;#97;&amp;#52;&amp;#50;&amp;#97;&amp;#104;&amp;#74;&amp;#75;&amp;#45;&amp;#72;&amp;#83;&amp;#49;&amp;#49;&amp;#73;&amp;#73;&amp;#73;&amp;#125</code><br>这个是unicod代码，百度找到<a href="http://tool.chinaz.com/tools/unicode.aspx" target="_blank" rel="noopener">在线解码工具</a><br>解出即可<br><code>KEY{J2sa42ahJK-HS11III}</code></p>
@@ -349,122 +287,15 @@
 <h2 id="题目链接9：http-chinalover-sinaapp-com-web17-index-php"><a href="#题目链接9：http-chinalover-sinaapp-com-web17-index-php" class="headerlink" title="题目链接9：http://chinalover.sinaapp.com/web17/index.php"></a>题目链接9：<a href="http://chinalover.sinaapp.com/web17/index.php" target="_blank" rel="noopener">http://chinalover.sinaapp.com/web17/index.php</a></h2><p>打开发现php代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_GET[&apos;a&apos;]) and isset($_GET[&apos;b&apos;]))&#123;</span><br><span class="line">if ($_GET[&apos;a&apos;] != $_GET[&apos;b&apos;])</span><br><span class="line">if (md5($_GET[&apos;a&apos;]) == md5($_GET[&apos;b&apos;]))</span><br><span class="line">die(&apos;Flag: &apos;.$flag);</span><br><span class="line">else</span><br><span class="line">print &apos;Wrong.&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这个代码大概意思就是传a，b两个参数，a不等于b，但是MD5加密后a的MD5值=b的MD5值就会输出flag<br>这是php弱类型，我们可以传两个数组，这样也会输出flag<br>payload:<code>http://chinalover.sinaapp.com/web17/index.php?a[]=aa&amp;b[]=aaa</code><br>另一种姿势就是PHP黑魔法240610708和QNKCDZO这两个字符MD5值是相当的<br>payload：<code>http://chinalover.sinaapp.com/web17/index.php?a=240610708&amp;b=QNKCDZO</code><br><code>Flag: nctf{php_is_so_cool}</code></p>
 <h2 id="题目链接10：http-lab1-xseclab-com-base7-eb68bd2f0d762faf70c89799b3c1cc52-index-php"><a href="#题目链接10：http-lab1-xseclab-com-base7-eb68bd2f0d762faf70c89799b3c1cc52-index-php" class="headerlink" title="题目链接10：http://lab1.xseclab.com/base7_eb68bd2f0d762faf70c89799b3c1cc52/index.php"></a>题目链接10：<a href="http://lab1.xseclab.com/base7_eb68bd2f0d762faf70c89799b3c1cc52/index.php" target="_blank" rel="noopener">http://lab1.xseclab.com/base7_eb68bd2f0d762faf70c89799b3c1cc52/index.php</a></h2><p>打开查看源代码无果，然后看一下请求头<br>火狐浏览器打开，右键查看元素，如图，选择：网络<br><img src="/2018/10/23/Book/book10.jpg" alt=" "><br>打开以后查看header<br><img src="/2018/10/23/Book/book11.jpg" alt=" "><br>找到flag<br><code>key：kjh%#$#%FDjjj</code></p>
 
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatreward.jpg" alt="BoBo 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipayreward.jpg" alt="BoBo 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/日益成长的小白/" rel="tag"># 日益成长的小白</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/10/17/python学习/" rel="next" title="python学习">
-                <i class="fa fa-chevron-left"></i> python学习
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/24/yushang/" rel="prev" title="豫商杯web的WP">
-                豫商杯web的WP <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-<span class="jiathis_txt">分享到：</span>
-<a class="jiathis_button_fav">收藏夹</a>
-<a class="jiathis_button_copy">复制网址</a>
-<a class="jiathis_button_email">邮件</a>
-<a class="jiathis_button_weixin">微信</a>
-<a class="jiathis_button_qzone">QQ空间</a>
-<a class="jiathis_button_tqq">腾讯微博</a>
-<a class="jiathis_button_douban">豆瓣</a>
-<a class="jiathis_button_share">一键分享</a>
-
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-  data_track_clickback:true,
-  summary:"",
-  shortUrl:false,
-  hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-      
-    </div>
   </div>
 
 

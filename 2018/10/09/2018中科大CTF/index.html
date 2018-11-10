@@ -259,86 +259,24 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/2018中科大CTF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BoBo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BoBo's Blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">2018中科大CTF</h1>
-        
+	<h1 class="post-title" itemprop="name headline">2018中科大CTF</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T18:51:37+08:00">
-                2018-10-09
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <h1 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h1><h2 id="题目如下"><a href="#题目如下" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/签到1.jpg" alt=" "><br>key输入框有最长输入限制，从前端改一下就好，如图<br><img src="/2018/10/09/2018中科大CTF/签到2.jpg" alt=" "><br><code>flag{Hackergame2018_Have_Fun!}</code></p>
+      <div class="post-body">
+        
+        
+          <h1 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h1><h2 id="题目如下"><a href="#题目如下" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/签到1.jpg" alt=" "><br>key输入框有最长输入限制，从前端改一下就好，如图<br><img src="/2018/10/09/2018中科大CTF/签到2.jpg" alt=" "><br><code>flag{Hackergame2018_Have_Fun!}</code></p>
 <h1 id="游园会的集章卡片"><a href="#游园会的集章卡片" class="headerlink" title="游园会的集章卡片"></a>游园会的集章卡片</h1><h2 id="题目如下-1"><a href="#题目如下-1" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/游园1.jpg" alt=" "><br>这个题真的想吐槽一波。。。一直以为有什么规律，结果就是拼图，而且还不是很好拼(可能我太菜了)<br>最后终于得出了flag<br><code>flag{H4PPY_1M4GE_PR0CE551NG}</code></p>
 <h1 id="Word-文档"><a href="#Word-文档" class="headerlink" title="Word 文档"></a>Word 文档</h1><h2 id="题目如下-2"><a href="#题目如下-2" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/word1.jpg" alt=" "><br>下载下来是个word文档，但是有损坏，winhex查看发现有flag.txt<br><img src="/2018/10/09/2018中科大CTF/word2.jpg" alt=" "><br>然后在linux用binwalk提取出来，发现了flag.txt得到flag。<br><code>flag{xlsx,pptx,docx_are_just_zip_files}</code><br>后来根据flag提示，发现刚开始那个附件，改一下后缀，改为zip，解压就可以得到flag.txt</p>
 <h1 id="黑曜石浏览器"><a href="#黑曜石浏览器" class="headerlink" title="黑曜石浏览器"></a>黑曜石浏览器</h1><h2 id="题目如下-3"><a href="#题目如下-3" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/石头1.jpg" alt=" "><br>打开链接看到<br><img src="/2018/10/09/2018中科大CTF/石头2.jpg" alt=" "><br>于是我们就找一下黑曜石浏览器，百度貌似找不到这个东西，用必应浏览器可以找到<br><a href="https://heicore.com/" target="_blank" rel="noopener">黑曜石</a><br>我们在这个页面查看源码，不过右键查看被禁了<br>我们直接输入<code>view-source:https://heicore.com/index.html</code>可以看到源码<br><img src="/2018/10/09/2018中科大CTF/石头3.jpg" alt=" "><br>看到这里，想到替换user-agent为<code>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) HEICORE/49.1.2623.213 Safari/537.36</code><br>重新访问刚才页面，得到flag。<br><code>flag{H3ic0re_49.1.2623.213_sai_kou}</code></p>
@@ -360,122 +298,15 @@
 <h1 id="猫咪银行"><a href="#猫咪银行" class="headerlink" title="猫咪银行"></a>猫咪银行</h1><h2 id="题目如下-4"><a href="#题目如下-4" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/bank1.jpg" alt=" "><br>打开链接：<br><img src="/2018/10/09/2018中科大CTF/bank2.jpg" alt=" "><br>先开始以为是web……后来做好怀疑人生又以为是数学题，后来抓包发现如果时间参数过大可以溢出<br>于是我们先兑换理财产品需要的货币：TDSU<br>然后我们存入，但是时间参数需要修改为一个很大的数<br>payload：<code>http://202.38.95.46:12003/?action=buy_A1&amp;period=5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555&amp;val=39636</code><br>后面的val是存入的钱数，填写自己兑换好的货币总量就ok。<br>于是我们看到<br><img src="/2018/10/09/2018中科大CTF/bank3.jpg" alt=" "><br>我们点击取出，然后发现自己成了土豪，再慢慢兑换买flag需要的货币就ok<br><code>flag{Evil_Integer._Evil_Overflow.}</code></p>
 <h1 id="猫咪问答"><a href="#猫咪问答" class="headerlink" title="猫咪问答"></a>猫咪问答</h1><h2 id="题目如下-5"><a href="#题目如下-5" class="headerlink" title="题目如下"></a>题目如下</h2><p><img src="/2018/10/09/2018中科大CTF/问答1.jpg" alt=" "><br><img src="/2018/10/09/2018中科大CTF/问答2.jpg" alt=" "><br>讲真的这个还是有点难哈哈哈,也默默佩服中科大~<br>贴上答案：<br>1958<br>9111B026<br>9<br>TP311.1/94<br>3A202<br><code>flag{G00G1E-is-always-YOUR-FRIEND}</code></p>
 
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatreward.jpg" alt="BoBo 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipayreward.jpg" alt="BoBo 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/日益成长的小白/" rel="tag"># 日益成长的小白</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/10/07/ctf-web/" rel="next" title="ctf-web">
-                <i class="fa fa-chevron-left"></i> ctf-web
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/17/Blog-Encrypt/" rel="prev" title="Blog Encrypt">
-                Blog Encrypt <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-<span class="jiathis_txt">分享到：</span>
-<a class="jiathis_button_fav">收藏夹</a>
-<a class="jiathis_button_copy">复制网址</a>
-<a class="jiathis_button_email">邮件</a>
-<a class="jiathis_button_weixin">微信</a>
-<a class="jiathis_button_qzone">QQ空间</a>
-<a class="jiathis_button_tqq">腾讯微博</a>
-<a class="jiathis_button_douban">豆瓣</a>
-<a class="jiathis_button_share">一键分享</a>
-
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-  data_track_clickback:true,
-  summary:"",
-  shortUrl:false,
-  hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-      
-    </div>
   </div>
 
 
