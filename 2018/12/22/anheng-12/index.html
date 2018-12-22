@@ -84,7 +84,7 @@
 <meta name="description" content="安恒12月月赛">
 <meta name="keywords" content="各类WP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="anheng-12">
+<meta property="og:title" content="安恒十二月月赛题解">
 <meta property="og:url" content="http://bobosec.top/2018/12/22/anheng-12/index.html">
 <meta property="og:site_name" content="BoBo&#39;s Blog">
 <meta property="og:description" content="安恒12月月赛">
@@ -97,9 +97,9 @@
 <meta property="og:image" content="http://bobosec.top/2018/12/22/anheng-12/6.jpg">
 <meta property="og:image" content="http://bobosec.top/2018/12/22/anheng-12/7.jpg">
 <meta property="og:image" content="http://bobosec.top/2018/12/22/anheng-12/8.jpg">
-<meta property="og:updated_time" content="2018-12-22T09:54:15.383Z">
+<meta property="og:updated_time" content="2018-12-22T09:59:00.176Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="anheng-12">
+<meta name="twitter:title" content="安恒十二月月赛题解">
 <meta name="twitter:description" content="安恒12月月赛">
 <meta name="twitter:image" content="http://bobosec.top/2018/12/22/anheng-12/1.jpg">
 
@@ -137,7 +137,7 @@
 
 
 
-  <title>anheng-12 | BoBo's Blog</title>
+  <title>安恒十二月月赛题解 | BoBo's Blog</title>
   
 
 
@@ -281,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">anheng-12</h1>
+          <h1 class="post-title" itemprop="name headline">安恒十二月月赛题解</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Writeuo/" itemprop="url" rel="index">
-                    <span itemprop="name">Writeuo</span>
+                  <a href="/categories/Writeup/" itemprop="url" rel="index">
+                    <span itemprop="name">Writeup</span>
                   </a>
                 </span>
 
@@ -362,7 +362,7 @@
 <h2 id="ezweb2"><a href="#ezweb2" class="headerlink" title="ezweb2"></a>ezweb2</h2><p>这个题目一打开并没有发现什么，所以我们扫一下后台，得到了<code>admin.php</code><br>但进去以后<br><img src="/2018/12/22/anheng-12/2.jpg" alt=" "><br>提示我们并不是admin，我们抓包看到<br><img src="/2018/12/22/anheng-12/3.jpg" alt=" "><br>这个user我们解码得到<code>user</code>所以我们的思路就是改一下cooikes，改成admin，base64编码一下<code>YWRtaW4=</code><br>题目对我不太友好、、、好几遍都进不去<br><img src="/2018/12/22/anheng-12/4.jpg" alt=" "><br>进去以后是个网站后台管理，可以访问一些文件<br><img src="/2018/12/22/anheng-12/5.jpg" alt=" "><br>试一下admin.php<br><img src="/2018/12/22/anheng-12/6.jpg" alt=" "><br>再读一下config.php，发现有过滤规则</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line">function waf_exec($str)&#123;</span><br><span class="line">	$black_str = &quot;/(;|&amp;|&gt;|&#125;|&#123;|%|#|!|\?|@|\+| )/i&quot;;</span><br><span class="line">		$str = preg_replace($black_str, &quot;&quot;,$str);</span><br><span class="line">		return $str;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>很多符号都被过滤了，但是“$”,“/”没被过滤，所以可以匹配一下啦。<br>首先ls一下看看<br><img src="/2018/12/22/anheng-12/7.jpg" alt=" "><br><code>IFS 是一种 set 变量，当 shell 处理&quot;命令替换&quot;和&quot;参数替换&quot;时，shell 根据 IFS 的值，默认是 space, tab, newline 来拆解读入的变量，然后对特殊字符进行处理，最后重新组合赋值给该变量。</code><br><img src="/2018/12/22/anheng-12/8.jpg" alt=" "></p>
-<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h2><p>直接给公众号发：蜗牛，在喊一句口号就行了</p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h2><p>直接给公众号发：蜗牛，再喊一句口号就行了</p>
 <h2 id="juju"><a href="#juju" class="headerlink" title="juju"></a>juju</h2><p>打开压缩包发现是个超大png，结果binwalk以后发现一堆乱七八糟的，所以只好改一下图片高度试试<br>图片高度改成1080就好</p>
 
       
@@ -414,7 +414,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://bobosec.top/2018/12/22/anheng-12/" title="anheng-12">http://bobosec.top/2018/12/22/anheng-12/</a>
+    <a href="http://bobosec.top/2018/12/22/anheng-12/" title="安恒十二月月赛题解">http://bobosec.top/2018/12/22/anheng-12/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
