@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bobosec.top/"/>
-  <updated>2018-12-23T12:55:08.228Z</updated>
+  <updated>2019-01-18T14:11:05.119Z</updated>
   <id>http://bobosec.top/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kali Linux 渗透学习记录</title>
+    <link href="http://bobosec.top/2019/01/18/kali-linux-study/"/>
+    <id>http://bobosec.top/2019/01/18/kali-linux-study/</id>
+    <published>2019-01-18T13:03:25.000Z</published>
+    <updated>2019-01-18T14:11:05.119Z</updated>
+    
+    <summary type="html">
+    
+      立个flag，2019寒假学习完linux kali的渗透
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://bobosec.top/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="日积月累" scheme="http://bobosec.top/tags/%E6%97%A5%E7%A7%AF%E6%9C%88%E7%B4%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>ctf-python一些技巧</title>
@@ -297,7 +317,7 @@
     <published>2018-10-17T03:32:34.000Z</published>
     <updated>2018-12-23T06:16:21.283Z</updated>
     
-    <content type="html"><![CDATA[<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><div id="hbe-security">  <div class="hbe-input-container">  <input type="password" class="hbe-form-control" id="pass" placeholder="Welcome to my blog, enter password to read.">    <label for="pass">Welcome to my blog, enter password to read.</label>    <div class="bottom-line"></div>  </div></div><div id="decryptionError" style="display: none;">Incorrect Password!</div><div id="noContentError" style="display: none;">No content to display!</div><div id="encrypt-blog" style="display:none">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</div><script src="/lib/crypto-js.js"></script><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+    <content type="html"><![CDATA[<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><div id="hbe-security">  <div class="hbe-input-container">  <input type="password" class="hbe-form-control" id="pass" placeholder="Welcome to my blog, enter password to read." />    <label for="pass">Welcome to my blog, enter password to read.</label>    <div class="bottom-line"></div>  </div></div><div id="decryptionError" style="display: none;">Incorrect Password!</div><div id="noContentError" style="display: none;">No content to display!</div><div id="encrypt-blog" style="display:none">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</div><script src="/lib/crypto-js.js"></script><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
     
     <summary type="html">
     
@@ -445,29 +465,6 @@
     
     
       <category term="日益成长的小白" scheme="http://bobosec.top/tags/%E6%97%A5%E7%9B%8A%E6%88%90%E9%95%BF%E7%9A%84%E5%B0%8F%E7%99%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>怎么在优酷下载视频不用VIP，不用客户端</title>
-    <link href="http://bobosec.top/2018/04/26/youku/"/>
-    <id>http://bobosec.top/2018/04/26/youku/</id>
-    <published>2018-04-26T08:55:53.000Z</published>
-    <updated>2018-04-26T13:23:30.951Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天需要一个优酷的视频，可是看了一下没有下载链接，很gg<br>于是百度了一堆下载方法，有些已经不能再用了，所以自己想了想办法<br>我们知道优酷防止用户通过别的方法下载会把视频分段，这也难不倒我们哦<br>首先我们点开想要的视频，如图：<br><img src="/2018/04/26/youku/客户端.jpg" alt=" "><br>这里点击下载就会让我们下载他的客户端，有时候就需要一下视频所以下载安装超级麻烦哦（还不知道会不会要VIP~）<br>等广告加载完以后，我们用搜狗高速浏览器打开这个网页，会出现如下图片（有一个小窗口播放）<br><img src="/2018/04/26/youku/小窗口.jpg" alt=" "><br>点开，就会以小窗口播放，然后我们点鼠标右键会惊喜的发现有个视频另存为？？岂不是美滋滋？（手动滑稽）<br><img src="/2018/04/26/youku/另存.jpg" alt=" "><br>然后保存到桌面就好。<br>上文提到优酷会让视频分段播放，我们可以看一下下载下来的视频大概到多少分钟，然后重复上面步骤：以<code>小窗播放--&gt;视频另存为（这里需要把进度条往后拖一拖才能下载到后面那个片段）</code><br>现在我们有两个mp4文件了，分开看岂不是很不舒服，于是用<code>格式工厂</code>里面有<code>视频合并</code>功能，可以合为一个，不会有重复片段<br>然后就可以美滋滋看视频咯<br>小小技巧送给大佬们</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;今天需要一个优酷的视频，可是看了一下没有下载链接，很gg&lt;br&gt;于是百度了一堆下载方法，有些已经不能再用了，所以自己想了想办法&lt;br&gt;我们知道优酷防止用户通过别的方法下载会把视频分段，这也难不倒我们哦&lt;br&gt;首先我们点开想要的视频，如图：&lt;br&gt;&lt;img src=&quot;/201
-      
-    
-    </summary>
-    
-    
-      <category term="小技巧" scheme="http://bobosec.top/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
