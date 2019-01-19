@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bobosec.top/"/>
-  <updated>2019-01-18T14:11:05.119Z</updated>
+  <updated>2019-01-19T02:16:24.921Z</updated>
   <id>http://bobosec.top/</id>
   
   <author>
@@ -21,7 +21,9 @@
     <link href="http://bobosec.top/2019/01/18/kali-linux-study/"/>
     <id>http://bobosec.top/2019/01/18/kali-linux-study/</id>
     <published>2019-01-18T13:03:25.000Z</published>
-    <updated>2019-01-18T14:11:05.119Z</updated>
+    <updated>2019-01-19T02:16:24.921Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个假期准备学一下linux的渗透，一步一步慢慢来吧~</p><h2 id="一些小工具"><a href="#一些小工具" class="headerlink" title="一些小工具"></a>一些小工具</h2><p>在kali里面自带了无数小工具用来渗透，在这里列举一下</p><ol><li>namp （用于扫描）但是namp扫描有很大噪音，会被记录，小心利用。</li><li>wafw00f （这个是用来识别web防火墙）</li></ol><h2 id="使用netcat编写自己的端口扫描器"><a href="#使用netcat编写自己的端口扫描器" class="headerlink" title="使用netcat编写自己的端口扫描器"></a>使用netcat编写自己的端口扫描器</h2><p>命令：<code>while read r; do nc -v -z $r 1-65535; done &lt;iplist</code></p><p>这里需要自己准备一下iplist这个文件。这个是查看和扫描目标开放端口的。</p><p>相同的脚本还可以修改为在单个IP上攻击多个目标。</p><p>代码：<code>while read  r; do nc -v -z target $r; done &lt; ports</code></p><p>在使用自定义端口扫描器的时候，会容易被警报。。。</p>]]></content>
     
     <summary type="html">
     

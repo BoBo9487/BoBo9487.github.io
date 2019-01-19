@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BoBo&#39;s Blog">
 <meta property="og:description" content="立个flag，2019寒假学习完linux kali的渗透">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-18T14:11:05.119Z">
+<meta property="og:updated_time" content="2019-01-19T02:16:24.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kali Linux 渗透学习记录">
 <meta name="twitter:description" content="立个flag，2019寒假学习完linux kali的渗透">
@@ -358,7 +358,18 @@
       
 
       
-        
+        <p>这个假期准备学一下linux的渗透，一步一步慢慢来吧~</p>
+<h2 id="一些小工具"><a href="#一些小工具" class="headerlink" title="一些小工具"></a>一些小工具</h2><p>在kali里面自带了无数小工具用来渗透，在这里列举一下</p>
+<ol>
+<li>namp （用于扫描）但是namp扫描有很大噪音，会被记录，小心利用。</li>
+<li>wafw00f （这个是用来识别web防火墙）</li>
+</ol>
+<h2 id="使用netcat编写自己的端口扫描器"><a href="#使用netcat编写自己的端口扫描器" class="headerlink" title="使用netcat编写自己的端口扫描器"></a>使用netcat编写自己的端口扫描器</h2><p>命令：<code>while read r; do nc -v -z $r 1-65535; done &lt;iplist</code></p>
+<p>这里需要自己准备一下iplist这个文件。这个是查看和扫描目标开放端口的。</p>
+<p>相同的脚本还可以修改为在单个IP上攻击多个目标。</p>
+<p>代码：<code>while read  r; do nc -v -z target $r; done &lt; ports</code></p>
+<p>在使用自定义端口扫描器的时候，会容易被警报。。。</p>
+
       
     </div>
     
@@ -522,8 +533,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -590,6 +610,22 @@ var jiathis_config={
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些小工具"><span class="nav-number">1.</span> <span class="nav-text">一些小工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用netcat编写自己的端口扫描器"><span class="nav-number">2.</span> <span class="nav-text">使用netcat编写自己的端口扫描器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
