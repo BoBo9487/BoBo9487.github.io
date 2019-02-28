@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BoBo&#39;s Blog">
 <meta property="og:description" content="sqli-labs学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-28T10:31:37.813Z">
+<meta property="og:updated_time" content="2019-02-28T10:34:31.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs">
 <meta name="twitter:description" content="sqli-labs学习">
@@ -415,8 +415,7 @@
 <p>information_schema.schemata中schema_name列，字段为所有库名</p>
 <p>information_schema.tables中table_name列对应数据库所有表名，与table_schema列对应</p>
 <p>information_schema.columns同理，column_name与table_schema和table_name对应</p>
-<p><strong>Less 1</strong></p>
-<p>这一关先测试一下属于字符型注入</p>
+<h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less 1"></a>Less 1</h2><p>这一关先测试一下属于字符型注入</p>
 <p><code>?id=1&#39;and &#39;1&#39;=&#39;1</code>回显正常，<code>?id=1&#39;and &#39;1&#39;=&#39;2</code>报错，确定是字符型注入。</p>
 <p>使用order by排序试得有3行。继续用联合注入<code>union select 1,2,3--+</code>发现在2和3位置有回显，所以要在2，3两个位置注入和查询。</p>
 <p>先查数据库和数据库版本<code>?id=-1&#39;union select 1,database(),version()--+</code>发现显示出来了当前数据库和版本。</p>
@@ -425,8 +424,7 @@
 <p>为了方便练习，自己加了个flag数据库还有fl4g的表，以后爆出fl4g数据即可</p>
 <p>爆flag数据库的表：<code>http://localhost/sqli-labs-master/Less-1/?id=-1&#39;union select 1,group_concat(table_name),3 from information_schema.tables where table_schema= &#39;flag&#39;--+</code></p>
 <p>爆fl4g这个表的列：<code>http://localhost/sqli-labs-master/Less-1/?id=-1&#39;union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#39;fl4g&#39;--+</code></p>
-<p><strong>Less 2</strong></p>
-
+<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less 2"></a>Less 2</h2>
       
     </div>
     
@@ -677,7 +675,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-1"><span class="nav-number">1.1.</span> <span class="nav-text">Less 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2"><span class="nav-number">1.2.</span> <span class="nav-text">Less 2</span></a></li></ol></li></ol></div>
             
 
           </div>
